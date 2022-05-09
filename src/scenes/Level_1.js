@@ -9,12 +9,14 @@ class LEVEL_1 extends Phaser.Scene {
         this.load.image('kirby', 'square kirby.png');
         this.load.image('cat', 'MainCharacter.png');
         this.load.image('ground', 'ground.png');
+        this.load.image ('heart','heart.png');
     }
 
     create() {
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
         keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
+        keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         let menuConfig = {
             fontFamily: 'Courier',
             fontSize: '28px',
@@ -32,20 +34,32 @@ class LEVEL_1 extends Phaser.Scene {
         this.player = new Player(this, game.config.width/2, game.config.height/2,'cat');
         //this.enemies = new Enemies ( this, game.config.width/2 - 35, game.config.height/2 ,'kirby');
         //this.enemies.create();
+        this.dreamCatcher = new Weapons(this, this.player.x,this.player.y,'kirby');
         this.player.create();
         this.ground = this.add.group();
-        for(let i = 0; i < game.config.width; i += 35) {
-            let groundTile = new Ground(this, i, game.config.height - 35,'ground');
-            groundTile.create();
-            this.ground.add(groundTile);
-        }
-        this.physics.add.collider(this.player, this.ground);
+        this.hearts = this.add.group();
+        let heart = new Items(this, game.config.width/2 + 100, game.config.height/2 + 100,'heart');
+        heart.create();
+        this.hearts.add(heart);
+        this.createPlatform(35,this.ground,'ground');
+
+        //add collider
         //this.physics.add.collider(this.enemies, this.ground);
+        this.physics.add.collider(this.player, this.ground);
+        this.physics.add.collider(this.hearts, this.ground);
     }
     
     update() {
-        this.player.move();
+        this.player.update();
+        this.dreamCatcher.attack(this.player.x + 25,this.player.y);
     }
 
-
+    // create Platform
+    createPlatform(tileSize,Group,texture){
+        for (let i = 0; i < game.config.width; i += tileSize){
+            let groundTile = new Ground(this, i, game.config.height - tileSize*2, texture);
+            groundTile.create();
+            Group.add(groundTile);
+        }
+    }
 }

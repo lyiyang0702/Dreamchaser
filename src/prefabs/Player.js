@@ -7,16 +7,22 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
     create(){
         this.setScale(0.1);
-        this.setGravityY(1000);
+        this.setGravityY(500);
         this.allowGravity = true;
     }
 
-    move (){
-        if (Phaser.Input.Keyboard.JustDown(keyLEFT)) {
-            this.setVelocityX(-10); 
+    update (){
+        if (keyLEFT.isDown) {
+            this.setVelocityX(-100); 
         }
-        else if (Phaser.Input.Keyboard.JustDown(keyRIGHT)){
-            this.setVelocityX(10); 
+        else if (keyRIGHT.isDown){
+            this.setVelocityX(100); 
+        }
+        else if (Phaser.Input.Keyboard.JustDown(keyUP)){
+            this.setVelocityY(-300);
+        }
+        else {
+            this.setVelocityX(0);
         }
     }
 }

@@ -1,4 +1,4 @@
-class Obstacles extends Phaser.Physics.Arcade.Sprite {
+class Ground extends Phaser.Physics.Arcade.Sprite {
     constructor (scene,x,y,texture,frame){
         super (scene,x,y,texture,frame);
         scene.physics.add.existing(this);
@@ -6,8 +6,7 @@ class Obstacles extends Phaser.Physics.Arcade.Sprite {
     }
 
     create(){
-        this.setScale(0.1);
-        this.setGravityY(1000);
-        this.allowGravity = true;
+        this.setScale(0.5);
+        this.setImmovable(true);
     }
 }

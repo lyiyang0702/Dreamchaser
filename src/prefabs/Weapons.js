@@ -6,16 +6,17 @@ class Weapons extends Phaser.Physics.Arcade.Sprite {
         this.firing = false;
         this.alpha = 0;
     }
-
+    // long press SPACE to attack
     attack (new_x,new_y){
         if (keySPACE.isDown){
             this.firing = true;
             this.alpha = 1;
             this.x = new_x;
             this.y = new_y;
+            this.anims.play('dreamCatcher', true);
         }
         else{
-            this.alpha = 0;
+            this.anims.play('dreamCatcher', false);
         }
     }
 }

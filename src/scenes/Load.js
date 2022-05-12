@@ -7,7 +7,6 @@ class Load extends Phaser.Scene {
         // set load path
         this.load.path = 'assets/';
         // take care of all of our asset loading now
-        this.load.image('kirby', 'square kirby.png');
         this.load.image('cat', 'MainCharacter.png');
         this.load.image('ground', 'ground.png');
         this.load.image ('heart','heart.png');
@@ -70,7 +69,6 @@ class Load extends Phaser.Scene {
             }),
             frameRate: 8, 
             repeat: 10, 
-            //hideOnComplete: false
         }
         this.anims.create(dconfig);
         // ...and pass to the next Scene

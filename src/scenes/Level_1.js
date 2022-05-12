@@ -2,18 +2,6 @@ class LEVEL_1 extends Phaser.Scene {
     constructor () {
         super ("level_1");
     }
-    preload() {
-        // try to load in load.js but failed
-        // need help
-        // set load path
-        this.load.path = 'assets/';
-        // take care of all of our asset loading now
-        this.load.image('kirby', 'square kirby.png');
-        this.load.image('cat', 'MainCharacter.png');
-        this.load.image('ground', 'ground.png');
-        this.load.image ('heart','heart.png');
-        this.load.atlas('cat_atlas', 'Spritesheet.png', 'sprites.json');
-    }
 
     create() {
         // define keys
@@ -21,6 +9,11 @@ class LEVEL_1 extends Phaser.Scene {
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
         keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
         keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        keyDOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
+
+        // set camera
+        this.cameras.main.setBounds(0, 0, 1800, 720);
+        this.physics.world.setBounds(0, 0, 1800, 720);
         // delete later
         let menuConfig = {
             fontFamily: 'Courier',
@@ -35,100 +28,53 @@ class LEVEL_1 extends Phaser.Scene {
             fixedWidth: 0
         }
         this.add.text (game.config.width/2, game.config.height/2 - borderUISize - borderPadding, 'LEVEL 1',menuConfig).setOrigin(0.5);
-
-        // set animations
-        // idle left
-        this.anims.create({
-            key: 'idle_left',
-            frames: this.anims.generateFrameNames('cat_atlas', {
-                prefix: 'idle_left_',
-                start: 1,
-                end: 4,
-                suffix: '',
-                zeroPad: 4
-            }),
-            frameRate: 8,
-            repeat: -1,
-        });
-        // idle right
-        this.anims.create({
-            key: 'idle_right',
-            frames: this.anims.generateFrameNames('cat_atlas', {
-                prefix: 'idle_right_',
-                start: 1,
-                end: 4,
-                suffix: '',
-                zeroPad: 4
-            }),
-            frameRate: 8,
-            repeat: -1,
-        });
-        //idle down
-        this.anims.create({
-            key: 'idle_down',
-            frames: this.anims.generateFrameNames('cat_atlas', {
-                prefix: 'idle_down_',
-                start: 1,
-                end: 4,
-                suffix: '',
-                zeroPad: 4
-            }),
-            frameRate: 8,
-            repeat: -1,
-        });
-        // dreamcatcher
-        let dconfig = {
-            key: 'dreamCatcher',
-            frames: this.anims.generateFrameNames('cat_atlas', {
-                prefix: 'weapon_normal_',
-                start: 1,
-                end: 4,
-                suffix: '',
-                zeroPad: 4
-            }),
-            frameRate: 8,
-            //repeat: -1,
-            hideOnComplete: true
-        }
-        this.anims.create(dconfig);
         //set up player
-        this.player = new Player(this, game.config.width/2, game.config.height/2,'cat_atlas','idle_down_0001');
+        player = new Player(this, game.config.width/2, game.config.height/2,'cat_atlas','idle_down_0001',MAX_JUMP);
+        // camera follow character
+        this.cameras.main.startFollow(player, true, 0.05, 0.05);
+        player.create();
         //this.enemies = new Enemies ( this, game.config.width/2 - 35, game.config.height/2 ,'kirby');
         //this.enemies.create();
-        this.dreamCatcher = new Weapons(this, this.player.x,this.player.y,'kirby');
-        this.player.create();
-        this.ground = this.add.group();
-        this.hearts = this.add.group();
+
+        //set up dream catcher
+        this.dreamCatcher = new Weapons(this, player.x,player.y,'cat_atlas','weapon_normal_0001');
+        groundGroup = this.add.group();
+        heartGroup = this.add.group();
 
         // randomize && add properties later
-        let heart = new Items(this, game.config.width/2 + 100, game.config.height/2 + 100,'heart');
+        let heart = new Items(this, game.config.width/2 + 100, game.config.height/2 + 100,'heart',0,'Heart');
         heart.create();
-        this.hearts.add(heart);
-        this.createPlatform(35,this.ground,'ground');
+        heartGroup.add(heart);
+        door = new Items(this, 1800 - 100, game.config.height - 100,'door',0,'Door');
+        door.create();
+        this.createPlatform(35,groundGroup,'ground');
 
         //add collider
         //this.physics.add.collider(this.enemies, this.ground);
-        this.physics.add.collider(this.player, this.ground);
-        this.physics.add.collider(this.hearts, this.ground);
+        this.physics.add.collider(player, groundGroup);
+        this.physics.add.collider(heartGroup, groundGroup);
+        this.physics.add.collider(player, door);
     }
     
     update() {
-        this.player.update();
-        if (keyLEFT.isDown){
-            this.dreamCatcher.attack(this.player.x - this.player.width,this.player.y);
-        }
-        else if (keyRIGHT.isDown){
-            this.dreamCatcher.attack(this.player.x + this.player.width,this.player.y);
-        }
+        player.update();
+        this.dreamCatcher.attack(player.x,player.y - player.width - 10);
+        this.physics.add.collider(door, player, this.travel());
     }
 
     // create Platform
     createPlatform(tileSize,Group,texture){
-        for (let i = 0; i < game.config.width; i += tileSize){
+        for (let i = 0; i < 1800; i += tileSize){
             let groundTile = new Ground(this, i, game.config.height - tileSize*2, texture);
             groundTile.create();
             Group.add(groundTile);
         }
+    }
+
+    // send to level 2
+    travel(){
+        //this.scene.start('level_2');
+        console.log('test');
     }
 
 }

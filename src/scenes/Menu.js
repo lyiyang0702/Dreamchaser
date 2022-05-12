@@ -25,6 +25,7 @@ class Menu extends Phaser.Scene {
         menuConfig.backgroundColor = '#00FF00';
         menuConfig.color = '#000';
         this.add.text (game.config.width/2, game.config.height/2 + borderUISize + borderPadding, 'Press ENTER to start', menuConfig).setOrigin (0.5);
+        this.add.text (game.config.width/2, game.config.height/2 + borderUISize + borderPadding *4, 'Press SPACE to collect & keyDOWN to hide weapon', menuConfig).setOrigin (0.5);
 
         // define keys
         keyENTER = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);

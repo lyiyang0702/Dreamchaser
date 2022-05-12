@@ -20,7 +20,7 @@ class LEVEL_2 extends Phaser.Scene {
             },
             fixedWidth: 0
         }
-        this.add.text (game.config.width/2, game.config.height/2 - borderUISize - borderPadding, 'LEVEL 2',menuConfig).setOrigin(0.5);
+        this.add.text (game.config.width/2, game.config.height/2 - borderUISize - borderPadding*5, 'LEVEL 2',menuConfig).setOrigin(0.5);
         this.player = new Player(this, game.config.width/2, game.config.height/2,'cat');
         this.player.create();
     }

@@ -15,6 +15,9 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         // image order priority
         this.setDepth(1);
         this.body.setSize(20, 80);
+
+        //add collider with items
+        //physics.add.collider(player, heart);
     }
 
     update() {
@@ -41,5 +44,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             this.jumpCount ++;
             this.setVelocityY(-300);
         }
+
+        
     }
 }

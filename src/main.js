@@ -27,3 +27,5 @@ let MAX_JUMP = 2;
 
 let groundGroup, heartGroup, door,player;
 
+let currentHealth = 3;
+

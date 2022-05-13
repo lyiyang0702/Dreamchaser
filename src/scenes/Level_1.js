@@ -57,6 +57,23 @@ class LEVEL_1 extends Phaser.Scene {
             game.scene.start('level_2');
             game.scene.sleep('level_1');
         });
+
+        //health track
+        //let text = this.add.text(10, 10, 'Health: 3', { font: '32px Courier', fill: '#000000' });
+        //this.physics.add.collider(player, heartGroup);
+
+        //heart disappear when player collide with it
+        this.physics.add.overlap(player, heartGroup, this.healthCollect);
+    }
+
+    //collect items
+    healthCollect(player, heart){
+        heartGroup.killAndHide(heart);
+        heart.body.enable = false;
+        if(currentHealth < 3){
+            currentHealth += 1;
+        }
+        console.log("Health: " + currentHealth);
     }
 
     update() {

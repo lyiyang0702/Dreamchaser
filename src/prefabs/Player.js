@@ -23,11 +23,11 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     update() {
         // left & right movement
         if (keyLEFT.isDown) {
-            this.setVelocityX(-100);
+            this.setVelocityX(-300);
             this.anims.play('idle_left', true);
         }
         else if (keyRIGHT.isDown) {
-            this.setVelocityX(100);
+            this.setVelocityX(300);
             this.anims.play('idle_right', true);
         }
         else {

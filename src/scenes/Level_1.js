@@ -3,6 +3,12 @@ class LEVEL_1 extends Phaser.Scene {
         super("level_1");
     }
 
+    preload(){
+        // set load path
+        this.load.path = 'assets/';
+        // take care of all of our asset loading now
+        this.load.image('tileStructure', 'level1Tiles.png');
+    }
     create() {
         // define keys
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
@@ -27,6 +33,7 @@ class LEVEL_1 extends Phaser.Scene {
             },
             fixedWidth: 0
         }
+        this.tileStruct = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'tileStructure').setOrigin(0, 0);
         this.add.text(game.config.width / 2, game.config.height / 2 - borderUISize - borderPadding, 'LEVEL 1', menuConfig).setOrigin(0.5);
         //set up player
         player = new Player(this, game.config.width / 2, game.config.height / 2, 'cat_atlas', 'idle_down_0001', MAX_JUMP);
@@ -52,6 +59,7 @@ class LEVEL_1 extends Phaser.Scene {
         //add collider
         //this.physics.add.collider(this.enemies, this.ground);
         this.physics.add.collider(player, groundGroup);
+        this.physics.add.collider(player, this.tileStruct);
         this.physics.add.collider(heartGroup, groundGroup);
         this.physics.add.collider(player,door,function(){
             game.scene.start('level_2');

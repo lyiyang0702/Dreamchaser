@@ -13,6 +13,8 @@ class Load extends Phaser.Scene {
         this.load.image('bg','TempBg.png');
         this.load.image('door','door.png');
         this.load.atlas('cat_atlas', 'Spritesheet.png', 'sprites.json');
+        this.load.image('jungle', 'jungleBackground.png');
+        this.load.image('tileStructure', 'level1Tiles.png');
     }
 
     create() {

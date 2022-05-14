@@ -3,12 +3,6 @@ class LEVEL_1 extends Phaser.Scene {
         super("level_1");
     }
 
-    preload(){
-        // set load path
-        this.load.path = 'assets/';
-        // take care of all of our asset loading now
-        this.load.image('tileStructure', 'level1Tiles.png');
-    }
     create() {
         // define keys
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);

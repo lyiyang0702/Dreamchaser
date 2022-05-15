@@ -25,7 +25,10 @@ let borderPadding = borderUISize / 3;
 
 let MAX_JUMP = 2;
 
-let groundGroup, heartGroup, door,player;
+let groundGroup, heartGroup, door, player, enemy;
 
 let currentHealth = 3;
+let healthCheck;
+
+let mirrored = false;
 

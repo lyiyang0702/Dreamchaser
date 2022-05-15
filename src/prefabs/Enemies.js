@@ -3,11 +3,13 @@ class Enemies extends Phaser.Physics.Arcade.Sprite {
         super (scene,x,y,texture,frame);
         scene.physics.add.existing(this);
         scene.add.existing (this);
+        //mirrored = false;
     }
 
     create(){
         this.setScale(1);
         this.setGravityY(1000);
         this.allowGravity = true;
+        mirrored = false;
     }
 }

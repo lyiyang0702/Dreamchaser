@@ -44,12 +44,14 @@ class LEVEL_2 extends Phaser.Scene {
         healthCheck = this.add.text(borderPadding*10, borderPadding*5, "Health: " + currentHealth, menuConfig);
     
         // randomize && add properties later
-        let heart = new Items(this, game.config.width / 2 + 100, game.config.height / 2 + 100, 'heart', 0, 'Heart');
+        let heart = new Items(this, game.config.width / 2 + 100, game.config.height / 2 + 260, 'heart', 0, 'Heart');
+        let heart1 = new Items(this, game.config.width / 2 - 200, game.config.height / 2 + 100, 'heart', 0, 'Heart1');
 
         groundGroup = this.add.group();
         heartGroup = this.add.group();
         heart.create();
         heartGroup.add(heart);
+        heartGroup.add(heart1);
         door = new Items(this, 1800 - 100, game.config.height - 100, 'door', 0, 'Door');
         door.create();
         this.createPlatform(35, groundGroup, 'ground');
@@ -58,9 +60,12 @@ class LEVEL_2 extends Phaser.Scene {
         this.physics.add.collider(player, groundGroup);
         this.physics.add.collider(heartGroup, groundGroup);
         this.physics.add.collider(enemy, groundGroup);
+        //this.physics.add.collider(enemy, heartGroup);
         //heart disappear when player collide with it
         this.physics.add.overlap(player, heartGroup, this.healthCollect);
         this.physics.add.overlap(player, enemy, this.healthLose);
+        //this.physics.add.overlap(player, enemy, enemy.changeDirection());
+        //this.physics.add.collider(enemy, heartGroup, enemy.changeDirection(), null, this);
         
     }
 
@@ -92,6 +97,8 @@ class LEVEL_2 extends Phaser.Scene {
     
     update() {
         player.update();
+        enemy.update();
+        //this.physics.add.collider(enemy, heartGroup, enemy.changeDirection(), null, this);
     }
 
     // create Platform

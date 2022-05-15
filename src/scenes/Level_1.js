@@ -10,7 +10,7 @@ class LEVEL_1 extends Phaser.Scene {
         keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
         keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         keyDOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
-
+        keyG = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.G);
         // set camera
         this.cameras.main.setBounds(0, 0, 1800, 720);
         this.physics.world.setBounds(0, 0, 1800, 720);
@@ -81,6 +81,19 @@ class LEVEL_1 extends Phaser.Scene {
     update() {
         player.update();
         this.dreamCatcher.attack(player.x, player.y - player.width - 10);
+        //gameOver Trigger (statement is temporarily)
+        if(keyG.isDown){
+            gameOverStatus = true;
+        }
+        this.checkGameOver();
+    }
+
+    checkGameOver(){
+        if(gameOverStatus){
+            game.scene.start('gameover');
+            game.scene.sleep('level_1');
+            gameOverStatus = false;
+        }
     }
 
     // create Platform

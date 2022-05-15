@@ -16,9 +16,13 @@ let config = {
 }
 
 let game = new Phaser.Game(config);
-
+let gameOverStatus = false;
 // define keys
 let keyUP,keyLEFT,keyRIGHT,keyENTER,keySPACE,keyDOWN;
+
+//gameOver Experimental Key
+let keyG, keyR; //end game key and restart key
+
 // Set UI sizes
 let borderUISize = game.config.height / 15;
 let borderPadding = borderUISize / 3;

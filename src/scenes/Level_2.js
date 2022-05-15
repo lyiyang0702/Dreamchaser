@@ -15,6 +15,7 @@ class LEVEL_2 extends Phaser.Scene {
         this.cameras.main.setBounds(0, 0, 1800, 720);
         this.physics.world.setBounds(0, 0, 1800, 720);
 
+        //config
         let menuConfig = {
             fontFamily: 'Courier',
             fontSize: '28px',
@@ -27,6 +28,8 @@ class LEVEL_2 extends Phaser.Scene {
             },
             fixedWidth: 0
         }
+
+        //crate platforms
         this.jungle = this.add.tileSprite(0, 0, 2000, game.config.height, 'jungle').setOrigin(0, 0);
         this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding*5, 'LEVEL 2',menuConfig).setOrigin(0.5);
         player = new Player(this, game.config.width/2, game.config.height/2,'cat_atlas', 'idle_down_0001', MAX_JUMP);
@@ -63,20 +66,25 @@ class LEVEL_2 extends Phaser.Scene {
 
     //collect items
     healthCollect(player, heart){
+        //remove heart after collected
         heartGroup.killAndHide(heart);
         heart.body.enable = false;
+        //update num
         if(currentHealth < 3){
             currentHealth += 1;
         }
+        //debug output for health number
         healthCheck.text = "Health: " + currentHealth;
         console.log("Health: " + currentHealth);
     }
 
     healthLose(){
         //heartGroup.destory(enemy);
+        //update num
         if(currentHealth > 0){
             currentHealth -= 1;
         }
+        //debug output for health number
         healthCheck.text = "Health: " + currentHealth;
         console.log("Health: " + currentHealth);
     }

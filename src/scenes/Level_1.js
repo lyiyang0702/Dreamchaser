@@ -27,7 +27,7 @@ class LEVEL_1 extends Phaser.Scene {
             },
             fixedWidth: 0
         }
-        this.tileStruct = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'tileStructure').setOrigin(0, 0);
+        this.tileStruct = this.add.tileSprite(0, 0, 2000, game.config.height, 'tileStructure').setOrigin(0, 0);
         this.add.text(game.config.width / 2, game.config.height / 2 - borderUISize - borderPadding, 'LEVEL 1', menuConfig).setOrigin(0.5);
         //set up player
         player = new Player(this, game.config.width / 2, game.config.height / 2, 'cat_atlas', 'idle_down_0001', MAX_JUMP);

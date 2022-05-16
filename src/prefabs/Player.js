@@ -5,7 +5,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         scene.add.existing(this);
         this.max = MAXjump;
     }
-
     create() {
         this.setGravityY(900);
         this.allowGravity = true;
@@ -42,8 +41,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         if (Phaser.Input.Keyboard.JustDown(keyUP) && this.jumpCount < this.max) {
             this.jumpCount ++;
             this.setVelocityY(-350);
+            console.log("music played");
         }
-
-        
     }
 }

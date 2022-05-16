@@ -15,6 +15,13 @@ let config = {
     scene: [Load,Menu,LEVEL_1,LEVEL_2,Gameover]
 }
 
+let soundConfig = {
+    mute: false,
+    volume: 0.8,
+    rate: 1,
+    loop: true,
+}
+
 let game = new Phaser.Game(config);
 let gameOverStatus = false;
 // define keys

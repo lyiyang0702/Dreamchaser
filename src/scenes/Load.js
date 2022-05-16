@@ -19,7 +19,7 @@ class Load extends Phaser.Scene {
         this.load.image('tileStructure', 'Level1Background.png');
         this.load.image('ghost_left', 'arrowKey.png');
         this.load.image('White_Tile', 'level1SingleTile.png');
-        this.load.tilemapTiledJSON('map', 'Level1TileMap.json');
+        this.load.tilemapTiledJSON('map', 'level1TileMap.json');
         this.load.audio('backMusic', 'backgroundMusic.mp3');
     }
 

@@ -1,4 +1,4 @@
-let bgmMusic;
+//let bgmMusic;
 class LEVEL_1 extends Phaser.Scene {
     constructor() {
         super("level_1");
@@ -36,7 +36,7 @@ class LEVEL_1 extends Phaser.Scene {
         platform.setCollision([1,2]);
         this.add.text(10, 10, 'LEVEL 1', menuConfig);
         //health debug
-        healthCheck = this.add.text(borderPadding*10, borderPadding*5, "Health: " + currentHealth, menuConfig);
+        healthCheck = this.add.text(this.pla, borderPadding*5, "Health: " + currentHealth, menuConfig);
         //set up player
         player = new Player(this, 30, 0, 'cat_atlas', 'idle_down_0001', MAX_JUMP);
         //set up enemy
@@ -74,8 +74,8 @@ class LEVEL_1 extends Phaser.Scene {
         //heart disappear when player collide with it
         this.physics.add.overlap(player, heartGroup, this.healthCollect);
 
-        bgmMusic = this.sound.add('backMusic', soundConfig);
-        bgmMusic.play();
+        // bgmMusic = this.sound.add('backMusic', soundConfig);
+        // bgmMusic.play();
 
         this.physics.add.overlap(player, enemy, this.healthLose);
 
@@ -105,7 +105,6 @@ class LEVEL_1 extends Phaser.Scene {
     update() {
         player.update();
         enemy.update();
-
         this.dreamCatcher.attack(player.x, player.y - player.width - 10);
         //gameOver Trigger (statement is temporarily)
         if(player.y > game.config.height){

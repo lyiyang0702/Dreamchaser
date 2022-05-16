@@ -41,7 +41,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         if (Phaser.Input.Keyboard.JustDown(keyUP) && this.jumpCount < this.max) {
             this.jumpCount ++;
             this.setVelocityY(-350);
-            console.log("music played");
         }
     }
 }

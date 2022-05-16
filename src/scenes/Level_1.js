@@ -35,20 +35,24 @@ class LEVEL_1 extends Phaser.Scene {
         platform = map.createLayer('Platforms', tileset, 0, 0);
         platform.setCollision([1,2]);
         this.add.text(10, 10, 'LEVEL 1', menuConfig);
+        //health debug
+        healthCheck = this.add.text(borderPadding*10, borderPadding*5, "Health: " + currentHealth, menuConfig);
         //set up player
         player = new Player(this, 30, 0, 'cat_atlas', 'idle_down_0001', MAX_JUMP);
+        //set up enemy
+        enemy = new Enemies(this, game.config.width/2 - 100, game.config.height/2 - 100,'enemy_atlas','ghost_left_0001').setScale(0.01);;
+
         // camera follow character
         this.cameras.main.startFollow(player, true, 0.05, 0.05);
         player.create();
-        //this.enemies = new Enemies ( this, game.config.width/2 - 35, game.config.height/2 ,'kirby');
-        //this.enemies.create();
+        enemy.create();
 
         //set up dream catcher
         this.dreamCatcher = new Weapons(this, player.x, player.y, 'cat_atlas', 'weapon_normal_0001');
         heartGroup = this.add.group();
 
         // randomize && add properties later
-        let heart = new Items(this, 100, 0, 'heart', 0, 'Heart');
+        let heart = new Items(this, 630, 0, 'heart', 0, 'Heart');
         heart.create();
         heartGroup.add(heart);
         door = new Items(this, 1970, 60, 'door', 0, 'Door');
@@ -64,14 +68,22 @@ class LEVEL_1 extends Phaser.Scene {
             game.scene.sleep('level_1');
         });
 
-        //health track
-        //let text = this.add.text(10, 10, 'Health: 3', { font: '32px Courier', fill: '#000000' });
-        //this.physics.add.collider(player, heartGroup);
+        this.physics.add.collider(enemy, platform);
+        //this.physics.add.collider(enemy, player);
 
         //heart disappear when player collide with it
         this.physics.add.overlap(player, heartGroup, this.healthCollect);
+<<<<<<< Updated upstream
         bgmMusic = this.sound.add('backMusic', soundConfig);
         bgmMusic.play();
+=======
+<<<<<<< HEAD
+        this.physics.add.overlap(player, enemy, this.healthLose);
+=======
+        bgmMusic = this.sound.add('backMusic', soundConfig);
+        bgmMusic.play();
+>>>>>>> fadcdd4f6df373b5a80b765f732f1c207a5c314a
+>>>>>>> Stashed changes
     }
 
     //collect items
@@ -81,11 +93,24 @@ class LEVEL_1 extends Phaser.Scene {
         if(currentHealth < 3){
             currentHealth += 1;
         }
+        healthCheck.text = "Health: " + currentHealth;
+        console.log("Health: " + currentHealth);
+    }
+    healthLose(){
+        //heartGroup.destory(enemy);
+        //update num
+        if(currentHealth > 0){
+            currentHealth -= 1;
+        }
+        //debug output for health number
+        healthCheck.text = "Health: " + currentHealth;
         console.log("Health: " + currentHealth);
     }
 
     update() {
         player.update();
+        enemy.update();
+
         this.dreamCatcher.attack(player.x, player.y - player.width - 10);
         //gameOver Trigger (statement is temporarily)
         if(player.y > game.config.height){

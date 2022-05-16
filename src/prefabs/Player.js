@@ -14,35 +14,34 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.setCollideWorldBounds(true);
         // image order priority
         this.setDepth(1);
-        this.body.setSize(20, 80);
-
-        //add collider with items
-        //physics.add.collider(player, heart);
     }
 
     update() {
         // left & right movement
         if (keyLEFT.isDown) {
-            this.setVelocityX(-300);
+            this.setVelocityX(-80);
             this.anims.play('idle_left', true);
+            this.body.setSize(20, 80,true);
         }
         else if (keyRIGHT.isDown) {
-            this.setVelocityX(300);
+            this.setVelocityX(80);
             this.anims.play('idle_right', true);
+            this.body.setSize(20, 80,true);
         }
         else {
             this.setVelocityX(0);
             this.anims.play('idle_down', true);
+            this.body.setSize(40, 80,true);
         }
         // jump (Max: 2)
-        this.isGrounded = this.body.touching.down;
+        this.isGrounded = this.body.blocked.down;
         if (this.isGrounded) {
             this.jumpCount = 0;
         }
 
         if (Phaser.Input.Keyboard.JustDown(keyUP) && this.jumpCount < this.max) {
             this.jumpCount ++;
-            this.setVelocityY(-300);
+            this.setVelocityY(-250);
         }
 
         

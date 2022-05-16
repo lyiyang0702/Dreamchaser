@@ -36,3 +36,5 @@ let healthCheck;
 
 let mirrored = false;
 
+let map, tileset,platform;
+

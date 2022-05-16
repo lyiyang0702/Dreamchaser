@@ -1,4 +1,4 @@
-//let bgmMusic;
+let bgmMusic;
 class LEVEL_1 extends Phaser.Scene {
     constructor() {
         super("level_1");
@@ -74,13 +74,13 @@ class LEVEL_1 extends Phaser.Scene {
         //heart disappear when player collide with it
         this.physics.add.overlap(player, heartGroup, this.healthCollect);
 
-        // bgmMusic = this.sound.add('backMusic', soundConfig);
-        // bgmMusic.play();
+        bgmMusic = this.sound.add('backMusic', soundConfig);
+        bgmMusic.play();
 
         this.physics.add.overlap(player, enemy, this.healthLose);
 
     }
-
+    
     //collect items
     healthCollect(player, heart){
         heartGroup.killAndHide(heart);

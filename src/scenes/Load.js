@@ -84,10 +84,10 @@ class Load extends Phaser.Scene {
             key: 'enemy',
             frames: this.anims.generateFrameNames('enemy_atlas', {
                 prefix: 'ghost_left_',
-                start: 1,
-                end: 2,
+                start: 2,
+                end: 1,
                 suffix: '',
-                zeroPad: 4
+                zeroPad: 2
             }),
             frameRate: 8, 
             repeat: 10, 

@@ -33,7 +33,7 @@ class LEVEL_2 extends Phaser.Scene {
         this.jungle = this.add.tileSprite(0, 0, 2000, game.config.height, 'jungle').setOrigin(0, 0);
         this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding*5, 'LEVEL 2',menuConfig).setOrigin(0.5);
         player = new Player(this, game.config.width/2, game.config.height/2,'cat_atlas', 'idle_down_0001', MAX_JUMP);
-        enemy = new Enemies(this, game.config.width/2 - 100, game.config.height/2,'cat_atlas','ghost_left_0001').setOrigin(0, 0);;
+        enemy = new Enemies(this, game.config.width/2 - 100, game.config.height/2 + 200,'cat_atlas','ghost_left_0001').setOrigin(0, 0);;
         player.create();
         enemy.create();
 
@@ -45,10 +45,9 @@ class LEVEL_2 extends Phaser.Scene {
     
         // randomize && add properties later
         let heart = new Items(this, game.config.width / 2 + 100, game.config.height / 2 + 260, 'heart', 0, 'Heart');
-        let heart1 = new Items(this, game.config.width / 2 - 200, game.config.height / 2 + 100, 'heart', 0, 'Heart').setScale(0.1);
+        let heart1 = new Items(this, game.config.width / 2 - 200, game.config.height / 2 + 100, 'heart', 0, 'Heart');
 
         groundGroup = this.add.group();
-        heartGroup = this.add.group();
         heart.create();
         heartGroup.add(heart);
         heartGroup.add(heart1);

@@ -13,14 +13,14 @@ class Enemies extends Phaser.Physics.Arcade.Sprite {
         this.setCollideWorldBounds(true);
         //is mirrored: facing to left
         mirrored = false;
-        this.setVelocityX(-200);
+        this.setVelocityX(-100);
     }
 
     changeDirection(){
         console.log("enemy hit heart");
         //when facing right
         if(enemy.body.blocked.right){       
-            this.setVelocityX(-200);
+            this.setVelocityX(-100);
             mirrored = false;
             if(mirrored == false){
                 console.log("mirrored changed to false");
@@ -32,7 +32,7 @@ class Enemies extends Phaser.Physics.Arcade.Sprite {
 
         if(enemy.body.blocked.left){
 
-            this.setVelocityX(200);
+            this.setVelocityX(100);
             mirrored = true;
             if(mirrored == true){
                 console.log("mirrored changed to true");

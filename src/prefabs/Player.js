@@ -7,7 +7,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     }
 
     create() {
-        this.setGravityY(500);
+        this.setGravityY(900);
         this.allowGravity = true;
         this.jumpCount = 0;
         this.jumping = false;
@@ -19,12 +19,12 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     update() {
         // left & right movement
         if (keyLEFT.isDown) {
-            this.setVelocityX(-80);
+            this.setVelocityX(-200);
             this.anims.play('idle_left', true);
             this.body.setSize(20, 80,true);
         }
         else if (keyRIGHT.isDown) {
-            this.setVelocityX(80);
+            this.setVelocityX(200);
             this.anims.play('idle_right', true);
             this.body.setSize(20, 80,true);
         }
@@ -41,7 +41,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
         if (Phaser.Input.Keyboard.JustDown(keyUP) && this.jumpCount < this.max) {
             this.jumpCount ++;
-            this.setVelocityY(-250);
+            this.setVelocityY(-350);
         }
 
         

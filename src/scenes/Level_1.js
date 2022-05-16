@@ -73,19 +73,14 @@ class LEVEL_1 extends Phaser.Scene {
 
         //heart disappear when player collide with it
         this.physics.add.overlap(player, heartGroup, this.healthCollect);
-<<<<<<< Updated upstream
-        bgmMusic = this.sound.add('backMusic', soundConfig);
-        bgmMusic.play();
-=======
-<<<<<<< HEAD
-        this.physics.add.overlap(player, enemy, this.healthLose);
-=======
-        bgmMusic = this.sound.add('backMusic', soundConfig);
-        bgmMusic.play();
->>>>>>> fadcdd4f6df373b5a80b765f732f1c207a5c314a
->>>>>>> Stashed changes
-    }
 
+        bgmMusic = this.sound.add('backMusic', soundConfig);
+        bgmMusic.play();
+
+        this.physics.add.overlap(player, enemy, this.healthLose);
+
+    }
+    
     //collect items
     healthCollect(player, heart){
         heartGroup.killAndHide(heart);

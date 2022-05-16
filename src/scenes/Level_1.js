@@ -80,7 +80,7 @@ class LEVEL_1 extends Phaser.Scene {
         this.physics.add.overlap(player, enemy, this.healthLose);
 
     }
-    
+
     //collect items
     healthCollect(player, heart){
         heartGroup.killAndHide(heart);

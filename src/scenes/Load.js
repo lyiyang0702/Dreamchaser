@@ -14,7 +14,7 @@ class Load extends Phaser.Scene {
         this.load.image('bg','TempBg.png');
         this.load.image('door','door.png');
         this.load.atlas('cat_atlas', 'Spritesheet.png', 'sprites.json');
-        this.load.atlas('enemy_atlas', 'ghost_left.png', 'ghostLeftMap.json');
+        this.load.atlas('enemy_atlas', 'Ghost_left.png', 'ghostLeftMap.json');
         this.load.image('jungle', 'jungleBackground.png');
         this.load.image('tileStructure', 'Level1Background.png');
         this.load.image('ghost_left', 'arrowKey.png');
@@ -84,10 +84,10 @@ class Load extends Phaser.Scene {
             key: 'enemy',
             frames: this.anims.generateFrameNames('enemy_atlas', {
                 prefix: 'ghost_left_',
-                start: 1,
-                end: 2,
+                start: 2,
+                end: 1,
                 suffix: '',
-                zeroPad: 4
+                zeroPad: 2
             }),
             frameRate: 8, 
             repeat: 10, 

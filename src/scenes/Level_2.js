@@ -53,7 +53,7 @@ class LEVEL_2 extends Phaser.Scene {
         heartGroup.add(heart1);
         door = new Items(this, 1800 - 100, game.config.height - 100, 'door', 0, 'Door');
         door.create();
-        this.createPlatform(35, groundGroup, 'ground');
+        this.createPlatform(35, groundGroup, 'White_Tile');
 
         //collider
         this.physics.add.collider(player, groundGroup);

@@ -9,9 +9,7 @@ class Load extends Phaser.Scene {
         // take care of all of our asset loading now
         this.load.audio('jump', 'jump.wav');
         this.load.image('cat', 'MainCharacter.png');
-        this.load.image('ground', 'ground.png');
         this.load.image ('heart','heart.png');
-        this.load.image('bg','TempBg.png');
         this.load.image('door','door.png');
         this.load.atlas('cat_atlas', 'Spritesheet.png', 'sprites.json');
         this.load.atlas('enemy_atlas', 'ghost_left.png', 'ghostLeftMap.json');

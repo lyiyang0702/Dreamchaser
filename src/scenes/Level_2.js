@@ -41,6 +41,7 @@ class LEVEL_2 extends Phaser.Scene {
         this.cameras.main.startFollow(player, true, 0.05, 0.05);
 
         //health debug
+        currentHealth = 3;
         healthCheck = this.add.text(borderPadding*10, borderPadding*5, "Health: " + currentHealth, menuConfig);
     
         // randomize && add properties later

@@ -37,6 +37,7 @@ class LEVEL_1 extends Phaser.Scene {
         platform.setCollision([1, 2]);
         this.add.text(10, 10, 'LEVEL 1', menuConfig);
         //health debug
+        currentHealth = 3;
         healthCheck = this.add.text(this.pla, borderPadding * 5, "Health: " + currentHealth, menuConfig);
         //set up player
         player = new Player(this, 30, 0, 'cat_atlas', 'idle_down_0001', MAX_JUMP);
@@ -127,6 +128,7 @@ class LEVEL_1 extends Phaser.Scene {
             this.checkGameOver();
         }
         else if (gameOverStatus) {
+            bgmMusic.stop();
             gameOverStatus = false;
             this.scene.restart();
         }
@@ -134,6 +136,7 @@ class LEVEL_1 extends Phaser.Scene {
     }
 
     checkGameOver() {
+        bgmMusic.stop();
         game.scene.start('gameover');
         game.scene.sleep('level_1');
     }

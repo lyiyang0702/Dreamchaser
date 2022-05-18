@@ -38,8 +38,7 @@ let MAX_JUMP = 2;
 
 let groundGroup, heartGroup, door, player, enemy;
 
-let currentHealth = 3;
-let healthCheck;
+let healthCheck, currentHealth;
 
 let mirrored = false;
 

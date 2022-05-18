@@ -70,7 +70,6 @@ class LEVEL_1 extends Phaser.Scene {
         });
 
         this.physics.add.collider(enemy, platform);
-        //this.physics.add.collider(enemy, player);
 
         //heart disappear when player collide with it
         this.physics.add.overlap(player, heartGroup, this.healthCollect);
@@ -94,12 +93,19 @@ class LEVEL_1 extends Phaser.Scene {
     }
     healthLose() {
         //heartGroup.destory(enemy);
+
         //update num
         if (currentHealth > 0) {
             currentHealth -= 1;
         }
+
         // add effects later
-        player.x -= 100;
+        if(enemy.x > player.x){
+            player.x -= 100;
+        }else if(enemy.x < player.x){
+            player.x += 100;
+        }
+
         //debug output for health number
         healthCheck.text = "Health: " + currentHealth;
         console.log("Health: " + currentHealth);
@@ -109,9 +115,14 @@ class LEVEL_1 extends Phaser.Scene {
     update() {
         player.update();
         enemy.update();
+
         this.dreamCatcher.attack(player.x, player.y - player.width - 10);
         //gameOver Trigger (statement is temporarily)
         if (player.y > game.config.height) {
+            gameOverStatus = true;
+            this.checkGameOver();
+        }
+        else if(currentHealth == 0){
             gameOverStatus = true;
             this.checkGameOver();
         }

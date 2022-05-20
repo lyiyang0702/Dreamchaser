@@ -12,8 +12,6 @@ class Items extends Phaser.Physics.Arcade.Sprite {
             case 'Heart':
                 //console.log(this.items);
                 this.setScale(0.1);
-                this.setGravityY(1000);
-                this.allowGravity = true;
                 break;
             case 'Door':
                 //console.log(this.items);

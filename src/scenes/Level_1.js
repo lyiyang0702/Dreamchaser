@@ -74,7 +74,7 @@ class LEVEL_1 extends Phaser.Scene {
         });
         this.physics.add.collider(player, groundLayer);
 
-        //this.physics.add.collider(enemy, platform);
+        this.physics.add.collider(enemy, groundLayer);
 
         //heart disappear when player collide with it
         this.physics.add.overlap(player, heartGroup, this.healthCollect);
@@ -82,7 +82,9 @@ class LEVEL_1 extends Phaser.Scene {
         bgmMusic = this.sound.add('backMusic', soundConfig);
         bgmMusic.play();
 
-        this.physics.add.overlap(player, enemy, this.healthLose);
+        this.physics.add.overlap(player, enemy, function(){
+            player.healthLose();
+        }, null, this);
 
     }
 
@@ -94,27 +96,6 @@ class LEVEL_1 extends Phaser.Scene {
             currentHealth += 1;
         }
         healthCheck.text = "Health: " + currentHealth;
-        console.log("Health: " + currentHealth);
-    }
-    healthLose() {
-        //heartGroup.destory(enemy);
-
-        //update num
-        if (currentHealth > 0) {
-            currentHealth -= 1;
-        }
-
-        // add effects later
-        if (enemy.x > player.x) {
-            player.x -= 100;
-        } else if (enemy.x < player.x) {
-            player.x += 100;
-        }
-
-        //debug output for health number
-        healthCheck.text = "Health: " + currentHealth;
-        console.log("Health: " + currentHealth);
-
     }
 
     update() {
@@ -126,12 +107,7 @@ class LEVEL_1 extends Phaser.Scene {
         if (player.y > game.config.height) {
             gameOverStatus = true;
             this.checkGameOver();
-        }
-        // else if (currentHealth == 0) {
-        //     gameOverStatus = true;
-        //     this.checkGameOver();
-        // }
-        else if (gameOverStatus) {
+        }else if (gameOverStatus) {
             bgmMusic.stop();
             gameOverStatus = false;
             this.scene.restart();

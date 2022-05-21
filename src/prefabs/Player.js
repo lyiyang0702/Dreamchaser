@@ -4,6 +4,18 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         scene.physics.add.existing(this);
         scene.add.existing(this);
         this.max = MAXjump;
+
+        this.onHit = false;
+        this.hitEvent = scene.time.addEvent({ 
+            delay: 1000,
+            callback: () => {
+                this.onHit = false;
+            },
+            loop: true,
+            callbackScope: this,
+            paused: true,
+        });
+        this.hitTimer = scene.time.addEvent(this.hitEvent);
     }
     create() {
         this.setGravityY(900);
@@ -42,5 +54,17 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             this.jumpCount ++;
             this.setVelocityY(-350);
         }
+    }
+
+    healthLose() {
+        //update num
+        if (currentHealth > 0 && !this.onHit) {
+            currentHealth -= 1;
+            this.onHit = true;
+            this.hitTimer.paused = false;
+        }
+
+        //debug output for health number
+        healthCheck.text = "Health: " + currentHealth;
     }
 }

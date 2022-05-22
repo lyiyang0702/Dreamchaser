@@ -6,11 +6,11 @@ class LEVEL_1 extends Phaser.Scene {
 
     create() {
         // define keys
-        keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
-        keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
-        keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
+        keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+        keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+        keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
         keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-        keyDOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
+        keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
         keyG = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.G);
         // set camera
         this.cameras.main.setBounds(0, 0, 2000, 720);
@@ -30,51 +30,104 @@ class LEVEL_1 extends Phaser.Scene {
         }
         this.add.tileSprite(0, 0, 2000, game.config.height, 'tileStructure').setOrigin(0, 0);
         // add a tilemap
-        const map = this.add.tilemap("level1_map");
+        this.map = this.add.tilemap("level1_map");
         // add a tileset to the map
-        const tileset = map.addTilesetImage("Final_sheet");
+        this.tileset = this.map.addTilesetImage("Final_sheet");
         // create tilemap layers
-        const groundLayer = map.createLayer("ground", tileset, 0, 0);
-        groundLayer.setCollisionByProperty({
+        this.groundLayer = this.map.createLayer("ground", this.tileset, 0, 0);
+        this.groundLayer.setCollisionByProperty({
             collides: true
         });
 
-        const p1Spawn = map.findObject("Object", obj => obj.name === "P1 Spawn");
+        const p1Spawn = this.map.findObject("Object", obj => obj.name === "P1 Spawn");
+        
+        // define a render debug so we can see the tilemap's collision bounds
+        const debugGraphics = this.add.graphics().setAlpha(0.75);
+        this.groundLayer.renderDebug(debugGraphics, {
+            tileColor: null,    // color of non-colliding tiles
+            collidingTileColor: new Phaser.Display.Color(243, 134, 48, 255),    // color of colliding tiles
+            faceColor: new Phaser.Display.Color(40, 39, 37, 255)                // color of colliding face edges
+        });
+        
         this.add.text(10, 10, 'LEVEL 1', menuConfig);
         //health debug
         currentHealth = 3;
         healthCheck = this.add.text(this.pla, borderPadding * 5, "Health: " + currentHealth, menuConfig);
         //set up player
-        player = new Player(this, p1Spawn.x, 0, 'Final_sheet', 94, MAX_JUMP);
-        //set up enemy
-        enemy = new Enemies(this, game.config.width / 2 - 100, game.config.height / 2 - 100, 'enemy_atlas', 'ghost_left_0001').setScale(0.01);;
+        player = new Player(this, p1Spawn.x, 0, 'animation_atlas', 'idle_right_0001', MAX_JUMP);
 
         // camera follow character
         this.cameras.main.startFollow(player, true, 0.05, 0.05);
         player.create();
-        enemy.create();
 
         //set up dream catcher
-        this.dreamCatcher = new Weapons(this, player.x, player.y, 'cat_atlas', 'weapon_normal_0001');
-        heartGroup = this.add.group();
+        this.dreamCatcher = new Weapons(this, player.x, player.y, 'animation_atlas', 'weapon_right_0001');
+        // set up objects
+        // heart
+        this.heart = this.map.createFromObjects("Object", {
+            name: "Heart",
+            key: "Final_sheet",
+            frame: 5
+        });
+        this.physics.world.enable(this.heart, Phaser.Physics.Arcade.STATIC_BODY);
+        heartGroup = this.add.group(this.heart);
+        this.physics.add.overlap(player, heartGroup, (obj1, obj2) => {
+            obj2.destroy(); // remove heart
+            if (currentHealth < 3) {
+                currentHealth += 1;
+            }
+            healthCheck.text = "Health: " + currentHealth;
+            console.log("Health: " + currentHealth); // HP +1
 
-        // randomize && add properties later
-        let heart = new Items(this, 630, 100, 'heart', 0, 'Heart');
-        heart.create();
-        heartGroup.add(heart);
-        door = new Items(this, 1970, 60, 'door', 0, 'Door');
-        door.create();
+        })
+        // spikes
+        this.spikes = this.map.createFromObjects("Object", {
+            name: "Spikes",
+            key: "Final_sheet",
+            frame: 14
+        });
+        this.physics.world.enable(this.spikes, Phaser.Physics.Arcade.STATIC_BODY);
+        this.spikes.map((spikes) => {
+            spikes.body.setSize(50,25).setOffset(0,20); 
+        });
+        spikesGroup = this.add.group(this.spikes);
+        this.physics.add.overlap(player, spikesGroup, (obj1, obj2) => {
+            if (currentHealth > 0) {
+                currentHealth -= 1;
+            }
+            //debug output for health number
+            healthCheck.text = "Health: " + currentHealth;
+            console.log("Health: " + currentHealth);
+        })
 
+        // memeory orbs
+        this.orbs= this.map.createFromObjects("Object", {
+            name: "Memory orbs",
+            key: "Final_sheet",
+            frame: 0
+        });
+        this.physics.world.enable(this.orbs, Phaser.Physics.Arcade.DYNAMIC_BODY);
+        orbsGroup = this.add.group(this.orbs);
+        orbsGroup.playAnimation('memory_orb');
+        // ghost
+        this.ghosts= this.map.createFromObjects("Object", {
+            name: "Ghost",
+            key: "Final_sheet",
+            frame: 6
+        });
+        this.physics.world.enable(this.ghosts, Phaser.Physics.Arcade.DYNAMIC_BODY);
+        ghostGroup = this.add.group(this.ghosts);
+        ghostGroup.playAnimation('ghost');
+        this.physics.add.overlap(player, ghostGroup, (obj1, obj2) => {
+            this.healthLose(obj2);
+        })
 
         //add collider
-        this.physics.add.collider(heartGroup, groundLayer);
         this.physics.add.collider(player, door, function () {
             game.scene.start('level_2');
             game.scene.sleep('level_1');
         });
-        this.physics.add.collider(player, groundLayer);
-
-        //this.physics.add.collider(enemy, platform);
+        this.physics.add.collider(player, this.groundLayer);
 
         //heart disappear when player collide with it
         this.physics.add.overlap(player, heartGroup, this.healthCollect);
@@ -82,22 +135,10 @@ class LEVEL_1 extends Phaser.Scene {
         bgmMusic = this.sound.add('backMusic', soundConfig);
         bgmMusic.play();
 
-        this.physics.add.overlap(player, enemy, this.healthLose);
 
     }
 
-    //collect items
-    healthCollect(player, heart) {
-        heartGroup.killAndHide(heart);
-        heart.body.enable = false;
-        if (currentHealth < 3) {
-            currentHealth += 1;
-        }
-        healthCheck.text = "Health: " + currentHealth;
-        console.log("Health: " + currentHealth);
-    }
-    healthLose() {
-        //heartGroup.destory(enemy);
+    healthLose(enemy) {
 
         //update num
         if (currentHealth > 0) {
@@ -119,7 +160,6 @@ class LEVEL_1 extends Phaser.Scene {
 
     update() {
         player.update();
-        enemy.update();
 
         this.dreamCatcher.attack(player.x, player.y - player.width - 10);
         //gameOver Trigger (statement is temporarily)

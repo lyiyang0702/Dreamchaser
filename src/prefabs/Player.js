@@ -16,30 +16,49 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     }
 
     update() {
-        // left & right movement
-        if (keyLEFT.isDown) {
-            this.setVelocityX(-200);
-            this.anims.play('idle_left', true);
-            this.body.setSize(20, 80,true);
-        }
-        else if (keyRIGHT.isDown) {
-            this.setVelocityX(200);
-            this.anims.play('idle_right', true);
-            this.body.setSize(20, 80,true);
-        }
-        else {
-            this.setVelocityX(0);
-            this.anims.play('idle_down', true);
-            this.body.setSize(40, 80,true);
-        }
-        // jump (Max: 2)
         this.isGrounded = this.body.blocked.down;
         if (this.isGrounded) {
             this.jumpCount = 0;
         }
+        // left & right movement
+        if (keyA.isDown) {
+            this.setVelocityX(-200);
+            if (this.isGrounded){
+                this.anims.play('cat_walk_left', true);
+            }
+            this.body.setSize(this.width,this.height,true);
+            this.right = false;
+            this.left = true;
+        }
+        else if (keyD.isDown) {
+            this.setVelocityX(200);
+            if (this.isGrounded){
+                this.anims.play('cat_walk_right', true);
+            }
+            this.body.setSize(this.width,this.height,true);
+            this.left = false;
+            this.right = true;
+        }
+        else if (this.isGrounded) {
+            this.setVelocityX(0);
+            if (this.right){
+                this.anims.play('idle_right', true);
+            }
+            else if(this.left){
+                this.anims.play('idle_left', true);
+            }
+            this.body.setSize(this.width,this.height,true);
+        }
+        // jump (Max: 2)
 
-        if (Phaser.Input.Keyboard.JustDown(keyUP) && this.jumpCount < this.max) {
+        if (Phaser.Input.Keyboard.JustDown(keyW) && this.jumpCount < this.max) {
             this.jumpCount ++;
+            if (this.left){
+                this.anims.play ('jump_left',true);
+            }
+            else if (this.right){
+                 this.anims.play ('jump_right',true);
+            }
             this.setVelocityY(-350);
         }
     }

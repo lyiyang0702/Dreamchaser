@@ -25,7 +25,7 @@ let soundConfig = {
 let game = new Phaser.Game(config);
 let gameOverStatus = false;
 // define keys
-let keyUP,keyLEFT,keyRIGHT,keyENTER,keySPACE,keyDOWN;
+let keyW,keyA,keyS,keyENTER,keySPACE,keyD;
 
 //gameOver Experimental Key
 let keyG, keyR; //end game key and restart key
@@ -36,11 +36,8 @@ let borderPadding = borderUISize / 3;
 
 let MAX_JUMP = 2;
 
-let groundGroup, heartGroup, door, player, enemy;
+let heartGroup, door, player, enemy, spikesGroup, ghostGroup, orbsGroup;
 
 let healthCheck, currentHealth;
 
 let mirrored = false;
-
-let map, tileset,platform;
-

@@ -8,16 +8,10 @@ class Load extends Phaser.Scene {
         this.load.path = 'assets/';
         // take care of all of our asset loading now
         this.load.audio('jump', 'jump.wav');
-        this.load.image('cat', 'MainCharacter.png');
-        this.load.image('heart', 'heart.png');
         this.load.image('door', 'door.png');
         this.load.atlas('animation_atlas', 'animations.png', 'animation_sprites.json');
-        this.load.atlas('enemy_atlas', 'ghost_left.png', 'ghostLeftMap.json');
         this.load.image('jungle', 'jungleBackground.png');
         this.load.image('tileStructure', 'Level1Background.png');
-        this.load.image('ghost_left', 'arrowKey.png');
-        // this.load.image('White_Tile', 'level1SingleTile.png');
-        // this.load.tilemapTiledJSON('map', 'level1TileMap.json');
         this.load.spritesheet("Final_sheet", "Final_sheet.png", {
             frameWidth: 50,
             frameHeight: 50

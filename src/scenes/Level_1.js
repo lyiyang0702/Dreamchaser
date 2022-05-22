@@ -91,13 +91,8 @@ class LEVEL_1 extends Phaser.Scene {
             spikes.body.setSize(50,25).setOffset(0,20); 
         });
         spikesGroup = this.add.group(this.spikes);
-        this.physics.add.overlap(player, spikesGroup, (obj1, obj2) => {
-            if (currentHealth > 0) {
-                currentHealth -= 1;
-            }
-            //debug output for health number
-            healthCheck.text = "Health: " + currentHealth;
-            console.log("Health: " + currentHealth);
+        this.physics.add.overlap(player, spikesGroup, function() {
+            player.healthLose();
         })
 
         // memeory orbs
@@ -118,9 +113,9 @@ class LEVEL_1 extends Phaser.Scene {
         this.physics.world.enable(this.ghosts, Phaser.Physics.Arcade.DYNAMIC_BODY);
         ghostGroup = this.add.group(this.ghosts);
         ghostGroup.playAnimation('ghost');
-        this.physics.add.overlap(player, ghostGroup, (obj1, obj2) => {
-            this.healthLose(obj2);
-        })
+        this.physics.add.overlap(player, ghostGroup, function(){
+            player.healthLose();
+        }, null, this)
 
         //add collider
         this.physics.add.collider(player, door, function () {
@@ -135,26 +130,6 @@ class LEVEL_1 extends Phaser.Scene {
         bgmMusic = this.sound.add('backMusic', soundConfig);
         bgmMusic.play();
 
-
-    }
-
-    healthLose(enemy) {
-
-        //update num
-        if (currentHealth > 0) {
-            currentHealth -= 1;
-        }
-
-        // add effects later
-        if (enemy.x > player.x) {
-            player.x -= 100;
-        } else if (enemy.x < player.x) {
-            player.x += 100;
-        }
-
-        //debug output for health number
-        healthCheck.text = "Health: " + currentHealth;
-        console.log("Health: " + currentHealth);
 
     }
 

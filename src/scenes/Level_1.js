@@ -166,12 +166,7 @@ class LEVEL_1 extends Phaser.Scene {
         if (player.y > game.config.height) {
             gameOverStatus = true;
             this.checkGameOver();
-        }
-        // else if (currentHealth == 0) {
-        //     gameOverStatus = true;
-        //     this.checkGameOver();
-        // }
-        else if (gameOverStatus) {
+        }else if (gameOverStatus) {
             bgmMusic.stop();
             gameOverStatus = false;
             this.scene.restart();

@@ -22,9 +22,13 @@ class Story extends Phaser.Scene {
         }
 
         this.add.text(10, 10, 'Story', menuConfig);
+         // define keys
+         keyENTER = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
     }
 
     update() {
-
+        if (Phaser.Input.Keyboard.JustDown(keyENTER)) {
+            this.scene.start('level_1'); 
+        }
     }
 }

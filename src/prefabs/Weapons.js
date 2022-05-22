@@ -16,16 +16,13 @@ class Weapons extends Phaser.Physics.Arcade.Sprite {
         }
 
         if (this.firing) {
-            if (Phaser.Input.Keyboard.JustDown(keyLEFT)){
-                this.setScale (-0.5);
-            }
-            if (Phaser.Input.Keyboard.JustDown(keyRIGHT)){
-                this.setScale (0.5);
-            }
             this.alpha = 1;
             this.x = new_x;
             this.y = new_y;
-            this.anims.play('dreamCatcher', true);
+            this.anims.play('weapon_right', true);
+            if (Phaser.Input.Keyboard.JustDown(keyLEFT)){
+                this.flipX = true;
+            }
             if (Phaser.Input.Keyboard.JustDown(keyDOWN)) {
                 this.reset();
             }

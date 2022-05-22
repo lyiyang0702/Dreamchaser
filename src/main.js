@@ -22,6 +22,12 @@ let soundConfig = {
     loop: true,
 }
 
+let backConfig = {
+    mute: false,
+    volume: 0.4,
+    rate: 1,
+    loop: true,
+}
 let game = new Phaser.Game(config);
 let gameOverStatus = false;
 // define keys

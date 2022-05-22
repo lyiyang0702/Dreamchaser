@@ -18,6 +18,7 @@ class Load extends Phaser.Scene {
         });
         this.load.tilemapTiledJSON("level1_map", "level1Map.json");    // Tiled JSON file
         this.load.audio('backMusic', 'backgroundMusic.mp3');
+        this.load.audio('backstory', 'backstoryAudio.mp3');
     }
 
     create() {

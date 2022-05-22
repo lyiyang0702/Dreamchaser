@@ -6,7 +6,10 @@ class Weapons extends Phaser.Physics.Arcade.Sprite {
         this.setScale(0.5);
         this.firing = false;
         this.alpha = 0;
+        
     }
+
+
 
     // Press SPACE to summon dream cathcer && DOWN to hide
     // or the weapon will disspear after 5secs
@@ -14,16 +17,20 @@ class Weapons extends Phaser.Physics.Arcade.Sprite {
         if (Phaser.Input.Keyboard.JustDown(keySPACE) && !this.firing) {
             this.firing = true;
         }
-
         if (this.firing) {
             this.alpha = 1;
+
+            this.anims.play('weapon_right', true);
             this.x = new_x;
             this.y = new_y;
-            this.anims.play('weapon_right', true);
-            if (Phaser.Input.Keyboard.JustDown(keyLEFT)){
+        
+            if (Phaser.Input.Keyboard.JustDown(keyA)){
                 this.flipX = true;
             }
-            if (Phaser.Input.Keyboard.JustDown(keyDOWN)) {
+            if (Phaser.Input.Keyboard.JustDown(keyD)){
+                this.flipX = false;
+            }
+            if (Phaser.Input.Keyboard.JustDown(keyS)) {
                 this.reset();
             }
             else {
@@ -31,7 +38,9 @@ class Weapons extends Phaser.Physics.Arcade.Sprite {
                     this.reset();
                 }, this);
             }
+
         }
+
     }
 
     // weapon reset

@@ -12,6 +12,8 @@ class LEVEL_1 extends Phaser.Scene {
         keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
         keyG = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.G);
+        keyF1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F1);
+        keyF2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F2);
         // set camera
         this.cameras.main.setBounds(0, 0, 2000, 720);
         this.physics.world.setBounds(0, 0, 2000, 800);
@@ -67,7 +69,7 @@ class LEVEL_1 extends Phaser.Scene {
         this.heart = this.map.createFromObjects("Object", {
             name: "Heart",
             key: "Final_sheet",
-            frame: 5
+            frame: 4
         });
         this.physics.world.enable(this.heart, Phaser.Physics.Arcade.STATIC_BODY);
         heartGroup = this.add.group(this.heart);
@@ -84,7 +86,7 @@ class LEVEL_1 extends Phaser.Scene {
         this.spikes = this.map.createFromObjects("Object", {
             name: "Spikes",
             key: "Final_sheet",
-            frame: 14
+            frame: 24
         });
         this.physics.world.enable(this.spikes, Phaser.Physics.Arcade.STATIC_BODY);
         this.spikes.map((spikes) => {
@@ -108,7 +110,7 @@ class LEVEL_1 extends Phaser.Scene {
         this.ghosts= this.map.createFromObjects("Object", {
             name: "Ghost",
             key: "Final_sheet",
-            frame: 6
+            frame: 5
         });
         this.physics.world.enable(this.ghosts, Phaser.Physics.Arcade.DYNAMIC_BODY);
         ghostGroup = this.add.group(this.ghosts);
@@ -130,13 +132,12 @@ class LEVEL_1 extends Phaser.Scene {
         bgmMusic = this.sound.add('backMusic', soundConfig);
         bgmMusic.play();
 
-
     }
 
     update() {
         player.update();
+        this.dreamCatcher.attack(player.x, player.y - player.height + 10);
 
-        this.dreamCatcher.attack(player.x, player.y - player.width - 10);
         //gameOver Trigger (statement is temporarily)
         if (player.y > game.config.height) {
             gameOverStatus = true;

@@ -62,7 +62,7 @@ class Load extends Phaser.Scene {
                 zeroPad: 4
             }),
             frameRate: 8,
-            repeat: -1,
+            repeat: 10,
         });
 
         // cat idle right
@@ -76,7 +76,7 @@ class Load extends Phaser.Scene {
                 zeroPad: 4
             }),
             frameRate: 8,
-            repeat: -1,
+            repeat: 10,
         });
         //idle down
         this.anims.create({
@@ -237,12 +237,32 @@ class Load extends Phaser.Scene {
             key: 'ghost',
             defaultTextureKey: 'Final_sheet',
             frames: [ 
-                { frame: 6 },
-                { frame: 7 }
+                { frame: 5 },
+                { frame: 6 }
             ],
             frameRate: 6,
             repeat: -1
         });
+
+        // explosion
+        this.anims.create({
+            key: 'explosion',
+            defaultTextureKey: 'Final_sheet',
+            frames: [ 
+                { frame: 10 },
+                { frame: 11 },
+                { frame: 12 },
+                { frame: 13 },
+                { frame: 14 },
+                { frame: 15},
+                { frame: 16 },
+                { frame: 17 },
+                { frame: 18 },
+                { frame: 19 },
+            ],
+            frameRate: 16,
+        });
+
         // ...and pass to the next Scene
         this.scene.start('menuScene');
     }

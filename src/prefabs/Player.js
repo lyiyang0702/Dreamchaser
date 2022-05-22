@@ -4,9 +4,9 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         scene.physics.add.existing(this);
         scene.add.existing(this);
         this.max = MAXjump;
-
+        this.cat = false;
         this.onHit = false;
-        this.hitEvent = scene.time.addEvent({ 
+        this.hitEvent = scene.time.addEvent({
             delay: 1000,
             callback: () => {
                 this.onHit = false;
@@ -32,47 +32,84 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         if (this.isGrounded) {
             this.jumpCount = 0;
         }
+        if (keyF1.isDown&&!this.cat) {
+            this.cat = true;
+            this.anims.play('explosion', true);
+            this.on(Phaser.Animations.Events.ANIMATION_COMPLETE, function () {
+                this.anims.play('cat_idle_right', true);
+                this.body.setSize(this.width, this.height, true);
+            }, this);
+        }
+        else if (keyF2.isDown&&this.cat) {
+            this.cat = false;
+            this.anims.play('explosion', true);
+            this.on(Phaser.Animations.Events.ANIMATION_COMPLETE, function () {
+                this.anims.play('idle_right', true);
+                this.body.setSize(this.width, this.height, true);
+            }, this);
+        }
         // left & right movement
         if (keyA.isDown) {
             this.setVelocityX(-200);
-            if (this.isGrounded){
-                this.anims.play('cat_walk_left', true);
+            if (this.isGrounded) {
+                if (this.cat) {
+                    this.anims.play('cat_run_left', true);
+                }
+                else {
+                    this.anims.play('cat_walk_left', true);
+                }
             }
-            this.body.setSize(this.width,this.height,true);
+            this.body.setSize(this.width, this.height, true);
             this.right = false;
             this.left = true;
         }
         else if (keyD.isDown) {
             this.setVelocityX(200);
-            if (this.isGrounded){
-                this.anims.play('cat_walk_right', true);
+            if (this.isGrounded) {
+                if (this.cat) {
+                    this.anims.play('cat_run_right', true);
+                }
+                else {
+                    this.anims.play('cat_walk_right', true);
+                }
             }
-            this.body.setSize(this.width,this.height,true);
+            this.body.setSize(this.width, this.height, true);
             this.left = false;
             this.right = true;
         }
         else if (this.isGrounded) {
             this.setVelocityX(0);
-            if (this.right){
-                this.anims.play('idle_right', true);
+            if (this.right) {
+                if (this.cat) {
+                    this.anims.play('cat_idle_right', true);
+                }
+                else {
+                    this.anims.play('idle_right', true);
+                }
             }
-            else if(this.left){
-                this.anims.play('idle_left', true);
+            else if (this.left) {
+                if (this.cat) {
+                    this.anims.play('cat_idle_left', true);
+                }
+                else {
+                    this.anims.play('idle_left', true);
+                }
             }
-            this.body.setSize(this.width,this.height,true);
+            this.body.setSize(this.width, this.height, true);
         }
         // jump (Max: 2)
 
-        if (Phaser.Input.Keyboard.JustDown(keyW) && this.jumpCount < this.max) {
-            this.jumpCount ++;
-            if (this.left){
-                this.anims.play ('jump_left',true);
+        if (Phaser.Input.Keyboard.JustDown(keyW) && this.jumpCount < this.max && !this.cat) {
+            this.jumpCount++;
+            if (this.left) {
+                this.anims.play('jump_left', true);
             }
-            else if (this.right){
-                 this.anims.play ('jump_right',true);
+            else if (this.right) {
+                this.anims.play('jump_right', true);
             }
             this.setVelocityY(-350);
         }
+
     }
 
     healthLose() {

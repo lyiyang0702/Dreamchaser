@@ -24,7 +24,6 @@ var currDreamY = 20;
 var currLucyY = 500;
 var currDreamLine = 0;
 var currLucyLine = 0;
-var flag = false;
 let dreamConfig = {
     fontFamily: 'Copperplate',
     fontSize: '18px',
@@ -57,9 +56,8 @@ class Story extends Phaser.Scene {
         super("story");
     }
     typewriteText(text){
-        flag = true;
         const length = text.length
-        let i = 0
+        let i = 0;
         this.time.addEvent({
             callback: () => {
                 this.label.text += text[i]
@@ -68,7 +66,7 @@ class Story extends Phaser.Scene {
             repeat: length - 1,
             delay: 30
         })
-        flag = false;
+
     }
     typewriteTextWrapped(text){
         const lines = this.label.getWrappedText(text);
@@ -85,7 +83,7 @@ class Story extends Phaser.Scene {
     }
 
     update() {
-        if (Phaser.Input.Keyboard.JustDown(keySPACE) && (flag == false)) {
+        if (Phaser.Input.Keyboard.JustDown(keySPACE)) {
             if(whichOne[currTalk]==0) {
                 this.label = this.add.text(30, currDreamY, '', dreamConfig).setWordWrapWidth(700);
 	            this.typewriteTextWrapped(dreamTherapist[currDreamLine]);

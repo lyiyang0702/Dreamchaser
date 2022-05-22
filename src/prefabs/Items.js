@@ -13,11 +13,10 @@ class Items extends Phaser.Physics.Arcade.Sprite {
                 //console.log(this.items);
                 this.setScale(0.1);
                 break;
-            case 'Door':
+            case 'Ghost':
                 //console.log(this.items);
-                this.setScale(0.1);
                 this.setImmovable(true);
-                this.body.setSize(100, 100);
+                //this.anims.play('soul_left',true);
                 break;
             default:
                 break;

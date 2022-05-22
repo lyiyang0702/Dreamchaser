@@ -120,14 +120,14 @@ class LEVEL_1 extends Phaser.Scene {
         }, null, this)
 
         //add collider
-        this.physics.add.collider(player, door, function () {
+        this.physics.add.collider(player, this.groundLayer);
+
+        this.soul = new Items(this, 1950, 125, 'animation_atlas', 'soul_left_0001', 'Ghost'); 
+        this.soul.anims.play('soul_left',true);
+        this.physics.add.collider(player,this.soul,function(){
             game.scene.start('level_2');
             game.scene.sleep('level_1');
         });
-        this.physics.add.collider(player, this.groundLayer);
-
-        //heart disappear when player collide with it
-        this.physics.add.overlap(player, heartGroup, this.healthCollect);
 
         bgmMusic = this.sound.add('backMusic', soundConfig);
         bgmMusic.play();

@@ -219,6 +219,19 @@ class Load extends Phaser.Scene {
             repeat: 10,
         });
 
+        // soul
+        this.anims.create({
+            key: 'soul_left',
+            frames: this.anims.generateFrameNames('animation_atlas', {
+                prefix: 'soul_left_',
+                start: 1,
+                end: 3,
+                suffix: '',
+                zeroPad: 4
+            }),
+            frameRate: 8,
+            repeat: -1,
+        });
         // memory orb
         this.anims.create({
             key: 'memory_orb',

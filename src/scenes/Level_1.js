@@ -107,6 +107,11 @@ class LEVEL_1 extends Phaser.Scene {
         this.physics.world.enable(this.orbs, Phaser.Physics.Arcade.DYNAMIC_BODY);
         orbsGroup = this.add.group(this.orbs);
         orbsGroup.playAnimation('memory_orb');
+        this.obsNum = 0;
+        this.obsCheck = this.add.text(this.pla, borderPadding * 6, "Obs: " + this.obsNum, menuConfig).setScrollFactor(0);
+        this.physics.add.overlap(this.dreamCatcher, orbsGroup, (obj1, obj2) => {
+            this.obsCollected(obj2);
+        });
 
         // ghost
         this.ghosts = this.map.createFromObjects("Object", {
@@ -114,9 +119,6 @@ class LEVEL_1 extends Phaser.Scene {
             key: "Final_sheet",
             frame: 5
         });
-
-        this.ghostMirrored = false;
-        // this.ghosts.x -= 100;
 
         this.physics.world.enable(this.ghosts, Phaser.Physics.Arcade.DYNAMIC_BODY);
         ghostGroup = this.add.group(this.ghosts);
@@ -148,7 +150,7 @@ class LEVEL_1 extends Phaser.Scene {
 
     update() {
         player.update();
-        this.dreamCatcher.attack(player.x, player.y - player.height + 10);
+        this.dreamCatcher.attack(player.x, player.y - player.height + 40);
         if(currentHealth == 3) {
             heart3.visible = true;
         } else if(currentHealth == 2) {
@@ -173,6 +175,8 @@ class LEVEL_1 extends Phaser.Scene {
             this.scene.restart();
         }
 
+        this.ghosts.x += this.ghostSpeed;
+
     }
 
     checkGameOver() {
@@ -181,30 +185,36 @@ class LEVEL_1 extends Phaser.Scene {
         game.scene.sleep('level_1');
     }
 
-    changeDirection(){
+    changeDirection(enemy){
         console.log("enemy hit heart");
         //when facing right
         if(enemy.body.blocked.right){       
-            this.setVelocityX(-100);
-            mirrored = false;
-            if(mirrored == false){
+            // this.setVelocityX(-100);
+            this.ghostSpeed = -1;
+            this.ghostMirrored = false;
+            if(this.ghostMirrored == false){
                 console.log("mirrored changed to false");
             }else{
                 console.log("false");
             }
                 
-        }
+        }else if(enemy.body.blocked.left){
 
-        if(enemy.body.blocked.left){
-
-            this.setVelocityX(100);
-            mirrored = true;
-            if(mirrored == true){
+            // this.setVelocityX(100);
+            this.ghostSpeed = 1;
+            this.ghostMirrored = true;
+            if(this.ghostMirrored == true){
                 console.log("mirrored changed to true");
             }else{
                 console.log("false");
             }
         }
+    }
+
+    obsCollected(obj2){
+        obj2.destroy();
+        this.obsNum += 1;
+        this.obsCheck.text = "Obs: " + this.obsNum;
     }
 
 

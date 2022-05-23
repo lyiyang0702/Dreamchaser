@@ -18,7 +18,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.hitTimer = scene.time.addEvent(this.hitEvent);
     }
     create() {
-        this.setGravityY(900);
+        this.setGravityY(800);
         this.allowGravity = true;
         this.jumpCount = 0;
         this.jumping = false;
@@ -107,7 +107,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             else if (this.right) {
                 this.anims.play('jump_right', true);
             }
-            this.setVelocityY(-350);
+            this.setVelocityY(-400);
         }
 
     }

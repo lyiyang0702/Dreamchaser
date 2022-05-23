@@ -1,43 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="40" height="15" tilewidth="50" tileheight="50" infinite="0" nextlayerid="3" nextobjectid="8">
+<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="40" height="15" tilewidth="50" tileheight="50" infinite="0" nextlayerid="3" nextobjectid="34">
  <editorsettings>
-  <export target="E:/file/Dreamchaser/assets/level1Map.json" format="json"/>
+  <export target="level1Map.json" format="json"/>
  </editorsettings>
- <tileset firstgid="1" name="Final_sheet" tilewidth="50" tileheight="50" tilecount="15" columns="5">
-  <image source="E:/file/Dreamchaser/assets/Final_sheet.png" width="250" height="150"/>
-  <tile id="13">
+ <tileset firstgid="1" name="Final_sheet" tilewidth="50" tileheight="50" tilecount="30" columns="10">
+  <image source="Final_sheet.png" width="500" height="150"/>
+  <tile id="20">
+   <properties>
+    <property name="collides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="21">
+   <properties>
+    <property name="collides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="23">
    <properties>
     <property name="collides" type="bool" value="true"/>
    </properties>
   </tile>
  </tileset>
- <layer id="1" name="ground" width="40" height="15" locked="1">
+ <layer id="1" name="ground" width="40" height="15">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,14,14,
-14,14,14,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,14,14,0,
-0,0,14,14,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,14,14,0,0,
-0,0,0,14,14,14,0,0,14,14,14,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,14,14,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,14,14,14,14,0,0,0,0,0,0,0,0,0,0,0,0,0,0,14,14,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,14,14,14,14,14,14,0,0,0,0,14,14,14,14,14,14,0,0,14,14,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,14,14,14,0,0,14,14,14,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,14,14,0,0,0,0,0,0,14,14,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,14,14,0,0,0,0,0,0,0,0,14,14,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,14,14,0,0,0,0,0,0,0,0,0,0,14,14,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,21,21,21,21,21,21,0,0,0,0,0,0,0,0,0,0,21,21,21,0,0,21,21,21,23,
+21,21,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,23,
+23,23,21,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,21,21,0,0,0,0,0,0,0,0,0,0,0,0,0,0,23,
+23,23,23,21,0,0,0,21,21,21,21,0,0,0,0,0,0,0,0,0,0,0,21,23,23,0,0,0,0,0,0,0,0,0,0,21,21,21,0,23,
+23,23,23,23,21,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,21,23,23,23,0,0,0,0,0,0,0,0,0,0,0,0,0,0,23,
+23,23,23,23,23,21,0,0,0,0,0,0,21,21,21,21,21,0,0,0,21,23,23,23,23,0,0,0,0,0,0,21,21,21,0,0,0,0,0,23,
+23,23,23,23,23,23,0,0,0,0,21,21,23,23,0,0,0,0,0,21,23,23,23,23,23,0,0,0,0,0,0,0,0,0,0,0,0,0,0,23,
+23,23,23,23,23,23,0,0,0,0,0,0,23,23,0,0,0,0,21,23,23,23,23,23,23,0,21,21,21,21,0,0,0,0,0,0,0,0,0,23,
+23,23,23,23,23,23,0,0,0,0,0,0,23,23,0,0,0,0,23,23,23,23,23,23,23,0,0,0,0,0,0,0,0,0,0,0,0,0,0,23,
+23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,0,0,0,0,0,0,0,0,0,0,0,0,0,0,23,
+23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,21,21,21,21,21,21,21,21,21,21,21,21,21,21,23,
+23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23
 </data>
  </layer>
  <objectgroup id="2" name="Object">
   <object id="1" name="P1 Spawn" x="68" y="162.667">
    <point/>
   </object>
-  <object id="2" name="Heart" gid="6" x="884.333" y="270.333" width="38" height="32.6667"/>
-  <object id="3" name="Spikes" gid="15" x="200.5" y="300.25" width="50" height="50"/>
-  <object id="4" name="Memory orbs" gid="1" x="1573.67" y="377" width="50" height="50"/>
-  <object id="6" name="Ghost" gid="7" x="1703" y="295.667" width="67.3333" height="72.6667"/>
-  <object id="7" name="Spikes" gid="15" x="876.917" y="350" width="50" height="50"/>
+  <object id="2" name="Heart" gid="11" x="1380.33" y="462.333" width="38" height="32.6667"/>
+  <object id="4" name="Memory orbs" gid="1" x="875.003" y="94.3333" width="50" height="50"/>
+  <object id="6" name="Ghost" gid="12" x="599" y="257.667" width="67.3333" height="72.6667"/>
+  <object id="7" name="Spikes" gid="25" x="699.584" y="600" width="50" height="50"/>
+  <object id="8" name="Spikes" gid="25" x="300.5" y="599.773" width="50" height="50"/>
+  <object id="9" name="Spikes" gid="25" x="350.5" y="599.455" width="50" height="50"/>
+  <object id="10" name="Spikes" gid="25" x="401" y="600" width="50" height="50"/>
+  <object id="11" name="Spikes" gid="25" x="450.5" y="600.5" width="50" height="50"/>
+  <object id="12" name="Spikes" gid="25" x="501" y="600.5" width="50" height="50"/>
+  <object id="13" name="Spikes" gid="25" x="551" y="600" width="50" height="50"/>
+  <object id="15" name="Spikes" gid="25" x="750.333" y="600" width="50" height="50"/>
+  <object id="16" name="Spikes" gid="25" x="800" y="600" width="50" height="50"/>
+  <object id="17" name="Spikes" gid="25" x="850.667" y="601" width="50" height="50"/>
+  <object id="18" gid="25" x="850" y="150" width="50" height="50"/>
+  <object id="20" gid="25" x="900.333" y="150" width="50" height="50"/>
+  <object id="22" name="Spikes" gid="25" x="1249.67" y="650.333" width="50" height="50"/>
+  <object id="27" name="Spikes" gid="25" x="1300" y="650.25" width="50" height="50"/>
+  <object id="28" name="Spikes" gid="25" x="1350.33" y="650.333" width="50" height="50"/>
+  <object id="29" name="Spikes" gid="25" x="1400.33" y="650" width="50" height="50"/>
+  <object id="30" name="Spikes" gid="25" x="1749.67" y="649.667" width="50" height="50"/>
+  <object id="31" name="Spikes" gid="25" x="1800.33" y="649.667" width="50" height="50"/>
+  <object id="32" name="Spikes" gid="25" x="1849.67" y="650.333" width="50" height="50"/>
+  <object id="33" name="Spikes" gid="25" x="1899.67" y="650.333" width="50" height="50"/>
  </objectgroup>
 </map>

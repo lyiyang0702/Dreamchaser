@@ -10,20 +10,20 @@ var dreamTherapist = [
 var lucy = [
 "Lucy\n...I’m scared",
 "Lucy\nI've been having weird dreams, ones that feel too real",
-"Lucy\nI keep hearing a voice calling out to me, but I can never seem to reach it. It always repeats the same words, save me",
+"Lucy\nI keep hearing a voice calling out to me, but I can never seem to reach it. It always repeats the same words 'SAVE ME'",
 "Lucy\nI chase after the voice, but right when I think I'm close, I wake up",
 "Lucy\nI feel like a part of me is stuck there",
-"Lucy\n…",
 "Lucy\n…",
 "Lucy\nYes"
 ];
 
-var whichOne = [0,1,1,0,1,1,1,0,0,1,1,1,-1];
+var whichOne = [0,1,1,0,1,1,1,0,0,0,1,1,0-1];
 var currTalk = 0;
 var currDreamY = 20;
 var currLucyY = 500;
 var currDreamLine = 0;
 var currLucyLine = 0;
+
 let dreamConfig = {
     fontFamily: 'Copperplate',
     fontSize: '18px',
@@ -58,15 +58,16 @@ class Story extends Phaser.Scene {
     typewriteText(text){
         const length = text.length
         let i = 0;
+        //funcRunning = true;
         this.time.addEvent({
             callback: () => {
                 this.label.text += text[i]
                 ++i
             },
             repeat: length - 1,
-            delay: 30
+            delay: 10
         })
-
+        //funcRunning = false;
     }
     typewriteTextWrapped(text){
         const lines = this.label.getWrappedText(text);
@@ -80,21 +81,27 @@ class Story extends Phaser.Scene {
         backstoryMusic.play();
         //this.label = this.add.text(100, 100, '').setWordWrapWidth(500);
 	    //this.typewriteTextWrapped("Dream Therapist\nSo what brings you here today?");
+        this.label = this.add.text(30, currDreamY, '', dreamConfig).setWordWrapWidth(750);
+        this.typewriteTextWrapped(dreamTherapist[currDreamLine]);
+        //this.add.text(30, currDreamY, dreamTherapist[currDreamLine], dreamConfig);
+        currDreamY += 60;
+        currDreamLine++;
+        currTalk++;
     }
 
     update() {
         if (Phaser.Input.Keyboard.JustDown(keySPACE)) {
-            if(whichOne[currTalk]==0) {
-                this.label = this.add.text(30, currDreamY, '', dreamConfig).setWordWrapWidth(700);
+            if((currTalk != 0) && whichOne[currTalk]==0) {
+                this.label = this.add.text(30, currDreamY, '', dreamConfig).setWordWrapWidth(750);
 	            this.typewriteTextWrapped(dreamTherapist[currDreamLine]);
                 //this.add.text(30, currDreamY, dreamTherapist[currDreamLine], dreamConfig);
                 currDreamY += 60;
                 currDreamLine++;
                 currTalk++;
             } else if(whichOne[currTalk]==1) {
-                this.label = this.add.text(1220, currDreamY-20, '', lucyConfig).setWordWrapWidth(700);
-	            this.typewriteTextWrapped(lucy[currLucyLine]);
-                //this.add.text(1220, currDreamY-20, lucy[currLucyLine], lucyConfig);
+                //this.label = this.add.text(1220, currDreamY-20, '', lucyConfig).setWordWrapWidth(750);
+	            //this.typewriteTextWrapped(lucy[currLucyLine]);
+                this.add.text(1220, currDreamY-20, lucy[currLucyLine], lucyConfig);
                 currDreamY += 60;
                 currLucyLine++;
                 currTalk++;

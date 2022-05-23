@@ -55,7 +55,7 @@ class LEVEL_1 extends Phaser.Scene {
         this.add.text(10, 10, 'LEVEL 1', menuConfig).setScrollFactor(0);
         //health debug
         currentHealth = 3;
-        healthCheck = this.add.text(this.pla, borderPadding * 5, "Health: " + currentHealth, menuConfig).setScrollFactor(0);
+        //healthCheck = this.add.text(this.pla, borderPadding * 5, "Health: " + currentHealth, menuConfig).setScrollFactor(0);
         //set up player
         player = new Player(this, p1Spawn.x, 0, 'animation_atlas', 'idle_right_0001', MAX_JUMP).setOrigin(0, 0);
 
@@ -79,7 +79,7 @@ class LEVEL_1 extends Phaser.Scene {
             if (currentHealth < 3) {
                 currentHealth += 1;
             }
-            healthCheck.text = "Health: " + currentHealth;
+            //healthCheck.text = "Health: " + currentHealth;
             console.log("Health: " + currentHealth); // HP +1
 
         })

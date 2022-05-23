@@ -79,6 +79,14 @@ class Story extends Phaser.Scene {
         keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         backstoryMusic = this.sound.add('backstory', backConfig);
         backstoryMusic.play();
+        this.anims.create({
+            key: 'backgroundAnimation',
+            frames: this.anims.generateFrameNumbers('backstoryBack', { start: 0, end: 2, first: 0 }),
+            frameRate: 10,
+            repeat: -1
+        });
+        this.backBack = this.add.sprite(game.config.width / 2, game.config.height / 2 , 'backstoryBack');
+        this.backBack.anims.play('backgroundAnimation');
         //this.label = this.add.text(100, 100, '').setWordWrapWidth(500);
 	    //this.typewriteTextWrapped("Dream Therapist\nSo what brings you here today?");
         this.label = this.add.text(30, currDreamY, '', dreamConfig).setWordWrapWidth(750);

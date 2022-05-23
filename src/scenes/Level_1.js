@@ -159,7 +159,7 @@ class LEVEL_1 extends Phaser.Scene {
             heart1.visible = false;
         }
         //gameOver Trigger (statement is temporarily)
-        if (player.y > game.config.height) {
+        if (player.y > game.config.height || currentHealth == 0) {
             gameOverStatus = true;
             this.checkGameOver();
         }else if (gameOverStatus) {

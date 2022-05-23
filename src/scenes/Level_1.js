@@ -30,7 +30,7 @@ class LEVEL_1 extends Phaser.Scene {
             },
             fixedWidth: 0
         }
-        this.add.tileSprite(0, 0, 2000, game.config.height, 'tileStructure').setOrigin(0, 0);
+        this.add.tileSprite(0, 0, 2000, game.config.height, 'tileStructure');
         // add a tilemap
         this.map = this.add.tilemap("level1_map");
         // add a tileset to the map
@@ -56,7 +56,7 @@ class LEVEL_1 extends Phaser.Scene {
         currentHealth = 3;
         healthCheck = this.add.text(this.pla, borderPadding * 5, "Health: " + currentHealth, menuConfig);
         //set up player
-        player = new Player(this, p1Spawn.x, 0, 'animation_atlas', 'idle_right_0001', MAX_JUMP);
+        player = new Player(this, p1Spawn.x, 0, 'animation_atlas', 'idle_right_0001', MAX_JUMP).setOrigin(0, 0);
 
         // camera follow character
         this.cameras.main.startFollow(player, true, 0.05, 0.05);

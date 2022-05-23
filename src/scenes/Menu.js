@@ -1,3 +1,4 @@
+let menuMusic;
 class Menu extends Phaser.Scene {
     constructor () {
         super ("menuScene");
@@ -17,7 +18,11 @@ class Menu extends Phaser.Scene {
             },
             fixedWidth: 0
         }
-    
+
+        //bgm
+        menuMusic = this.sound.add('backMusic',soundConfig);
+        menuMusic.setLoop(true);
+        menuMusic.play();
         this.add.tileSprite(0, 0, 1250, game.config.height, 'titlePageBackground').setOrigin(0, 0);
         this.add.tileSprite(0, 0, 1250, game.config.height, 'enter').setOrigin(0, 0);
         this.anims.create({
@@ -26,8 +31,8 @@ class Menu extends Phaser.Scene {
             frameRate: 10,
             repeat: -1
         });
-        this.backBack = this.add.sprite(game.config.width / 2, game.config.height / 2-100 , 'logo');
-        this.backBack.anims.play('logoAnim');
+        this.logoPlay = this.add.sprite(game.config.width / 2, game.config.height / 2-100 , 'logo');
+        this.logoPlay.anims.play('logoAnim');
 
         // show menu text
         /* this.add.text (game.config.width/2, game.config.height/2 - borderUISize - borderPadding, 'DREAMCATHER',menuConfig).setOrigin(0.5);
@@ -44,6 +49,7 @@ class Menu extends Phaser.Scene {
     update() {
 
         if (Phaser.Input.Keyboard.JustDown(keyENTER)) {
+            menuMusic.stop();
           this.scene.start('story'); 
         }
     }

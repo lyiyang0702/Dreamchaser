@@ -117,6 +117,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         }
 
         //debug output for health number
-        healthCheck.text = "Health: " + currentHealth;
+        //healthCheck.text = "Health: " + currentHealth;
     }
 }

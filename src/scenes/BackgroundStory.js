@@ -26,7 +26,7 @@ var currLucyLine = 0;
 
 let dreamConfig = {
     fontFamily: 'Copperplate',
-    fontSize: '18px',
+    fontSize: '20px',
     //backgroundColor: '#F3B141',
     color: '#12acfc',
     align: 'left',
@@ -39,7 +39,7 @@ let dreamConfig = {
 
 let lucyConfig = {
     fontFamily: 'Copperplate',
-    fontSize: '18px',
+    fontSize: '20px',
     //backgroundColor: '#F3B141',
     color: '#ffffff',
     align: 'right',

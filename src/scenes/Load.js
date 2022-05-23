@@ -26,6 +26,7 @@ class Load extends Phaser.Scene {
         this.load.image('threeH', 'threeHearts.png');
         this.load.image('twoH', 'twoHearts.png');
         this.load.image('oneH', 'oneHeart.png');
+        this.load.image('gameOverBack', 'gameOverBackground.PNG');
     }
 
     create() {

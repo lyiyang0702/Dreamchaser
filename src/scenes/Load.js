@@ -20,6 +20,9 @@ class Load extends Phaser.Scene {
         this.load.audio('backMusic', 'backgroundMusic.mp3');
         this.load.audio('backstory', 'backstoryAudio.mp3');
         this.load.spritesheet('backstoryBack', 'BackstoryBackground.png', { frameWidth: 1250, framHeight: 720, startFrame: 0, endFrame: 2 });
+        this.load.image('titlePageBackground', 'TitlePageBackground.png');
+        this.load.image('enter', 'enterButton.png');
+        this.load.spritesheet('logo', 'gameLogo.png', { frameWidth: 919, framHeight: 498, startFrame: 0, endFrame: 3});
     }
 
     create() {
@@ -276,7 +279,6 @@ class Load extends Phaser.Scene {
             ],
             frameRate: 16,
         });
-
         // ...and pass to the next Scene
         this.scene.start('menuScene');
     }

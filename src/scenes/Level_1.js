@@ -135,9 +135,9 @@ class LEVEL_1 extends Phaser.Scene {
         /* this.heart1 = new Items(this, 50, 50, 'Final_sheet', 4, 'Heart'); 
         this.heart2 = new Items(this, 100, 50, 'Final_sheet', 4, 'Heart');
         this.heart3 = new Items(this, 150, 50, 'Final_sheet', 4, 'Heart'); */
-        heart1 = this.add.tileSprite(30, 30, 150, 50, 'oneH').setOrigin(0, 0);
-        heart2 = this.add.tileSprite(30, 30, 150, 50, 'twoH').setOrigin(0, 0);
-        heart3 = this.add.tileSprite(30, 30, 150, 50, 'threeH').setOrigin(0, 0);
+        heart1 = this.add.tileSprite(30, 30, 150, 50, 'oneH').setOrigin(0, 0).setScrollFactor(0);;
+        heart2 = this.add.tileSprite(30, 30, 150, 50, 'twoH').setOrigin(0, 0).setScrollFactor(0);;
+        heart3 = this.add.tileSprite(30, 30, 150, 50, 'threeH').setOrigin(0, 0).setScrollFactor(0);;
 
     }
 

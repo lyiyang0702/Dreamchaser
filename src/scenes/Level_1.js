@@ -107,12 +107,17 @@ class LEVEL_1 extends Phaser.Scene {
         this.physics.world.enable(this.orbs, Phaser.Physics.Arcade.DYNAMIC_BODY);
         orbsGroup = this.add.group(this.orbs);
         orbsGroup.playAnimation('memory_orb');
+
         // ghost
-        this.ghosts= this.map.createFromObjects("Object", {
+        this.ghosts = this.map.createFromObjects("Object", {
             name: "Ghost",
             key: "Final_sheet",
             frame: 5
         });
+
+        this.ghostMirrored = false;
+        // this.ghosts.x -= 100;
+
         this.physics.world.enable(this.ghosts, Phaser.Physics.Arcade.DYNAMIC_BODY);
         ghostGroup = this.add.group(this.ghosts);
         ghostGroup.playAnimation('ghost');
@@ -174,6 +179,32 @@ class LEVEL_1 extends Phaser.Scene {
         bgmMusic.stop();
         game.scene.start('gameover');
         game.scene.sleep('level_1');
+    }
+
+    changeDirection(){
+        console.log("enemy hit heart");
+        //when facing right
+        if(enemy.body.blocked.right){       
+            this.setVelocityX(-100);
+            mirrored = false;
+            if(mirrored == false){
+                console.log("mirrored changed to false");
+            }else{
+                console.log("false");
+            }
+                
+        }
+
+        if(enemy.body.blocked.left){
+
+            this.setVelocityX(100);
+            mirrored = true;
+            if(mirrored == true){
+                console.log("mirrored changed to true");
+            }else{
+                console.log("false");
+            }
+        }
     }
 
 

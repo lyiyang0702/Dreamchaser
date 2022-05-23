@@ -1,4 +1,5 @@
 let bgmMusic;
+let heart1, heart2, heart3;
 class LEVEL_1 extends Phaser.Scene {
     constructor() {
         super("level_1");
@@ -131,13 +132,31 @@ class LEVEL_1 extends Phaser.Scene {
 
         bgmMusic = this.sound.add('backMusic', soundConfig);
         bgmMusic.play();
+        /* this.heart1 = new Items(this, 50, 50, 'Final_sheet', 4, 'Heart'); 
+        this.heart2 = new Items(this, 100, 50, 'Final_sheet', 4, 'Heart');
+        this.heart3 = new Items(this, 150, 50, 'Final_sheet', 4, 'Heart'); */
+        heart1 = this.add.tileSprite(30, 30, 150, 50, 'oneH').setOrigin(0, 0);
+        heart2 = this.add.tileSprite(30, 30, 150, 50, 'twoH').setOrigin(0, 0);
+        heart3 = this.add.tileSprite(30, 30, 150, 50, 'threeH').setOrigin(0, 0);
 
     }
 
     update() {
         player.update();
         this.dreamCatcher.attack(player.x, player.y - player.height + 10);
-
+        if(currentHealth == 3) {
+            heart3.visible = true;
+        } else if(currentHealth == 2) {
+            heart3.visible = false;
+            heart2.visible = true;
+        } else if(currentHealth == 1) {
+            heart3.visible = false;
+            heart2.visible = false;
+        } else if(currentHealth == 0) {
+            heart3.visible = false;
+            heart2.visible = false;
+            heart1.visible = false;
+        }
         //gameOver Trigger (statement is temporarily)
         if (player.y > game.config.height) {
             gameOverStatus = true;

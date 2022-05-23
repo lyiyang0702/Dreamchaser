@@ -23,6 +23,9 @@ class Load extends Phaser.Scene {
         this.load.image('titlePageBackground', 'TitlePageBackground.png');
         this.load.image('enter', 'enterButton.png');
         this.load.spritesheet('logo', 'gameLogo.png', { frameWidth: 919, framHeight: 498, startFrame: 0, endFrame: 3});
+        this.load.image('threeH', 'threeHearts.png');
+        this.load.image('twoH', 'twoHearts.png');
+        this.load.image('oneH', 'oneHeart.png');
     }
 
     create() {

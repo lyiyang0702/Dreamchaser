@@ -150,6 +150,7 @@ class LEVEL_1 extends Phaser.Scene {
             heart3.visible = false;
             heart2.visible = true;
         } else if(currentHealth == 1) {
+            heart1.visible = true;
             heart3.visible = false;
             heart2.visible = false;
         } else if(currentHealth == 0) {

@@ -51,10 +51,10 @@ class LEVEL_1 extends Phaser.Scene {
             faceColor: new Phaser.Display.Color(40, 39, 37, 255)                // color of colliding face edges
         }); */
         
-        this.add.text(10, 10, 'LEVEL 1', menuConfig);
+        this.add.text(10, 10, 'LEVEL 1', menuConfig).setScrollFactor(0);
         //health debug
         currentHealth = 3;
-        healthCheck = this.add.text(this.pla, borderPadding * 5, "Health: " + currentHealth, menuConfig);
+        healthCheck = this.add.text(this.pla, borderPadding * 5, "Health: " + currentHealth, menuConfig).setScrollFactor(0);
         //set up player
         player = new Player(this, p1Spawn.x, 0, 'animation_atlas', 'idle_right_0001', MAX_JUMP).setOrigin(0, 0);
 

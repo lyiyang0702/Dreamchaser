@@ -5,28 +5,33 @@ class Load extends Phaser.Scene {
 
     preload() {
         // set load path
-        this.load.path = 'assets/';
+        this.load.path = './assets/';
         // take care of all of our asset loading now
-        this.load.audio('jump', 'jump.wav');
-        this.load.image('door', 'door.png');
-        this.load.atlas('animation_atlas', 'animations.png', 'animation_sprites.json');
-        this.load.image('jungle', 'jungleBackground.png');
-        this.load.image('tileStructure', 'Level1Background.png');
-        this.load.spritesheet("Final_sheet", "Final_sheet.png", {
+        this.load.audio('jump', 'aduio/jump.wav');
+        this.load.image('door', 'img/door.png');
+        this.load.atlas('animation_atlas', 'img/animations.png', 'json/animation_sprites.json');
+        this.load.image('jungle', 'img/jungleBackground.png');
+        this.load.image('tileStructure', 'img/Level1Background.png');
+        this.load.image('lucy', 'img/MainCharacter.png');
+        this.load.spritesheet("Final_sheet", "img/Final_sheet.png", {
             frameWidth: 50,
             frameHeight: 50
         });
-        this.load.tilemapTiledJSON("level1_map", "level1Map.json");    // Tiled JSON file
-        this.load.audio('backMusic', 'mainSong.m4a');
-        this.load.audio('backstory', 'backstoryAudio.mp3');
-        this.load.spritesheet('backstoryBack', 'BackstoryBackground.png', { frameWidth: 1250, framHeight: 720, startFrame: 0, endFrame: 2 });
-        this.load.image('titlePageBackground', 'TitlePageBackground.png');
-        this.load.image('enter', 'enterButton.png');
-        this.load.spritesheet('logo', 'gameLogo.png', { frameWidth: 919, framHeight: 498, startFrame: 0, endFrame: 3});
-        this.load.image('threeH', 'threeHearts.png');
-        this.load.image('twoH', 'twoHearts.png');
-        this.load.image('oneH', 'oneHeart.png');
-        this.load.image('gameOverBack', 'gameOverBackground.PNG');
+        this.load.tilemapTiledJSON("level1_map", "json/level1Map.json");    // Tiled JSON file
+        this.load.audio('backMusic', 'audio/mainSong.m4a');
+        this.load.audio('backstory', 'audio/backstoryAudio.mp3');
+        this.load.spritesheet('backstoryBack', 'img/BackstoryBackground.png', { frameWidth: 1250, framHeight: 720, startFrame: 0, endFrame: 2 });
+        this.load.image('titlePageBackground', 'img/TitlePageBackground.png');
+        this.load.image('enter', 'img/enterButton.png');
+        this.load.spritesheet('logo', 'img/gameLogo.png', { frameWidth: 919, framHeight: 498, startFrame: 0, endFrame: 3 });
+        this.load.image('threeH', 'img/threeHearts.png');
+        this.load.image('twoH', 'img/twoHearts.png');
+        this.load.image('oneH', 'img/oneHeart.png');
+        this.load.image('gameOverBack', 'img/gameOverBackground.PNG');
+
+        // load bitmap font
+        this.load.bitmapFont('gem_font', 'font/gem.png', 'font/gem.xml');
+        this.load.json('dialog', 'json/dialog.json');
     }
 
     create() {
@@ -244,7 +249,7 @@ class Load extends Phaser.Scene {
         this.anims.create({
             key: 'memory_orb',
             defaultTextureKey: 'Final_sheet',
-            frames: [ 
+            frames: [
                 { frame: 0 },
                 { frame: 1 },
                 { frame: 2 },
@@ -257,7 +262,7 @@ class Load extends Phaser.Scene {
         this.anims.create({
             key: 'ghost',
             defaultTextureKey: 'Final_sheet',
-            frames: [ 
+            frames: [
                 { frame: 5 },
                 { frame: 6 }
             ],
@@ -269,13 +274,13 @@ class Load extends Phaser.Scene {
         this.anims.create({
             key: 'explosion',
             defaultTextureKey: 'Final_sheet',
-            frames: [ 
+            frames: [
                 { frame: 10 },
                 { frame: 11 },
                 { frame: 12 },
                 { frame: 13 },
                 { frame: 14 },
-                { frame: 15},
+                { frame: 15 },
                 { frame: 16 },
                 { frame: 17 },
                 { frame: 18 },

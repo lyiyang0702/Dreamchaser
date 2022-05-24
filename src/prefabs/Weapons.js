@@ -14,7 +14,7 @@ class Weapons extends Phaser.Physics.Arcade.Sprite {
     // Press SPACE to summon dream cathcer && DOWN to hide
     // or the weapon will disspear after 5secs
     attack(new_x, new_y) {
-        if (Phaser.Input.Keyboard.JustDown(keySPACE) && !this.firing) {
+        if (Phaser.Input.Keyboard.JustDown(keyW) && !this.firing) {
             this.firing = true;
         }
         if (this.firing) {

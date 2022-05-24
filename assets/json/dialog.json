@@ -1,0 +1,61 @@
+[
+	[
+		{
+			"speaker" : "Dream Therapist",
+			"dialog" :"So what brings you here today?",
+			"newSpeaker" : "true"
+		},
+		{
+			"speaker" : "lucy",
+			"dialog" : "...I’m scared."
+		},
+		{	
+			"speaker" : "lucy",
+			"dialog" : "I've been having weird dreams, ones that feel too real.",
+            "newSpeaker" : "true"
+		},
+		{	
+			"speaker" : "",
+			"dialog" : "Can you describe them?",
+            "newSpeaker" : "true"
+		},
+		{	
+			"speaker" : "lucy",
+			"dialog" : "I keep hearing a voice calling out to me, but I can never seem to reach it. It always repeats the same words 'SAVE ME'."
+		},
+		{	
+			"speaker" : "lucy",
+			"dialog" : "I chase after the voice, but right when I think I'm close, I wake up."
+		}
+	],
+	[
+		{
+			"speaker" : "lucy",
+			"dialog" : "I feel like a part of me is stuck there.",
+			"newSpeaker" : "true"
+		},
+		{
+			"speaker" : "Dream Therapist",
+			"dialog" : "Maybe you can go in there and find out the problem."
+		},
+		{	
+			"speaker" : "Dream Therapist",
+			"dialog" : "Are you ready?",
+			"newSpeaker" : "true"
+		},
+		{	
+			"speaker" : "lucy",
+			"dialog" : "…"
+		},
+		{	
+			"speaker" : "lucy",
+			"dialog" : "YES.",
+			"newSpeaker" : "true"
+		},
+		{	
+			"speaker" : "Dream Therapist",
+			"dialog" : "Let’s start then.",
+			"newSpeaker" : "true"
+		}
+	]
+]

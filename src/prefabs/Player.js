@@ -95,7 +95,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
         // jump (Max: 2)
 
-        if (Phaser.Input.Keyboard.JustDown(keyW) && this.jumpCount < this.max && !this.cat) {
+        if (Phaser.Input.Keyboard.JustDown(keySPACE) && this.jumpCount < this.max && !this.cat) {
             this.jumpCount++;
             if (this.left) {
                 this.anims.play('jump_left', true);

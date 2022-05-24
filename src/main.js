@@ -1,7 +1,7 @@
 let config = {
     type: Phaser.CANVAS,
     width: 1250,
-    height: 720,
+    height: 750,
     physics: {
         default: 'arcade',
         arcade: {
@@ -12,7 +12,7 @@ let config = {
             }
         }
     },
-    scene: [Load,Menu,Story,LEVEL_1,LEVEL_2,Gameover,Ending]
+    scene: [Load,Menu,Story,LEVEL_1,LEVEL_2,LEVEL_3,Gameover,Ending]
 }
 
 let soundConfig = {
@@ -47,3 +47,5 @@ let heartGroup, door, player, enemy, spikesGroup, ghostGroup, orbsGroup;
 let healthCheck, currentHealth;
 
 let mirrored = false;
+
+let curve = new Phaser.Curves.Line(new Phaser.Math.Vector2(100, 0), new Phaser.Math.Vector2(200, 0));

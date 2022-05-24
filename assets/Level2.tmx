@@ -1,7 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="40" height="15" tilewidth="50" tileheight="50" infinite="0" nextlayerid="4" nextobjectid="1">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="40" height="15" tilewidth="50" tileheight="50" infinite="0" nextlayerid="5" nextobjectid="12">
+ <editorsettings>
+  <export target="json/level2TMap.json" format="json"/>
+ </editorsettings>
  <tileset firstgid="1" name="Final_sheet" tilewidth="50" tileheight="50" tilecount="30" columns="10">
   <image source="img/Final_sheet.png" width="500" height="150"/>
+  <tile id="9">
+   <properties>
+    <property name="collides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="20">
+   <properties>
+    <property name="collides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="21">
+   <properties>
+    <property name="collides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="22">
+   <properties>
+    <property name="collides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="23">
+   <properties>
+    <property name="collides" type="bool" value="true"/>
+   </properties>
+  </tile>
  </tileset>
  <layer id="2" name="ground" width="40" height="15">
   <data encoding="csv">
@@ -22,23 +50,19 @@
 23,23,23,23,21,21,21,21,21,21,21,21,21,23,0,0,0,23,23,23,23,23,23,0,0,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23
 </data>
  </layer>
- <layer id="3" name="items" width="40" height="15">
-  <data encoding="csv">
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,25,25,25,0,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,25,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-</data>
- </layer>
+ <objectgroup id="4" name="Object">
+  <object id="1" name="P2 Spawn" x="28.8938" y="502.155">
+   <point/>
+  </object>
+  <object id="2" name="Memory orbs" gid="1" x="399.44" y="249.176" width="50" height="50"/>
+  <object id="3" name="Heart" gid="5" x="548.891" y="348.81" width="50" height="50"/>
+  <object id="4" name="Heart" gid="5" x="1199.5" y="447.448" width="50" height="50"/>
+  <object id="5" name="Heart" gid="5" x="199.176" y="698.525" width="50" height="50"/>
+  <object id="6" name="Memory orbs" gid="1" x="600.701" y="648.708" width="50" height="50"/>
+  <object id="7" name="Memory orbs" gid="1" x="1950.74" y="550.07" width="50" height="50"/>
+  <object id="8" name="Spikes" gid="25" x="350.62" y="349.806" width="50" height="50"/>
+  <object id="9" name="Spikes" gid="25" x="403.763" y="349.484" width="50" height="50"/>
+  <object id="10" name="Spikes" gid="25" x="450.253" y="349.806" width="50" height="50"/>
+  <object id="11" name="Spikes" gid="25" x="549.909" y="549.909" width="50" height="50"/>
+ </objectgroup>
 </map>

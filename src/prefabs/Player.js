@@ -53,7 +53,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
                     this.anims.play('cat_walk_left', true);
                 }
             }
-            this.body.setSize(this.width, this.height, true);
+            this.body.setSize(this.width-5, this.height-10, true);
             this.right = false;
             this.left = true;
         }
@@ -67,7 +67,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
                     this.anims.play('cat_walk_right', true);
                 }
             }
-            this.body.setSize(this.width, this.height, true);
+            this.body.setSize(this.width-5, this.height-10, true);
             this.left = false;
             this.right = true;
         }
@@ -75,27 +75,27 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             this.setVelocityX(0);
             if (this.right && this.cat) {
                 this.anims.play('cat_idle_right', true);
-                this.body.setSize(this.width, this.height, true);
+                this.body.setSize(this.width-5, this.height-10, true);
             }
             else if (this.right) {
                 this.anims.play('idle_right', true);
-                this.body.setSize(this.width, this.height, true);
+                this.body.setSize(this.width-5, this.height-10, true);
             }
 
             else if (this.left && this.cat) {
                 this.anims.play('cat_idle_left', true);
-                this.body.setSize(this.width, this.height, true);
+                this.body.setSize(this.width-5, this.height-10, true);
             }
             else if (this.left) {
                 this.anims.play('idle_left', true);
-                this.body.setSize(this.width, this.height, true);
+                this.body.setSize(this.width-5, this.height-10, true);
             }
         }
 
 
         // jump (Max: 2)
 
-        if (Phaser.Input.Keyboard.JustDown(keySPACE) && this.jumpCount < this.max && !this.cat) {
+        if (Phaser.Input.Keyboard.JustDown(keyW) && this.jumpCount < this.max && !this.cat) {
             this.jumpCount++;
             if (this.left) {
                 this.anims.play('jump_left', true);

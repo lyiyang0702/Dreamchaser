@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="40" height="15" tilewidth="50" tileheight="50" infinite="0" nextlayerid="3" nextobjectid="34">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="40" height="15" tilewidth="50" tileheight="50" infinite="0" nextlayerid="5" nextobjectid="48">
  <editorsettings>
-  <export target="level1Map.json" format="json"/>
+  <export target="json/level1Map.json" format="json"/>
  </editorsettings>
  <tileset firstgid="1" name="Final_sheet" tilewidth="50" tileheight="50" tilecount="30" columns="10">
-  <image source="Final_sheet.png" width="500" height="150"/>
+  <image source="img/Final_sheet.png" width="500" height="150"/>
+  <tile id="9">
+   <properties>
+    <property name="collides" type="bool" value="true"/>
+   </properties>
+  </tile>
   <tile id="20">
    <properties>
     <property name="collides" type="bool" value="true"/>
@@ -26,7 +31,7 @@
    </properties>
   </tile>
  </tileset>
- <layer id="1" name="ground" width="40" height="15">
+ <layer id="1" name="ground" width="40" height="15" visible="0" locked="1">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -45,13 +50,49 @@
 23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23
 </data>
  </layer>
- <objectgroup id="2" name="Object">
+ <layer id="3" name="ground2" width="40" height="15">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,21,21,21,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,21,21,21,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,21,0,0,0,0,0,
+0,0,0,0,0,21,21,21,21,21,21,21,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,21,23,21,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,21,0,0,21,0,0,0,21,21,21,21,23,23,21,0,0,0,0,
+0,0,0,21,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,21,23,0,0,23,21,0,0,0,0,0,0,21,23,23,21,0,0,0,
+0,0,21,23,21,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,21,23,23,0,0,23,23,21,0,0,0,0,0,0,21,23,23,21,0,0,
+21,21,23,23,21,21,21,0,21,21,21,21,21,21,0,0,0,21,21,21,23,23,23,0,0,23,23,23,21,21,21,21,21,21,23,23,23,23,21,21,
+23,23,23,23,0,0,0,0,0,0,0,0,0,23,0,0,0,23,23,23,23,23,23,0,0,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,
+23,23,23,23,0,0,0,0,0,0,0,0,0,23,0,0,0,23,23,23,23,23,23,0,0,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,
+23,23,23,23,21,21,21,21,21,21,21,21,21,23,0,0,0,23,23,23,23,23,23,0,0,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23
+</data>
+ </layer>
+ <objectgroup id="4" name="Object2">
+  <object id="34" name="Memory orbs" gid="1" x="1952.33" y="549" width="50" height="50"/>
+  <object id="35" name="Memory orbs" gid="1" x="600.333" y="647.667" width="50" height="50"/>
+  <object id="36" name="Memory orbs" gid="1" x="400.333" y="197" width="50" height="50"/>
+  <object id="37" name="Heart" gid="5" x="545.667" y="349" width="38" height="32.67"/>
+  <object id="38" name="Heart" gid="5" x="204.333" y="678.333" width="38" height="32.67"/>
+  <object id="40" name="Heart" gid="5" x="1179" y="383.667" width="38" height="32.67"/>
+  <object id="41" name="Ghost" gid="6" x="767" y="521" width="82" height="80.6667"/>
+  <object id="42" name="Spikes" gid="25" x="349.667" y="353" width="50" height="50"/>
+  <object id="43" name="Spikes" gid="25" x="401.25" y="352" width="50" height="50"/>
+  <object id="44" name="Spikes" gid="25" x="450.5" y="352" width="50" height="50"/>
+  <object id="45" name="Spikes" gid="25" x="550.455" y="551.909" width="50" height="50"/>
+  <object id="46" name="P2 Spawn" x="53.3333" y="394.667">
+   <point/>
+  </object>
+  <object id="47" name="Ghost" gid="6" x="1535" y="139.667" width="82" height="80.6667"/>
+ </objectgroup>
+ <objectgroup id="2" name="Object" visible="0" locked="1">
   <object id="1" name="P1 Spawn" x="68" y="162.667">
    <point/>
   </object>
-  <object id="2" name="Heart" gid="11" x="1380.33" y="462.333" width="38" height="32.6667"/>
+  <object id="2" name="Heart" gid="5" x="1380.33" y="462.333" width="38" height="32.6667"/>
   <object id="4" name="Memory orbs" gid="1" x="875.003" y="94.3333" width="50" height="50"/>
-  <object id="6" name="Ghost" gid="12" x="599" y="257.667" width="67.3333" height="72.6667"/>
+  <object id="6" name="Ghost" gid="6" x="599" y="257.667" width="67.3333" height="72.6667"/>
   <object id="7" name="Spikes" gid="25" x="699.584" y="600" width="50" height="50"/>
   <object id="8" name="Spikes" gid="25" x="300.5" y="599.773" width="50" height="50"/>
   <object id="9" name="Spikes" gid="25" x="350.5" y="599.455" width="50" height="50"/>

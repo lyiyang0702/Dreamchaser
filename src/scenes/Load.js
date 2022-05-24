@@ -17,7 +17,7 @@ class Load extends Phaser.Scene {
             frameWidth: 50,
             frameHeight: 50
         });
-        this.load.tilemapTiledJSON("level1_map", "json/level1Map.json");    // Tiled JSON file
+        this.load.tilemapTiledJSON("Map", "json/GameMap.json");    // Tiled JSON file
         this.load.audio('backMusic', 'audio/mainSong.m4a');
         this.load.audio('backstory', 'audio/backstoryAudio.mp3');
         this.load.spritesheet('backstoryBack', 'img/BackstoryBackground.png', { frameWidth: 1250, framHeight: 720, startFrame: 0, endFrame: 2 });

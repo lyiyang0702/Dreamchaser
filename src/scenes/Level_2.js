@@ -1,19 +1,22 @@
 class LEVEL_2 extends Phaser.Scene {
-    constructor () {
-        super ("level_2");
+    constructor() {
+        super("level_2");
     }
 
     create() {
         // define keys
-        keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
-        keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
-        keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
+        keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+        keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+        keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
         keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-        keyDOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
+        keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
+        keyG = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.G);
+        keyF1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F1);
+        keyF2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F2);
 
         // set camera
-        this.cameras.main.setBounds(0, 0, 1800, 720);
-        this.physics.world.setBounds(0, 0, 1800, 720);
+        this.cameras.main.setBounds(0, 0, 2000, 750);
+        this.physics.world.setBounds(0, 0, 2000, 850);
 
         //config
         let menuConfig = {
@@ -23,59 +26,128 @@ class LEVEL_2 extends Phaser.Scene {
             color: '#843605',
             align: 'right',
             padding: {
-                top:5,
+                top: 5,
                 bottom: 5,
             },
             fixedWidth: 0
         }
-
-        //crate platforms
         this.jungle = this.add.tileSprite(0, 0, 2000, game.config.height, 'jungle').setOrigin(0, 0);
-        this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding*5, 'LEVEL 2',menuConfig).setOrigin(0.5);
-        player = new Player(this, game.config.width/2, game.config.height/2,'cat_atlas', 'idle_down_0001', MAX_JUMP);
-        enemy = new Enemies(this, game.config.width/2 - 100, game.config.height/2 + 200,'cat_atlas','ghost_left_0001').setOrigin(0, 0);;
-        player.create();
-        enemy.create();
+        // add a tilemap
+        this.map = this.add.tilemap("Map");
+        // add a tileset to the map
+        this.tileset = this.map.addTilesetImage("Final_sheet");
+        // create tilemap layers
+        this.groundLayer = this.map.createLayer("ground2", this.tileset, 0, 0);
+        this.groundLayer.setCollisionByProperty({
+            collides: true
+        });
+        const p2Spawn = this.map.findObject("Object2", obj => obj.name === "P2 Spawn");
+        this.add.text(10, 10, 'LEVEL 2', menuConfig).setScrollFactor(0);
+        currentHealth = 3;
+        //set up player
+        player = new Player(this, p2Spawn.x, p2Spawn.y, 'animation_atlas', 'idle_right_0001', MAX_JUMP).setOrigin(0, 0);
 
         // camera follow character
         this.cameras.main.startFollow(player, true, 0.05, 0.05);
+        player.create();
 
-        //health debug
-        currentHealth = 3;
-        healthCheck = this.add.text(borderPadding*10, borderPadding*5, "Health: " + currentHealth, menuConfig);
-    
-        // randomize && add properties later
-        let heart = new Items(this, game.config.width / 2 + 100, game.config.height / 2 + 260, 'heart', 0, 'Heart');
-        let heart1 = new Items(this, game.config.width / 2 - 200, game.config.height / 2 + 100, 'heart', 0, 'Heart');
+        //set up dream catcher
+        this.dreamCatcher = new Weapons(this, player.x, player.y, 'animation_atlas', 'weapon_right_0001');
+        // set up objects
+        // heart
+        this.heart = this.map.createFromObjects("Object2", {
+            name: "Heart",
+            key: "Final_sheet",
+            frame: 4
+        });
+        this.physics.world.enable(this.heart, Phaser.Physics.Arcade.STATIC_BODY);
+        heartGroup = this.add.group(this.heart);
+        this.physics.add.overlap(player, heartGroup, (obj1, obj2) => {
+            obj2.destroy(); // remove heart
+            if (currentHealth < 3) {
+                currentHealth += 1;
+            }
+            console.log("Health: " + currentHealth); // HP +1
 
-        groundGroup = this.add.group();
-        heart.create();
-        heartGroup.add(heart);
-        heartGroup.add(heart1);
-        door = new Items(this, 1800 - 100, game.config.height - 100, 'door', 0, 'Door');
-        door.create();
-        this.createPlatform(35, groundGroup, 'White_Tile');
+        })
+        // spikes
+        this.spikes = this.map.createFromObjects("Object2", {
+            name: "Spikes",
+            key: "Final_sheet",
+            frame: 24
+        });
+        this.physics.world.enable(this.spikes, Phaser.Physics.Arcade.STATIC_BODY);
+        this.spikes.map((spikes) => {
+            spikes.body.setSize(44,20).setOffset(2,28); 
+        });
+        spikesGroup = this.add.group(this.spikes);
+        this.physics.add.overlap(player, spikesGroup, function() {
+            player.healthLose();
+        })
 
-        //collider
-        this.physics.add.collider(player, groundGroup);
-        this.physics.add.collider(heartGroup, groundGroup);
-        this.physics.add.collider(enemy, groundGroup);
-        //this.physics.add.collider(enemy, heartGroup);
-        //heart disappear when player collide with it
-        this.physics.add.overlap(player, heartGroup, this.healthCollect);
-        this.physics.add.overlap(player, enemy, this.healthLose);
-        //this.physics.add.overlap(player, enemy, enemy.changeDirection());
-        //this.physics.add.collider(enemy, heartGroup, enemy.changeDirection(), null, this);
-        
+        // memeory orbs
+        this.orbs= this.map.createFromObjects("Object2", {
+            name: "Memory orbs",
+            key: "Final_sheet",
+            frame: 0
+        });
+        this.physics.world.enable(this.orbs, Phaser.Physics.Arcade.DYNAMIC_BODY);
+        this.orbs.map((orbs) => {
+            orbs.body.setCircle(15).setOffset(10); 
+        });
+        orbsGroup = this.add.group(this.orbs);
+        orbsGroup.playAnimation('memory_orb');
+        this.obsNum = 0;
+        this.obsCheck = this.add.text(this.pla, borderPadding * 6, "Obs: " + this.obsNum, menuConfig).setScrollFactor(0);
+        this.physics.add.overlap(this.dreamCatcher, orbsGroup, (obj1, obj2) => {
+            obj2.anims.play('explosion');
+            this.obsCollected(obj2);
+        });
+
+        // ghost
+        this.ghosts = this.map.createFromObjects("Object2", {
+            name: "Ghost",
+            key: "Final_sheet",
+            frame: 5
+        });
+        ghostGroup = this.add.group(this.ghosts);
+        ghostGroup.setVisible(false);
+        this.groupAddpath(ghostGroup,curve,5);
+        // this.physics.world.enable(this.ghosts, Phaser.Physics.Arcade.DYNAMIC_BODY);
+        // ghostGroup = this.add.group(this.ghosts);
+        // ghostGroup.playAnimation('ghost');
+        // this.physics.add.overlap(player, ghostGroup, function(){
+        //     player.healthLose();
+        // }, null, this)
+
+        //add collider
+        this.physics.add.collider(player, this.groundLayer);
+
+        this.soul = new Items(this, 1950, 100, 'animation_atlas', 'soul_left_0001', 'Ghost'); 
+        this.soul.anims.play('soul_left',true);
+        this.physics.add.collider(player,this.soul,function(){
+            game.scene.start('level_3');
+            game.scene.sleep('level_2');
+        });
+
+        bgmMusic = this.sound.add('backMusic', soundConfig);
+        bgmMusic.play();
+        /* this.heart1 = new Items(this, 50, 50, 'Final_sheet', 4, 'Heart'); 
+        this.heart2 = new Items(this, 100, 50, 'Final_sheet', 4, 'Heart');
+        this.heart3 = new Items(this, 150, 50, 'Final_sheet', 4, 'Heart'); */
+        heart1 = this.add.tileSprite(30, 30, 150, 50, 'oneH').setOrigin(0, 0).setScrollFactor(0);;
+        heart2 = this.add.tileSprite(30, 30, 150, 50, 'twoH').setOrigin(0, 0).setScrollFactor(0);;
+        heart3 = this.add.tileSprite(30, 30, 150, 50, 'threeH').setOrigin(0, 0).setScrollFactor(0);;
+
     }
 
     //collect items
-    healthCollect(player, heart){
+    healthCollect(player, heart) {
         //remove heart after collected
         heartGroup.killAndHide(heart);
         heart.body.enable = false;
         //update num
-        if(currentHealth < 3){
+        if (currentHealth < 3) {
             currentHealth += 1;
         }
         //debug output for health number
@@ -83,10 +155,10 @@ class LEVEL_2 extends Phaser.Scene {
         console.log("Health: " + currentHealth);
     }
 
-    healthLose(){
+    healthLose() {
         //heartGroup.destory(enemy);
         //update num
-        if(currentHealth > 0){
+        if (currentHealth > 0) {
             currentHealth -= 1;
         }
         //debug output for health number
@@ -94,20 +166,93 @@ class LEVEL_2 extends Phaser.Scene {
         console.log("Health: " + currentHealth);
     }
 
-    
+
     update() {
         player.update();
-        enemy.update();
-        //this.physics.add.collider(enemy, heartGroup, enemy.changeDirection(), null, this);
+        this.dreamCatcher.attack(player.x, player.y - player.height + 40);
+        if(currentHealth == 3) {
+            heart3.visible = true;
+        } else if(currentHealth == 2) {
+            heart3.visible = false;
+            heart2.visible = true;
+        } else if(currentHealth == 1) {
+            heart1.visible = true;
+            heart3.visible = false;
+            heart2.visible = false;
+        } else if(currentHealth == 0) {
+            heart3.visible = false;
+            heart2.visible = false;
+            heart1.visible = false;
+        }
+        //gameOver Trigger (statement is temporarily)
+        if (player.y > game.config.height || currentHealth == 0) {
+            gameOverStatus = true;
+            this.checkGameOver();
+        }else if (gameOverStatus) {
+            bgmMusic.stop();
+            gameOverStatus = false;
+            this.scene.restart();
+        }
+
+        this.ghosts.x += this.ghostSpeed;
+
     }
 
-    // create Platform
-    createPlatform(tileSize, Group, texture) {
-        for (let i = 0; i < 1800; i += tileSize) {
-            let groundTile = new Ground(this, i, game.config.height - tileSize * 2, texture);
-            groundTile.create();
-            Group.add(groundTile);
+    checkGameOver() {
+        bgmMusic.stop();
+        game.scene.start('gameover');
+        game.scene.sleep('level_2');
+    }
+
+    changeDirection(enemy){
+        console.log("enemy hit heart");
+        //when facing right
+        if(enemy.body.blocked.right){       
+            enemy.body.setVelocityX(-100);
+            this.ghostSpeed = -1;
+            this.ghostMirrored = false;
+            if(this.ghostMirrored == false){
+                console.log("mirrored changed to false");
+            }else{
+                console.log("false");
+            }
+                
+        }else if(enemy.body.blocked.left){
+
+            enemy.body.setVelocityX(100);
+            this.ghostSpeed = 1;
+            this.ghostMirrored = true;
+            if(this.ghostMirrored == true){
+                console.log("mirrored changed to true");
+            }else{
+                console.log("false");
+            }
         }
+    }
+
+    obsCollected(obj2){
+        obj2.destroy();
+        this.obsNum += 1;
+        this.obsCheck.text = "Obs: " + this.obsNum;
+    }
+
+    groupAddpath (group,path,frame){
+        for (var i = 0; i < group.children.entries.length; i++) {
+            var mover = this.add.follower(path, group.children.entries[i].x, group.children.entries[i].y, group.children.entries[i].texture.key,frame).setScale(1.5);
+            mover.anims.play('ghost');
+            this.physics.world.enable(mover, Phaser.Physics.Arcade.DYNAMIC_BODY);
+            this.physics.add.overlap(player, mover, function(){
+                player.healthLose();
+            }, null, this)
+            mover.body.setCircle (15).setOffset(10,10);
+            mover.startFollow({
+                duration: 5000,
+                yoyo: true,
+                repeat: -1,
+                rotateToPath: false,
+                rotationOffset: 360
+            });
+          }
     }
 
 

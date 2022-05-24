@@ -16,7 +16,7 @@ class LEVEL_1 extends Phaser.Scene {
         keyF1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F1);
         keyF2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F2);
         // set camera
-        this.cameras.main.setBounds(0, 0, 2000, 720);
+        this.cameras.main.setBounds(0, 0, 2000, 750);
         this.physics.world.setBounds(0, 0, 2000, 800);
         // delete later
         let menuConfig = {
@@ -33,7 +33,7 @@ class LEVEL_1 extends Phaser.Scene {
         }
         this.add.tileSprite(0, 0, 2000, game.config.height, 'tileStructure');
         // add a tilemap
-        this.map = this.add.tilemap("level1_map");
+        this.map = this.add.tilemap("Map");
         // add a tileset to the map
         this.tileset = this.map.addTilesetImage("Final_sheet");
         // create tilemap layers
@@ -91,7 +91,7 @@ class LEVEL_1 extends Phaser.Scene {
         });
         this.physics.world.enable(this.spikes, Phaser.Physics.Arcade.STATIC_BODY);
         this.spikes.map((spikes) => {
-            spikes.body.setSize(50,25).setOffset(0,20); 
+            spikes.body.setSize(44,20).setOffset(2,28); 
         });
         spikesGroup = this.add.group(this.spikes);
         this.physics.add.overlap(player, spikesGroup, function() {
@@ -105,6 +105,9 @@ class LEVEL_1 extends Phaser.Scene {
             frame: 0
         });
         this.physics.world.enable(this.orbs, Phaser.Physics.Arcade.DYNAMIC_BODY);
+        this.orbs.map((orbs) => {
+            orbs.body.setCircle(15).setOffset(10); 
+        });
         orbsGroup = this.add.group(this.orbs);
         orbsGroup.playAnimation('memory_orb');
         this.obsNum = 0;
@@ -117,15 +120,11 @@ class LEVEL_1 extends Phaser.Scene {
         this.ghosts = this.map.createFromObjects("Object", {
             name: "Ghost",
             key: "Final_sheet",
-            frame: 5
+            frame: 5,
         });
-
-        this.physics.world.enable(this.ghosts, Phaser.Physics.Arcade.DYNAMIC_BODY);
         ghostGroup = this.add.group(this.ghosts);
-        ghostGroup.playAnimation('ghost');
-        this.physics.add.overlap(player, ghostGroup, function(){
-            player.healthLose();
-        }, null, this)
+        ghostGroup.setVisible(false);
+        this.groupAddpath(ghostGroup,curve,5);
 
         //add collider
         this.physics.add.collider(player, this.groundLayer);
@@ -189,7 +188,7 @@ class LEVEL_1 extends Phaser.Scene {
         console.log("enemy hit heart");
         //when facing right
         if(enemy.body.blocked.right){       
-            // this.setVelocityX(-100);
+            enemy.body.setVelocityX(-100);
             this.ghostSpeed = -1;
             this.ghostMirrored = false;
             if(this.ghostMirrored == false){
@@ -200,7 +199,7 @@ class LEVEL_1 extends Phaser.Scene {
                 
         }else if(enemy.body.blocked.left){
 
-            // this.setVelocityX(100);
+            enemy.body.setVelocityX(100);
             this.ghostSpeed = 1;
             this.ghostMirrored = true;
             if(this.ghostMirrored == true){
@@ -217,5 +216,23 @@ class LEVEL_1 extends Phaser.Scene {
         this.obsCheck.text = "Obs: " + this.obsNum;
     }
 
+    groupAddpath (group,path,frame){
+        for (var i = 0; i < group.children.entries.length; i++) {
+            var mover = this.add.follower(path, group.children.entries[i].x, group.children.entries[i].y, group.children.entries[i].texture.key,frame).setScale(1.5);
+            mover.anims.play('ghost');
+            this.physics.world.enable(mover, Phaser.Physics.Arcade.DYNAMIC_BODY);
+            mover.body.setCircle (15).setOffset(10,10);
+            this.physics.add.overlap(player, mover, function(){
+                player.healthLose();
+            }, null, this)
+            mover.startFollow({
+                duration: 5000,
+                yoyo: true,
+                repeat: -1,
+                rotateToPath: false,
+                rotationOffset: 360
+            });
+          }
+    }
 
 }

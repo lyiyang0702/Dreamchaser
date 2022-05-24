@@ -18,7 +18,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.hitTimer = scene.time.addEvent(this.hitEvent);
     }
     create() {
-        this.setGravityY(1000);
+        this.setGravityY(2000);
         this.allowGravity = true;
         this.jumpCount = 0;
         this.jumping = false;
@@ -44,7 +44,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         }
         // left & right movement
         if (keyA.isDown) {
-            this.setVelocityX(-300);
+            this.setVelocityX(-200);
             if (this.isGrounded) {
                 if (this.cat) {
                     this.anims.play('cat_run_left', true);
@@ -58,7 +58,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             this.left = true;
         }
         else if (keyD.isDown) {
-            this.setVelocityX(300);
+            this.setVelocityX(200);
             if (this.isGrounded) {
                 if (this.cat) {
                     this.anims.play('cat_run_right', true);
@@ -103,7 +103,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             else if (this.right) {
                 this.anims.play('jump_right', true);
             }
-            this.setVelocityY(-450);
+            this.setVelocityY(-600);
         }
 
     }

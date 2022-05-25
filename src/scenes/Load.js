@@ -294,20 +294,34 @@ class Load extends Phaser.Scene {
         this.scene.start('menuScene');
     }
 
+    // useful functions
     obsCollected(obj2, scene) {
         obj2.destroy();
         scene.obsNum += 1;
         scene.obsCheck.text = "Obs: " + scene.obsNum;
     }
 
-    groupAddpath (group,path,frame,scene){
+    groupAddpath(group, path, frame, scene) {
         for (var i = 0; i < group.children.entries.length; i++) {
-            var mover = scene.add.follower(path, group.children.entries[i].x, group.children.entries[i].y, group.children.entries[i].texture.key,frame).setScale(1.5);
+            var mover = scene.add.follower(path, group.children.entries[i].x, group.children.entries[i].y, group.children.entries[i].texture.key, frame).setScale(1.5);
             mover.anims.play('ghost');
             scene.physics.world.enable(mover, Phaser.Physics.Arcade.DYNAMIC_BODY);
-            mover.body.setCircle (15).setOffset(10,10);
-            scene.physics.add.overlap(player, mover, function(){
+            mover.body.setImmovable(true);
+            mover.body.setCircle(15).setOffset(10, 10);
+            // vfx
+            scene.powerUpVfxManager = scene.add.particles('Final_sheet', 4);
+
+            scene.powerUpVfxEffect = scene.powerUpVfxManager.createEmitter({
+                follow: player,
+                quantity: 1,
+                scale: { start: 1, end: 1 },  // start big, end small
+                speed: { min: 0, max: 50 }, // speed up
+                lifespan: 800,   // short lifespan
+                on: false   // do not immediately start, will trigger in collision
+            });
+            scene.physics.add.collider(player, mover, function () {
                 player.healthLose(scene);
+                scene.powerUpVfxEffect.explode();
             }, null, scene)
             mover.startFollow({
                 duration: 5000,
@@ -316,7 +330,7 @@ class Load extends Phaser.Scene {
                 rotateToPath: false,
                 rotationOffset: 360
             });
-          }
+        }
     }
 
     mapObject(Group, objects, objectKey, Frame, Map, objectLayerKey, scene) {
@@ -341,7 +355,7 @@ class Load extends Phaser.Scene {
                 objects.map((objects) => {
                     objects.body.setSize(44, 20).setOffset(2, 28);
                 });
-                scene.physics.add.overlap(player, Group, function () {
+                scene.physics.add.collider(player, Group, function () {
                     player.healthLose(scene);
                 })
                 break;
@@ -349,23 +363,35 @@ class Load extends Phaser.Scene {
                 objects.map((objects) => {
                     objects.body.setCircle(15).setOffset(10);
                 });
+                // vfx
+                scene.powerUpVfxManager = scene.add.particles('Final_sheet', 13);
+
+                scene.powerUpVfxEffect = scene.powerUpVfxManager.createEmitter({
+                    follow: player,
+                    quantity: 20,
+                    scale: { start: 1.0, end: 0.0 },  // start big, end small
+                    speed: { min: 50, max: 100 }, // speed up
+                    lifespan: 800,   // short lifespan
+                    on: false   // do not immediately start, will trigger in collision
+                });
                 Group.playAnimation('memory_orb');
                 scene.obsNum = 0;
                 scene.obsCheck = scene.add.text(scene.pla, borderPadding * 6, "Obs: " + scene.obsNum, menuConfig).setScrollFactor(0);
                 scene.physics.add.overlap(scene.dreamCatcher, Group, (obj1, obj2) => {
+                    scene.powerUpVfxEffect.explode();  // trigger particle system
                     this.obsCollected(obj2, scene);
                 });
                 break;
             case 'Ghost':
                 Group.setVisible(false);
-                this.groupAddpath(Group,curve,5,scene);
+                this.groupAddpath(Group, curve, 5, scene);
                 break;
             default:
                 break;
         }
     }
 
-    addSoul(scene,x,y,startLevel,sleepLevel){
+    addSoul(scene, x, y, startLevel, sleepLevel) {
         scene.soul = scene.add.sprite(x, y, 'animation_atlas', 'soul_left_0001');
         scene.physics.world.enable(scene.soul, Phaser.Physics.Arcade.STATIC_BODY);
         scene.soul.anims.play('soul_left', true);

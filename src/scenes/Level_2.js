@@ -65,17 +65,18 @@ class LEVEL_2 extends Phaser.Scene {
 
         bgmMusic = this.sound.add('backMusic', soundConfig);
         bgmMusic.play();
-        /* this.heart1 = new Items(this, 50, 50, 'Final_sheet', 4, 'Heart'); 
-        this.heart2 = new Items(this, 100, 50, 'Final_sheet', 4, 'Heart');
-        this.heart3 = new Items(this, 150, 50, 'Final_sheet', 4, 'Heart'); */
+
+        // HP bar
         heart1 = this.add.tileSprite(30, 30, 150, 50, 'oneH').setOrigin(0, 0).setScrollFactor(0);
         heart2 = this.add.tileSprite(30, 30, 150, 50, 'twoH').setOrigin(0, 0).setScrollFactor(0);
         heart3 = this.add.tileSprite(30, 30, 150, 50, 'threeH').setOrigin(0, 0).setScrollFactor(0);
     }
 
     update() {
+        this.modeShift(player);
         player.update();
         this.dreamCatcher.attack(player.x, player.y - player.height + 40);
+        // HP Bar update
         if (this.currentHealth == 3) {
             heart3.visible = true;
         } else if (this.currentHealth == 2) {
@@ -90,7 +91,7 @@ class LEVEL_2 extends Phaser.Scene {
             heart2.visible = false;
             heart1.visible = false;
         }
-        //gameOver Trigger (statement is temporarily)
+        //gameOver Trigger
         if (player.y > game.config.height || this.currentHealth == 0) {
             gameOverStatus = true;
             this.checkGameOver();
@@ -100,8 +101,6 @@ class LEVEL_2 extends Phaser.Scene {
             this.scene.restart();
         }
 
-        //this.ghosts.x += this.ghostSpeed;
-
     }
 
     checkGameOver() {
@@ -109,30 +108,18 @@ class LEVEL_2 extends Phaser.Scene {
         game.scene.start('gameover');
         game.scene.sleep('level_2');
     }
-
-    changeDirection(enemy) {
-        console.log("enemy hit heart");
-        //when facing right
-        if (enemy.body.blocked.right) {
-            enemy.body.setVelocityX(-100);
-            this.ghostSpeed = -1;
-            this.ghostMirrored = false;
-            if (this.ghostMirrored == false) {
-                console.log("mirrored changed to false");
-            } else {
-                console.log("false");
-            }
-
-        } else if (enemy.body.blocked.left) {
-
-            enemy.body.setVelocityX(100);
-            this.ghostSpeed = 1;
-            this.ghostMirrored = true;
-            if (this.ghostMirrored == true) {
-                console.log("mirrored changed to true");
-            } else {
-                console.log("false");
-            }
+    
+    modeShift(player) {
+        if (keyF1.isDown || keyF2.isDown) {
+            // temporarily hide player
+            player.alpha = 0;
+            // create explosion at ship's position
+            let boom = this.add.sprite(player.x, player.y, 'Final_sheet', 10).setOrigin(0, 0);
+            boom.anims.play('explosion');           
+            boom.on('animationcomplete', () => {    
+                player.alpha = 1;                    
+                boom.destroy();                   
+            });
         }
     }
 }

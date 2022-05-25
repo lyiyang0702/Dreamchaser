@@ -19,6 +19,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     }
     create() {
         this.setGravityY(2000);
+        this.setBounce(0.2);
         this.allowGravity = true;
         this.jumpCount = 0;
         this.jumping = false;
@@ -36,7 +37,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         }
         if (keyF1.isDown && !this.cat) {
             this.cat = true;
-            this.y -= this.height;
+            //this.y -= this.height;
         }
         else if (keyF2.isDown && this.cat) {
             this.cat = false;
@@ -118,8 +119,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             this.onHit = true;
             this.hitTimer.paused = false;
         }
-
-        //debug output for health number
-        //healthCheck.text = "Health: " + currentHealth;
     }
+
+
 }

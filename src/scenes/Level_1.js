@@ -19,8 +19,8 @@ class LEVEL_1 extends Phaser.Scene {
         this.cameras.main.setBounds(0, 0, 2000, 750);
         this.physics.world.setBounds(0, 0, 2000, 800);
         // define scene
-        const level_1 =  this.scene.get('level_1');
-        const load =  this.scene.get('loadScene');
+        const level_1 = this.scene.get('level_1');
+        const load = this.scene.get('loadScene');
         // Initial HP
         this.currentHealth = 3;
         // delete later
@@ -51,24 +51,22 @@ class LEVEL_1 extends Phaser.Scene {
         this.dreamCatcher = new Weapons(this, player.x, player.y, 'animation_atlas', 'weapon_right_0001');
         // set up objects
         // heart
-        load.mapObject(heartGroup, hearts,'Heart',4,this.map,'Object',level_1);
+        load.mapObject(heartGroup, hearts, 'Heart', 4, this.map, 'Object', level_1);
         // spikes
-        load.mapObject(heartGroup, spikes,'Spikes',24,this.map,'Object',level_1);
+        load.mapObject(heartGroup, spikes, 'Spikes', 24, this.map, 'Object', level_1);
         // memeory orbs
-        load.mapObject(orbsGroup, orbs,'Memory orbs',0,this.map,'Object',level_1);
+        load.mapObject(orbsGroup, orbs, 'Memory orbs', 0, this.map, 'Object', level_1);
         // ghost
-        load.mapObject(ghostGroup, ghosts,'Ghost',0,this.map,'Object',level_1);
+        load.mapObject(ghostGroup, ghosts, 'Ghost', 0, this.map, 'Object', level_1);
 
         //add collider
         this.physics.add.collider(player, this.groundLayer);
         // shift to next level
-        load.addSoul(level_1,1950,100,'level_2','level_1');
+        load.addSoul(level_1, 1950, 100, 'level_2', 'level_1');
 
         bgmMusic = this.sound.add('backMusic', soundConfig);
         bgmMusic.play();
-        /* this.heart1 = new Items(this, 50, 50, 'Final_sheet', 4, 'Heart'); 
-        this.heart2 = new Items(this, 100, 50, 'Final_sheet', 4, 'Heart');
-        this.heart3 = new Items(this, 150, 50, 'Final_sheet', 4, 'Heart'); */
+        // HP bar
         heart1 = this.add.tileSprite(30, 30, 150, 50, 'oneH').setOrigin(0, 0).setScrollFactor(0);;
         heart2 = this.add.tileSprite(30, 30, 150, 50, 'twoH').setOrigin(0, 0).setScrollFactor(0);;
         heart3 = this.add.tileSprite(30, 30, 150, 50, 'threeH').setOrigin(0, 0).setScrollFactor(0);;
@@ -76,33 +74,33 @@ class LEVEL_1 extends Phaser.Scene {
     }
 
     update() {
+        this.modeShift(player);
         player.update();
         this.dreamCatcher.attack(player.x, player.y - player.height + 40);
-        if(this.currentHealth == 3) {
+        // HP Bar update
+        if (this.currentHealth == 3) {
             heart3.visible = true;
-        } else if(this.currentHealth == 2) {
+        } else if (this.currentHealth == 2) {
             heart3.visible = false;
             heart2.visible = true;
-        } else if(this.currentHealth == 1) {
+        } else if (this.currentHealth == 1) {
             heart1.visible = true;
             heart3.visible = false;
             heart2.visible = false;
-        } else if(this.currentHealth == 0) {
+        } else if (this.currentHealth == 0) {
             heart3.visible = false;
             heart2.visible = false;
             heart1.visible = false;
         }
-        //gameOver Trigger (statement is temporarily)
+        //gameOver Trigger
         if (player.y > game.config.height || this.currentHealth == 0) {
             gameOverStatus = true;
             this.checkGameOver();
-        }else if (gameOverStatus) {
+        } else if (gameOverStatus) {
             bgmMusic.stop();
             gameOverStatus = false;
             this.scene.restart();
         }
-
-        //this.ghosts.x += this.ghostSpeed;
 
     }
 
@@ -112,29 +110,17 @@ class LEVEL_1 extends Phaser.Scene {
         game.scene.sleep('level_1');
     }
 
-    changeDirection(enemy){
-        console.log("enemy hit heart");
-        //when facing right
-        if(enemy.body.blocked.right){       
-            enemy.body.setVelocityX(-100);
-            this.ghostSpeed = -1;
-            this.ghostMirrored = false;
-            if(this.ghostMirrored == false){
-                console.log("mirrored changed to false");
-            }else{
-                console.log("false");
-            }
-                
-        }else if(enemy.body.blocked.left){
-
-            enemy.body.setVelocityX(100);
-            this.ghostSpeed = 1;
-            this.ghostMirrored = true;
-            if(this.ghostMirrored == true){
-                console.log("mirrored changed to true");
-            }else{
-                console.log("false");
-            }
+    modeShift(player) {
+        if (keyF1.isDown || keyF2.isDown) {
+            // temporarily hide player
+            player.alpha = 0;
+            // create explosion at ship's position
+            let boom = this.add.sprite(player.x, player.y, 'Final_sheet', 10).setOrigin(0, 0);
+            boom.anims.play('explosion');           
+            boom.on('animationcomplete', () => {    
+                player.alpha = 1;                    
+                boom.destroy();                   
+            });
         }
     }
 }

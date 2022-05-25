@@ -63,6 +63,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             if (this.isGrounded) {
                 if (this.cat) {
                     this.anims.play('cat_run_right', true);
+                    this.body.setSize(this.width, this.height, true);
                 }
                 else {
                     this.anims.play('cat_walk_right', true);
@@ -76,6 +77,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             this.setVelocityX(0);
             if (this.right && this.cat) {
                 this.anims.play('cat_idle_right', true);
+                this.body.setSize(this.width, this.height, true);
             }
             else if (this.right) {
                 this.anims.play('idle_right', true);
@@ -85,6 +87,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
             else if (this.left && this.cat) {
                 this.anims.play('cat_idle_left', true);
+                this.body.setSize(this.width, this.height, true);
             }
             else if (this.left) {
                 this.anims.play('idle_left', true);
@@ -108,10 +111,10 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
     }
 
-    healthLose() {
+    healthLose(scene) {
         //update num
-        if (currentHealth > 0 && !this.onHit) {
-            currentHealth -= 1;
+        if (scene.currentHealth > 0 && !this.onHit) {
+            scene.currentHealth -= 1;
             this.onHit = true;
             this.hitTimer.paused = false;
         }

@@ -45,12 +45,12 @@ class LEVEL_1 extends Phaser.Scene {
         const p1Spawn = this.map.findObject("Object", obj => obj.name === "P1 Spawn");
         
         // define a render debug so we can see the tilemap's collision bounds
-        /* const debugGraphics = this.add.graphics().setAlpha(0.75);
-        this.groundLayer.renderDebug(debugGraphics, {
-            tileColor: null,    // color of non-colliding tiles
-            collidingTileColor: new Phaser.Display.Color(243, 134, 48, 255),    // color of colliding tiles
-            faceColor: new Phaser.Display.Color(40, 39, 37, 255)                // color of colliding face edges
-        }); */
+        // const debugGraphics = this.add.graphics().setAlpha(0.75);
+        // this.groundLayer.renderDebug(debugGraphics, {
+        //     tileColor: null,    // color of non-colliding tiles
+        //     collidingTileColor: new Phaser.Display.Color(243, 134, 48, 255),    // color of colliding tiles
+        //     faceColor: new Phaser.Display.Color(40, 39, 37, 255)                // color of colliding face edges
+        // }); 
         
         this.add.text(10, 10, 'LEVEL 1', menuConfig).setScrollFactor(0);
         //health debug

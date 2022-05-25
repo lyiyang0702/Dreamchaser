@@ -6,7 +6,7 @@ class Weapons extends Phaser.Physics.Arcade.Sprite {
         this.setScale(0.5);
         this.firing = false;
         this.alpha = 0;
-        
+        this.body.setCircle(28);
     }
 
 

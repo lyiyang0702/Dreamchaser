@@ -132,6 +132,7 @@ class LEVEL_1 extends Phaser.Scene {
         this.soul = new Items(this, 1950, 125, 'animation_atlas', 'soul_left_0001', 'Ghost'); 
         this.soul.anims.play('soul_left',true);
         this.physics.add.collider(player,this.soul,function(){
+            bgmMusic.stop();
             game.scene.start('level_2');
             game.scene.sleep('level_1');
         });

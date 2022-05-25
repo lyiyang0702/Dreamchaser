@@ -7,7 +7,8 @@ class Load extends Phaser.Scene {
         // set load path
         this.load.path = './assets/';
         // take care of all of our asset loading now
-        this.load.audio('jump', 'aduio/jump.wav');
+        this.load.audio('jump', 'audio/jump.wav');
+        this.load.audio('selectSound', 'audio/selectSound.wav');
         this.load.image('door', 'img/door.png');
         this.load.atlas('animation_atlas', 'img/animations.png', 'json/animation_sprites.json');
         this.load.image('jungle', 'img/jungleBackground.png');
@@ -32,6 +33,7 @@ class Load extends Phaser.Scene {
         // load bitmap font
         this.load.bitmapFont('gem_font', 'font/gem.png', 'font/gem.xml');
         this.load.json('dialog', 'json/dialog.json');
+        this.load.image('dialogbox', 'img/dialogbox.PNG');
     }
 
     create() {

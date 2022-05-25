@@ -6,7 +6,7 @@
 			"newSpeaker" : "true"
 		},
 		{
-			"speaker" : "lucy",
+			"speaker" : "Lucy",
 			"dialog" : "...I’m scared."
 		},
 		{	
@@ -15,7 +15,7 @@
             "newSpeaker" : "true"
 		},
 		{	
-			"speaker" : "",
+			"speaker" : "Dream Therapist",
 			"dialog" : "Can you describe them?",
             "newSpeaker" : "true"
 		},

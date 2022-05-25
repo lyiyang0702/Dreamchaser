@@ -23,6 +23,7 @@ class Menu extends Phaser.Scene {
         menuMusic = this.sound.add('backMusic', soundConfig);
         menuMusic.setLoop(true);
         menuMusic.play();
+
         this.add.tileSprite(0, 0, 1250, game.config.height, 'titlePageBackground').setOrigin(0, 0);
         this.add.tileSprite(0, 0, 1250, game.config.height, 'enter').setOrigin(0, 0);
         this.anims.create({
@@ -35,13 +36,18 @@ class Menu extends Phaser.Scene {
         this.logoPlay.anims.play('logoAnim');
         // define keys
         keyENTER = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
+        if (Phaser.Input.Keyboard.JustDown(keyENTER)) {
+            selectSound.play();
+        }
     }
 
     update() {
 
         if (Phaser.Input.Keyboard.JustDown(keyENTER)) {
+            let music = this.sound.add('selectSound');
+            music.play();
             menuMusic.stop();
-            this.scene.start('level_1');
+            this.scene.start('story');
         }
     }
 

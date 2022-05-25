@@ -1,4 +1,4 @@
-// let backstoryMusic;
+let backstoryMusic;
 // var dreamTherapist = [
 //     "Dream Therapist\nSo what brings you here today?",
 //     "Dream Therapist\nCan you describe them?",
@@ -151,6 +151,8 @@ class Story extends Phaser.Scene {
     //     }
     // }
     create() {
+        backstoryMusic = this.sound.add('backstory', backConfig);
+        backstoryMusic.play();
         // parse dialog from JSON file
         this.dialog = this.cache.json.get('dialog');
         //console.log(this.dialog);
@@ -221,6 +223,7 @@ class Story extends Phaser.Scene {
             }
             // make text box invisible
             this.dialogbox.visible = false;
+            backstoryMusic.stop();
             this.scene.start("level_1");
 
         } else {

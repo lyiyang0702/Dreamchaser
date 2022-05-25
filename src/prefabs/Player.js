@@ -25,7 +25,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.right = true;
         this.left = false;
         this.setCollideWorldBounds(true);
-        this.body.setSize(this.width-20, this.height-10, true);
         // image order priority
         this.setDepth(1);
     }
@@ -49,14 +48,15 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             if (this.isGrounded) {
                 if (this.cat) {
                     this.anims.play('cat_run_left', true);
+                    this.body.setSize(this.width, this.height, true);
                 }
                 else {
                     this.anims.play('cat_walk_left', true);
+                    this.body.setSize(this.width-20, this.height-10, true).setOffset(6,9.5);
                 }
             }
             this.right = false;
             this.left = true;
-            this.body.setOffset(6,9.5);
         }
         else if (keyD.isDown) {
             this.setVelocityX(200);
@@ -66,31 +66,29 @@ class Player extends Phaser.Physics.Arcade.Sprite {
                 }
                 else {
                     this.anims.play('cat_walk_right', true);
+                    this.body.setSize(this.width-20, this.height-10, true).setOffset(14,9.5);
                 }
             }
             this.left = false;
             this.right = true;
-            this.body.setOffset(14,9.5);
         }
         else if (this.isGrounded) {
             this.setVelocityX(0);
             if (this.right && this.cat) {
                 this.anims.play('cat_idle_right', true);
-                this.body.setOffset(14,9.5);
             }
             else if (this.right) {
                 this.anims.play('idle_right', true);
-                this.body.setOffset(14,9.5);
+                this.body.setSize(this.width-20, this.height-10, true).setOffset(14,9.5);
                 
             }
 
             else if (this.left && this.cat) {
                 this.anims.play('cat_idle_left', true);
-                this.body.setOffset(6,9.5);
             }
             else if (this.left) {
                 this.anims.play('idle_left', true);
-                this.body.setOffset(6,9.5);
+                this.body.setSize(this.width-20, this.height-10, true).setOffset(6,9.5);
             }
         }
 

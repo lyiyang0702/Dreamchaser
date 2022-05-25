@@ -293,4 +293,85 @@ class Load extends Phaser.Scene {
         // ...and pass to the next Scene
         this.scene.start('menuScene');
     }
+
+    obsCollected(obj2, scene) {
+        obj2.destroy();
+        scene.obsNum += 1;
+        scene.obsCheck.text = "Obs: " + scene.obsNum;
+    }
+
+    groupAddpath (group,path,frame,scene){
+        for (var i = 0; i < group.children.entries.length; i++) {
+            var mover = scene.add.follower(path, group.children.entries[i].x, group.children.entries[i].y, group.children.entries[i].texture.key,frame).setScale(1.5);
+            mover.anims.play('ghost');
+            scene.physics.world.enable(mover, Phaser.Physics.Arcade.DYNAMIC_BODY);
+            mover.body.setCircle (15).setOffset(10,10);
+            scene.physics.add.overlap(player, mover, function(){
+                player.healthLose(scene);
+            }, null, scene)
+            mover.startFollow({
+                duration: 5000,
+                yoyo: true,
+                repeat: -1,
+                rotateToPath: false,
+                rotationOffset: 360
+            });
+          }
+    }
+
+    mapObject(Group, objects, objectKey, Frame, Map, objectLayerKey, scene) {
+        objects = Map.createFromObjects(objectLayerKey, {
+            name: objectKey,
+            key: "Final_sheet",
+            frame: Frame
+        });
+        scene.physics.world.enable(objects, Phaser.Physics.Arcade.STATIC_BODY);
+        Group = scene.add.group(objects);
+        switch (objectKey) {
+            case 'Heart':
+                scene.physics.add.overlap(player, Group, (obj1, obj2) => {
+                    obj2.destroy(); // remove heart
+                    if (scene.currentHealth < 3) {
+                        scene.currentHealth += 1;
+                    }
+                    console.log("Health: " + scene.currentHealth); // HP +1
+                })
+                break;
+            case 'Spikes':
+                objects.map((objects) => {
+                    objects.body.setSize(44, 20).setOffset(2, 28);
+                });
+                scene.physics.add.overlap(player, Group, function () {
+                    player.healthLose(scene);
+                })
+                break;
+            case 'Memory orbs':
+                objects.map((objects) => {
+                    objects.body.setCircle(15).setOffset(10);
+                });
+                Group.playAnimation('memory_orb');
+                scene.obsNum = 0;
+                scene.obsCheck = scene.add.text(scene.pla, borderPadding * 6, "Obs: " + scene.obsNum, menuConfig).setScrollFactor(0);
+                scene.physics.add.overlap(scene.dreamCatcher, Group, (obj1, obj2) => {
+                    this.obsCollected(obj2, scene);
+                });
+                break;
+            case 'Ghost':
+                Group.setVisible(false);
+                this.groupAddpath(Group,curve,5,scene);
+                break;
+            default:
+                break;
+        }
+    }
+
+    addSoul(scene,x,y,startLevel,sleepLevel){
+        scene.soul = scene.add.sprite(x, y, 'animation_atlas', 'soul_left_0001');
+        scene.physics.world.enable(scene.soul, Phaser.Physics.Arcade.STATIC_BODY);
+        scene.soul.anims.play('soul_left', true);
+        scene.physics.add.collider(player, scene.soul, function () {
+            game.scene.start(startLevel);
+            game.scene.sleep(sleepLevel);
+        });
+    }
 }

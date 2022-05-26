@@ -11,8 +11,8 @@ class Load extends Phaser.Scene {
         this.load.audio('selectSound', 'audio/selectSound.wav');
         this.load.image('door', 'img/door.png');
         this.load.atlas('animation_atlas', 'img/animations.png', 'json/animation_sprites.json');
-        this.load.image('jungle', 'img/jungleBackground.png');
-        this.load.image('tileStructure', 'img/Level1Background.png');
+        this.load.image('jungle', 'img/jungleBackground.PNG');
+        this.load.image('tileStructure', 'img/Level1Background.PNG');
         this.load.image('lucy', 'img/MainCharacter.png');
         this.load.spritesheet("Final_sheet", "img/Final_sheet.png", {
             frameWidth: 50,

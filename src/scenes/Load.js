@@ -277,9 +277,6 @@ class Load extends Phaser.Scene {
             key: 'explosion',
             defaultTextureKey: 'Final_sheet',
             frames: [
-                { frame: 10 },
-                { frame: 11 },
-                { frame: 12 },
                 { frame: 13 },
                 { frame: 14 },
                 { frame: 15 },
@@ -287,6 +284,9 @@ class Load extends Phaser.Scene {
                 { frame: 17 },
                 { frame: 18 },
                 { frame: 19 },
+                { frame: 20 },
+                { frame: 21 },
+                { frame: 22 },
             ],
             frameRate: 16,
         });

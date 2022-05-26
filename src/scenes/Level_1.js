@@ -53,11 +53,11 @@ class LEVEL_1 extends Phaser.Scene {
         // heart
         load.mapObject(heartGroup, hearts, 'Heart', 4, this.map, 'Object', level_1);
         // spikes
-        load.mapObject(heartGroup, spikes, 'Spikes', 24, this.map, 'Object', level_1);
+        load.mapObject(heartGroup, spikes, 'Spikes', 30, this.map, 'Object', level_1);
         // memeory orbs
         load.mapObject(orbsGroup, orbs, 'Memory orbs', 0, this.map, 'Object', level_1);
         // ghost
-        load.mapObject(ghostGroup, ghosts, 'Ghost', 0, this.map, 'Object', level_1);
+        load.mapObject(ghostGroup, ghosts, 'Ghost', 5, this.map, 'Object', level_1);
 
         //add collider
         this.physics.add.collider(player, this.groundLayer);

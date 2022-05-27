@@ -311,9 +311,9 @@ class Load extends Phaser.Scene {
             mover.body.setImmovable(true);
             mover.body.setCircle(15).setOffset(10, 10);
             // vfx
-            scene.powerUpVfxManager = scene.add.particles('Final_sheet', 4);
+            scene.ghostVfxManager = scene.add.particles('Final_sheet', 4);
 
-            scene.powerUpVfxEffect = scene.powerUpVfxManager.createEmitter({
+            scene.ghostVfxEffect = scene.ghostVfxManager.createEmitter({
                 follow: player,
                 quantity: 1,
                 scale: { start: 1, end: 1 },  // start big, end small
@@ -323,7 +323,7 @@ class Load extends Phaser.Scene {
             });
             scene.physics.add.collider(player, mover, function () {
                 player.healthLose(scene);
-                scene.powerUpVfxEffect.explode();
+                scene.ghostVfxEffect.explode();
             }, null, scene)
             mover.startFollow({
                 duration: 5000,
@@ -366,7 +366,7 @@ class Load extends Phaser.Scene {
                     objects.body.setCircle(15).setOffset(10);
                 });
                 // vfx
-                scene.powerUpVfxManager = scene.add.particles('Final_sheet', 13);
+                scene.powerUpVfxManager = scene.add.particles('Final_sheet', 15);
 
                 scene.powerUpVfxEffect = scene.powerUpVfxManager.createEmitter({
                     follow: player,

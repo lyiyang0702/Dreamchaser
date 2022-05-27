@@ -300,7 +300,7 @@ class Load extends Phaser.Scene {
     orbCollected(obj2, scene) {
         obj2.destroy();
         scene.orbNum += 1;
-        scene.orbCheck.text = "Orb: " + scene.orbNum;
+        // scene.orbCheck.text = "Orb: " + scene.orbNum;
     }
 
     groupAddpath(group, path, frame, scene) {
@@ -378,7 +378,7 @@ class Load extends Phaser.Scene {
                 });
                 Group.playAnimation('memory_orb');
                 scene.orbNum = 0;
-                scene.orbCheck = scene.add.text(scene.pla, borderPadding * 6, "Orb: " + scene.orbNum, menuConfig).setScrollFactor(0);
+                // scene.orbCheck = scene.add.text(scene.pla, borderPadding * 6, "Orb: " + scene.orbNum, menuConfig).setScrollFactor(0);
                 scene.physics.add.overlap(scene.dreamCatcher, Group, (obj1, obj2) => {
                     scene.powerUpVfxEffect.explode();  // trigger particle system
                     this.orbCollected(obj2, scene);

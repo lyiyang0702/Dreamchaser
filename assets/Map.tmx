@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="40" height="15" tilewidth="50" tileheight="50" infinite="0" nextlayerid="5" nextobjectid="57">
+<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="40" height="15" tilewidth="50" tileheight="50" infinite="0" nextlayerid="5" nextobjectid="59">
  <editorsettings>
-  <export target="json/level1Map.tmj" format="json"/>
+  <export target="json/GameMap.json" format="json"/>
  </editorsettings>
  <tileset firstgid="1" name="Final_sheet" tilewidth="50" tileheight="50" tilecount="65" columns="13">
   <image source="img/Final_sheet.png" width="650" height="250"/>
@@ -189,6 +189,6 @@
   <object id="32" name="Spikes" gid="31" x="1849.67" y="650.333" width="50" height="50"/>
   <object id="33" name="Spikes" gid="31" x="1899.67" y="650.333" width="50" height="50"/>
   <object id="55" name="Memory orbs" gid="1" x="402.969" y="247.344" width="50" height="50"/>
-  <object id="56" name="Memory orbs" gid="1" x="1602.58" y="608.308" width="50" height="50"/>
+  <object id="58" name="Memory orbs" gid="1" x="1624.19" y="591.016" width="50" height="50"/>
  </objectgroup>
 </map>

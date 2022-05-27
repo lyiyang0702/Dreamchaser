@@ -76,10 +76,6 @@ class LEVEL_1 extends Phaser.Scene {
         this.bOrb1 = this.add.image(55, 120, 'blackOrb').setScale(0.13).setScrollFactor(0);
         this.bOrb2 = this.add.image(100, 120, 'blackOrb').setScale(0.13).setScrollFactor(0);
         this.bOrb3 = this.add.image(145, 120, 'blackOrb').setScale(0.13).setScrollFactor(0);
-        // this.cOrb1 = this.add.image(55, 120, 'colorOrb').setScale(0.13).setScrollFactor(0);
-        // this.cOrb1 = this.add.tileSprite(30, 120, 150, 50, 'colorOrb').setOrigin(0, 0).setScrollFactor(0);
-
-
     }
 
     update() {

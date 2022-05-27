@@ -529,14 +529,14 @@
                 {
                  "gid":1,
                  "height":50,
-                 "id":56,
+                 "id":58,
                  "name":"Memory orbs",
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":50,
-                 "x":1602.58024424511,
-                 "y":608.30811628661
+                 "x":1624.19485572247,
+                 "y":591.016427104723
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -545,7 +545,7 @@
          "y":0
         }],
  "nextlayerid":5,
- "nextobjectid":57,
+ "nextobjectid":59,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.8.5",

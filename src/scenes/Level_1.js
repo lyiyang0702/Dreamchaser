@@ -23,6 +23,8 @@ class LEVEL_1 extends Phaser.Scene {
         const load = this.scene.get('loadScene');
         // Initial HP
         this.currentHealth = 3;
+        // initial orbs
+        this.orbNum = 0;
         // delete later
         this.add.text(10, 10, 'LEVEL 1', menuConfig).setScrollFactor(0);
 
@@ -67,9 +69,16 @@ class LEVEL_1 extends Phaser.Scene {
         bgmMusic = this.sound.add('backMusic', soundConfig);
         bgmMusic.play();
         // HP bar
-        heart1 = this.add.tileSprite(30, 30, 150, 50, 'oneH').setOrigin(0, 0).setScrollFactor(0);;
-        heart2 = this.add.tileSprite(30, 30, 150, 50, 'twoH').setOrigin(0, 0).setScrollFactor(0);;
-        heart3 = this.add.tileSprite(30, 30, 150, 50, 'threeH').setOrigin(0, 0).setScrollFactor(0);;
+        heart1 = this.add.tileSprite(30, 30, 150, 50, 'oneH').setOrigin(0, 0).setScrollFactor(0);
+        heart2 = this.add.tileSprite(30, 30, 150, 50, 'twoH').setOrigin(0, 0).setScrollFactor(0);
+        heart3 = this.add.tileSprite(30, 30, 150, 50, 'threeH').setOrigin(0, 0).setScrollFactor(0);
+        // Orbs track
+        this.bOrb1 = this.add.image(55, 120, 'blackOrb').setScale(0.13).setScrollFactor(0);
+        this.bOrb2 = this.add.image(100, 120, 'blackOrb').setScale(0.13).setScrollFactor(0);
+        this.bOrb3 = this.add.image(145, 120, 'blackOrb').setScale(0.13).setScrollFactor(0);
+        // this.cOrb1 = this.add.image(55, 120, 'colorOrb').setScale(0.13).setScrollFactor(0);
+        // this.cOrb1 = this.add.tileSprite(30, 120, 150, 50, 'colorOrb').setOrigin(0, 0).setScrollFactor(0);
+
 
     }
 
@@ -91,6 +100,14 @@ class LEVEL_1 extends Phaser.Scene {
             heart3.visible = false;
             heart2.visible = false;
             heart1.visible = false;
+        }
+        // orbs update
+        if(this.orbNum == 1){
+            this.add.image(55, 120, 'colorOrb').setScale(0.13).setScrollFactor(0);
+        } else if(this.orbNum == 2){
+            this.add.image(100, 120, 'colorOrb').setScale(0.13).setScrollFactor(0);
+        } else if(this.orbNum == 3){
+            this.add.image(145, 120, 'colorOrb').setScale(0.13).setScrollFactor(0);
         }
         //gameOver Trigger
         if (player.y > game.config.height || this.currentHealth == 0) {

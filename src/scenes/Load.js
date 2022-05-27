@@ -28,6 +28,8 @@ class Load extends Phaser.Scene {
         this.load.image('threeH', 'img/threeHearts.png');
         this.load.image('twoH', 'img/twoHearts.png');
         this.load.image('oneH', 'img/oneHeart.png');
+        this.load.image('blackOrb', 'img/blackOrb.png');
+        this.load.image('colorOrb', 'img/colorOrb.png');
         this.load.image('gameOverBack', 'img/gameOverBackground.PNG');
 
         // load bitmap font
@@ -295,10 +297,10 @@ class Load extends Phaser.Scene {
     }
 
     // useful functions
-    obsCollected(obj2, scene) {
+    orbCollected(obj2, scene) {
         obj2.destroy();
-        scene.obsNum += 1;
-        scene.obsCheck.text = "Obs: " + scene.obsNum;
+        scene.orbNum += 1;
+        scene.orbCheck.text = "Orb: " + scene.orbNum;
     }
 
     groupAddpath(group, path, frame, scene) {
@@ -375,11 +377,11 @@ class Load extends Phaser.Scene {
                     on: false   // do not immediately start, will trigger in collision
                 });
                 Group.playAnimation('memory_orb');
-                scene.obsNum = 0;
-                scene.obsCheck = scene.add.text(scene.pla, borderPadding * 6, "Obs: " + scene.obsNum, menuConfig).setScrollFactor(0);
+                scene.orbNum = 0;
+                scene.orbCheck = scene.add.text(scene.pla, borderPadding * 6, "Orb: " + scene.orbNum, menuConfig).setScrollFactor(0);
                 scene.physics.add.overlap(scene.dreamCatcher, Group, (obj1, obj2) => {
                     scene.powerUpVfxEffect.explode();  // trigger particle system
-                    this.obsCollected(obj2, scene);
+                    this.orbCollected(obj2, scene);
                 });
                 break;
             case 'Ghost':

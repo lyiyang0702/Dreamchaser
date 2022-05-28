@@ -20,12 +20,12 @@ class LEVEL_2 extends Phaser.Scene {
         // Initial HP
         this.currentHealth = 3;
         // set camera
-        this.cameras.main.setBounds(0, 0, 2000, 750);
+        this.cameras.main.setBounds(0, 0, 2000, 720);
         this.physics.world.setBounds(0, 0, 2000, 850);
 
         // create tilemap
         // add game background
-        this.jungle = this.add.tileSprite(0, 0, 2000, game.config.height, 'jungle').setOrigin(0);
+        this.jungle = this.add.tileSprite(0, 0, 2000, 720, 'jungle').setOrigin(0);
         // add a tilemap
         this.map = this.add.tilemap("Map");
         // add a tileset to the map

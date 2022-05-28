@@ -11,6 +11,7 @@ class Load extends Phaser.Scene {
         this.load.audio('selectSound', 'audio/selectSound.wav');
         this.load.audio('collectHealth', 'audio/collectHealth.mp3');
         this.load.audio('collectOrbs', 'audio/collectOrbs.mp3');
+        this.load.audio('ghostHit', 'audio/ghostHit.mp3');
         this.load.image('door', 'img/door.png');
         this.load.atlas('animation_atlas', 'img/animations.png', 'json/animation_sprites.json');
         this.load.image('jungle', 'img/jungleBackground.png');
@@ -362,6 +363,8 @@ class Load extends Phaser.Scene {
                     objects.body.setSize(44, 20).setOffset(2, 28);
                 });
                 scene.physics.add.collider(player, Group, function () {
+                    /* let ghostHit = this.sound.add('ghostHit');
+                    ghostHit.play() */;
                     player.healthLose(scene);
                 })
                 break;

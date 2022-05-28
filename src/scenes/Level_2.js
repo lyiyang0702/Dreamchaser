@@ -63,8 +63,8 @@ class LEVEL_2 extends Phaser.Scene {
         // shift to next level
         load.addSoul(level_2,1950,100,'level_3','level_2');
 
-        bgmMusic = this.sound.add('backMusic', soundConfig);
-        bgmMusic.play();
+        /* bgmMusic = this.sound.add('backMusic', soundConfig);
+        bgmMusic.play(); */
 
         // HP bar
         heart1 = this.add.tileSprite(30, 30, 150, 50, 'oneH').setOrigin(0, 0).setScrollFactor(0);

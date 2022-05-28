@@ -84,7 +84,6 @@ class LEVEL_1 extends Phaser.Scene {
         this.dreamCatcher.attack(player.x, player.y - player.height + 40);
 
         if(Phaser.Input.Keyboard.JustDown(keyW)) {
-            console.log('hello');
             let jumpSound = this.sound.add('jump', { loop: false });
             jumpSound.play();
         }

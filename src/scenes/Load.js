@@ -10,6 +10,7 @@ class Load extends Phaser.Scene {
         this.load.audio('jump', 'audio/jump.mp3');
         this.load.audio('selectSound', 'audio/selectSound.wav');
         this.load.audio('collectHealth', 'audio/collectHealth.mp3');
+        this.load.audio('collectOrbs', 'audio/collectOrbs.mp3');
         this.load.image('door', 'img/door.png');
         this.load.atlas('animation_atlas', 'img/animations.png', 'json/animation_sprites.json');
         this.load.image('jungle', 'img/jungleBackground.png');
@@ -385,6 +386,8 @@ class Load extends Phaser.Scene {
                 scene.physics.add.overlap(scene.dreamCatcher, Group, (obj1, obj2) => {
                     scene.powerUpVfxEffect.explode();  // trigger particle system
                     this.orbCollected(obj2, scene);
+                    let collectOrbs = this.sound.add('collectOrbs');
+                    collectOrbs.play();
                 });
                 break;
             case 'Ghost':

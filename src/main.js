@@ -41,7 +41,6 @@ let borderUISize = game.config.height / 15;
 let borderPadding = borderUISize / 3;
 
 let MAX_JUMP = 2;
-
 let hearts,spikes,orbs,ghosts;
 let heartGroup, door, player, enemy, spikesGroup, ghostGroup, orbsGroup;
 

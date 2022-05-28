@@ -348,6 +348,8 @@ class Load extends Phaser.Scene {
             case 'Heart':
                 scene.physics.add.overlap(player, Group, (obj1, obj2) => {
                     obj2.destroy(); // remove heart
+                    let collectHealth = this.sound.add('collectHealth');
+                    collectHealth.play();
                     if (scene.currentHealth < 3) {
                         scene.currentHealth += 1;
                     }

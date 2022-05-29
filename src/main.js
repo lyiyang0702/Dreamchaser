@@ -44,7 +44,7 @@ let MAX_JUMP = 2;
 let hearts,spikes,orbs,ghosts;
 let heartGroup, door, player, enemy, spikesGroup, ghostGroup, orbsGroup;
 
-let healthCheck;
+let healthCheck, orbNum;
 
 let mirrored = false;
 

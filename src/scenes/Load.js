@@ -303,7 +303,8 @@ class Load extends Phaser.Scene {
     // useful functions
     orbCollected(obj2, scene) {
         obj2.destroy();
-        scene.orbNum += 1;
+        orbNum += 1;
+        console.log(orbNum);
         // scene.orbCheck.text = "Orb: " + scene.orbNum;
     }
 
@@ -408,8 +409,10 @@ class Load extends Phaser.Scene {
         scene.physics.world.enable(scene.soul, Phaser.Physics.Arcade.STATIC_BODY);
         scene.soul.anims.play('soul_left', true);
         scene.physics.add.collider(player, scene.soul, function () {
-            game.scene.start(startLevel);
-            game.scene.sleep(sleepLevel);
+            if(orbNum == 3){
+                game.scene.start(startLevel);
+                game.scene.sleep(sleepLevel);
+            }
         });
     }
 }

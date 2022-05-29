@@ -24,7 +24,7 @@ class LEVEL_1 extends Phaser.Scene {
         // Initial HP
         this.currentHealth = 3;
         // initial orbs
-        this.orbNum = 0;
+        orbNum = 0;
         // delete later
         this.add.text(10, 10, 'LEVEL 1', menuConfig).setScrollFactor(0);
 
@@ -103,11 +103,11 @@ class LEVEL_1 extends Phaser.Scene {
             heart1.visible = false;
         }
         // orbs update
-        if(this.orbNum == 1){
+        if(orbNum == 1){
             this.add.image(55, 120, 'colorOrb').setScale(0.13).setScrollFactor(0);
-        } else if(this.orbNum == 2){
+        } else if(orbNum == 2){
             this.add.image(100, 120, 'colorOrb').setScale(0.13).setScrollFactor(0);
-        } else if(this.orbNum == 3){
+        } else if(orbNum == 3){
             this.add.image(145, 120, 'colorOrb').setScale(0.13).setScrollFactor(0);
         }
         //gameOver Trigger

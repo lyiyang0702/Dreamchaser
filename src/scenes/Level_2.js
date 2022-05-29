@@ -19,6 +19,8 @@ class LEVEL_2 extends Phaser.Scene {
         const load = this.scene.get('loadScene');
         // Initial HP
         this.currentHealth = 3;
+        // Initial OrbNum
+        orbNum = 0;
         // set camera
         this.cameras.main.setBounds(0, 0, 2000, 720);
         this.physics.world.setBounds(0, 0, 2000, 850);
@@ -97,11 +99,11 @@ class LEVEL_2 extends Phaser.Scene {
             heart1.visible = false;
         }
         // orbs update
-        if(this.orbNum == 1){
+        if(orbNum == 1){
             this.add.image(55, 120, 'colorOrb').setScale(0.13).setScrollFactor(0);
-        } else if(this.orbNum == 2){
+        } else if(orbNum == 2){
             this.add.image(100, 120, 'colorOrb').setScale(0.13).setScrollFactor(0);
-        } else if(this.orbNum == 3){
+        } else if(orbNum == 3){
             this.add.image(145, 120, 'colorOrb').setScale(0.13).setScrollFactor(0);
         }
         //gameOver Trigger

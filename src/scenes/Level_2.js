@@ -113,7 +113,7 @@ class LEVEL_2 extends Phaser.Scene {
             gameOverStatus = true;
             this.checkGameOver();
         } else if (gameOverStatus) {
-            bgmMusic.stop();
+            // bgmMusic.stop();
             gameOverStatus = false;
             this.scene.restart();
         }
@@ -121,7 +121,7 @@ class LEVEL_2 extends Phaser.Scene {
     }
 
     checkGameOver() {
-        bgmMusic.stop();
+        //bgmMusic.stop();
         game.scene.start('gameover');
         game.scene.sleep('level_2');
     }

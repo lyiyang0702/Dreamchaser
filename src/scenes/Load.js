@@ -308,16 +308,17 @@ class Load extends Phaser.Scene {
         // scene.orbCheck.text = "Orb: " + scene.orbNum;
     }
 
-    groupAddpath(group, path, frame, scene) {
+    groupAddpath(group, path, frame, scene,camera) {
         for (var i = 0; i < group.children.entries.length; i++) {
             var mover = scene.add.follower(path, group.children.entries[i].x, group.children.entries[i].y, group.children.entries[i].texture.key, frame).setScale(1.5);
+            camera.ignore(mover);
             mover.anims.play('ghost');
             scene.physics.world.enable(mover, Phaser.Physics.Arcade.DYNAMIC_BODY);
             mover.body.setImmovable(true);
             mover.body.setCircle(15).setOffset(10, 10);
             // vfx
             scene.ghostVfxManager = scene.add.particles('Final_sheet', 4);
-
+            camera.ignore(scene.ghostVfxManager);
             scene.ghostVfxEffect = scene.ghostVfxManager.createEmitter({
                 follow: player,
                 quantity: 1,
@@ -340,12 +341,13 @@ class Load extends Phaser.Scene {
         }
     }
 
-    mapObject(Group, objects, objectKey, Frame, Map, objectLayerKey, scene) {
+    mapObject(Group, objects, objectKey, Frame, Map, objectLayerKey, scene,Camera) {
         objects = Map.createFromObjects(objectLayerKey, {
             name: objectKey,
             key: "Final_sheet",
             frame: Frame
         });
+        Camera.ignore(objects);
         scene.physics.world.enable(objects, Phaser.Physics.Arcade.STATIC_BODY);
         Group = scene.add.group(objects);
         switch (objectKey) {
@@ -376,7 +378,7 @@ class Load extends Phaser.Scene {
                 });
                 // vfx
                 scene.powerUpVfxManager = scene.add.particles('Final_sheet', 15);
-
+                Camera.ignore(scene.powerUpVfxManager);
                 scene.powerUpVfxEffect = scene.powerUpVfxManager.createEmitter({
                     follow: player,
                     quantity: 20,
@@ -397,16 +399,17 @@ class Load extends Phaser.Scene {
                 break;
             case 'Ghost':
                 Group.setVisible(false);
-                this.groupAddpath(Group, curve, 5, scene);
+                this.groupAddpath(Group, curve, 5, scene,Camera);
                 break;
             default:
                 break;
         }
     }
 
-    addSoul(scene, x, y, startLevel, sleepLevel) {
+    addSoul(scene, x, y, startLevel, sleepLevel,camera) {
         scene.soul = scene.add.sprite(x, y, 'animation_atlas', 'soul_left_0001');
         scene.physics.world.enable(scene.soul, Phaser.Physics.Arcade.STATIC_BODY);
+        camera.ignore(scene.soul);
         scene.soul.anims.play('soul_left', true);
         scene.physics.add.collider(player, scene.soul, function () {
             if(orbNum == 3){

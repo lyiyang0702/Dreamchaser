@@ -1,5 +1,4 @@
 let bgmMusic;
-let heart1, heart2, heart3;
 class LEVEL_1 extends Phaser.Scene {
     constructor() {
         super("level_1");
@@ -15,9 +14,20 @@ class LEVEL_1 extends Phaser.Scene {
         keyG = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.G);
         keyF1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F1);
         keyF2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F2);
-        // set camera
+        // HP bar
+        this.heart1 = this.add.tileSprite(30, 30, 150, 50, 'oneH').setOrigin(0, 0).setScrollFactor(0);
+        this.heart2 = this.add.tileSprite(30, 30, 150, 50, 'twoH').setOrigin(0, 0).setScrollFactor(0);
+        this.heart3 = this.add.tileSprite(30, 30, 150, 50, 'threeH').setOrigin(0, 0).setScrollFactor(0);
+        // Orbs track
+        this.bOrb1 = this.add.image(55, 120, 'blackOrb').setScale(0.13).setScrollFactor(0);
+        this.bOrb2 = this.add.image(100, 120, 'blackOrb').setScale(0.13).setScrollFactor(0);
+        this.bOrb3 = this.add.image(145, 120, 'blackOrb').setScale(0.13).setScrollFactor(0);
+        // UI Camera
+        const UICam = this.cameras.add(0, 0, 2000, 750);
+        // set main camera
         this.cameras.main.setBounds(0, 0, 2000, 750);
         this.physics.world.setBounds(0, 0, 2000, 800);
+
         // define scene
         const level_1 = this.scene.get('level_1');
         const load = this.scene.get('loadScene');
@@ -25,12 +35,12 @@ class LEVEL_1 extends Phaser.Scene {
         this.currentHealth = 3;
         // initial orbs
         orbNum = 0;
-        // delete later
-        this.add.text(10, 10, 'LEVEL 1', menuConfig).setScrollFactor(0);
+        // level text
+        this.level = this.add.text(game.config.width/2, 10, 'LEVEL 1',textConfig ).setScrollFactor(0);
 
         // create tilemap
         // add game background
-        this.add.tileSprite(0, 0, 2000, game.config.height, 'tileStructure').setOrigin(0);
+        this.bg = this.add.tileSprite(0, 0, 2000, game.config.height, 'tileStructure').setOrigin(0);
         // add a tilemap
         this.map = this.add.tilemap("Map");
         // add a tileset to the map
@@ -48,34 +58,30 @@ class LEVEL_1 extends Phaser.Scene {
         // camera follow character
         this.cameras.main.startFollow(player, true, 0.05, 0.05);
         player.create();
+        this.cameras.main.setZoom(1.5);
 
         //set up dream catcher
         this.dreamCatcher = new Weapons(this, player.x, player.y, 'animation_atlas', 'weapon_right_0001');
         // set up objects
         // heart
-        load.mapObject(heartGroup, hearts, 'Heart', 4, this.map, 'Object', level_1);
+        load.mapObject(heartGroup, hearts, 'Heart', 4, this.map, 'Object', level_1, UICam);
         // spikes
-        load.mapObject(heartGroup, spikes, 'Spikes', 30, this.map, 'Object', level_1);
+        load.mapObject(spikesGroup, spikes, 'Spikes', 30, this.map, 'Object', level_1, UICam);
         // memeory orbs
-        load.mapObject(orbsGroup, orbs, 'Memory orbs', 0, this.map, 'Object', level_1);
+        load.mapObject(orbsGroup, orbs, 'Memory orbs', 0, this.map, 'Object', level_1, UICam);
         // ghost
-        load.mapObject(ghostGroup, ghosts, 'Ghost', 5, this.map, 'Object', level_1);
+        load.mapObject(ghostGroup, ghosts, 'Ghost', 5, this.map, 'Object', level_1, UICam);
 
         //add collider
         this.physics.add.collider(player, this.groundLayer);
         // shift to next level
-        load.addSoul(level_1, 1950, 100, 'level_2', 'level_1');
-
+        load.addSoul(level_1, 1950, 100, 'level_2', 'level_1',UICam);
         bgmMusic = this.sound.add('backMusic', soundConfig);
         bgmMusic.play();
-        // HP bar
-        heart1 = this.add.tileSprite(30, 30, 150, 50, 'oneH').setOrigin(0, 0).setScrollFactor(0);
-        heart2 = this.add.tileSprite(30, 30, 150, 50, 'twoH').setOrigin(0, 0).setScrollFactor(0);
-        heart3 = this.add.tileSprite(30, 30, 150, 50, 'threeH').setOrigin(0, 0).setScrollFactor(0);
-        // Orbs track
-        this.bOrb1 = this.add.image(55, 120, 'blackOrb').setScale(0.13).setScrollFactor(0);
-        this.bOrb2 = this.add.image(100, 120, 'blackOrb').setScale(0.13).setScrollFactor(0);
-        this.bOrb3 = this.add.image(145, 120, 'blackOrb').setScale(0.13).setScrollFactor(0);
+        // main camera
+        this.cameras.main.ignore([this.heart1, this.heart2, this.heart3, this.bOrb1, this.bOrb2, this.bOrb3,this.level]);
+        // UI camera
+        UICam.ignore([player, this.dreamCatcher, this.groundLayer, this.bg]);
     }
 
     update() {
@@ -91,18 +97,18 @@ class LEVEL_1 extends Phaser.Scene {
         }
         // HP Bar update
         if (this.currentHealth == 3) {
-            heart3.visible = true;
+            this.heart3.visible = true;
         } else if (this.currentHealth == 2) {
-            heart3.visible = false;
-            heart2.visible = true;
+            this.heart3.visible = false;
+            this.heart2.visible = true;
         } else if (this.currentHealth == 1) {
-            heart1.visible = true;
-            heart3.visible = false;
-            heart2.visible = false;
+            this.heart1.visible = true;
+            this.heart3.visible = false;
+            this.heart2.visible = false;
         } else if (this.currentHealth == 0) {
-            heart3.visible = false;
-            heart2.visible = false;
-            heart1.visible = false;
+            this.heart3.visible = false;
+            this.heart2.visible = false;
+            this.heart1.visible = false;
         }
         // orbs update
         if (orbNum == 1) {

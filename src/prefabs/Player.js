@@ -37,7 +37,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         }
         if (keyF1.isDown && !this.cat) {
             this.cat = true;
-            //this.y -= this.height;
         }
         else if (keyF2.isDown && this.cat) {
             this.cat = false;
@@ -118,6 +117,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             scene.currentHealth -= 1;
             this.onHit = true;
             this.hitTimer.paused = false;
+            scene.cameras.main.flash(250);
         }
     }
 

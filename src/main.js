@@ -42,7 +42,7 @@ let borderPadding = borderUISize / 3;
 
 let MAX_JUMP = 2;
 let hearts,spikes,orbs,ghosts;
-let heartGroup, door, player, enemy, spikesGroup, ghostGroup, orbsGroup;
+let heartGroup, player, spikesGroup, ghostGroup, orbsGroup;
 
 let healthCheck, orbNum;
 
@@ -50,15 +50,15 @@ let mirrored = false;
 
 let curve = new Phaser.Curves.Line(new Phaser.Math.Vector2(100, 0), new Phaser.Math.Vector2(200, 0));
 
-let menuConfig = {
-    fontFamily: 'Courier',
-    fontSize: '28px',
-    backgroundColor: '#F3B141',
-    color: '#843605',
-    align: 'right',
+let textConfig = {
+    fontFamily: 'OPTICopperplate',
+    fontSize: '30px',
+    color: '#FFFF00',
+    stroke: '#0D2C37',
+    strokeThickness: 5,
     padding: {
-        top: 5,
-        bottom: 5,
+        top: 20,
+        bottom: 2,
     },
     fixedWidth: 0
 }

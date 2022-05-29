@@ -17,10 +17,12 @@ class LEVEL_2 extends Phaser.Scene {
         // define scene
         const level_2 = this.scene.get('level_2');
         const load = this.scene.get('loadScene');
+
         // Initial HP
         this.currentHealth = 3;
         // Initial OrbNum
         orbNum = 0;
+        
         // set camera
         this.cameras.main.setBounds(0, 0, 2000, 720);
         this.physics.world.setBounds(0, 0, 2000, 850);

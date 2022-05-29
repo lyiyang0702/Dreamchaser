@@ -83,9 +83,11 @@ class LEVEL_1 extends Phaser.Scene {
         player.update();
         this.dreamCatcher.attack(player.x, player.y - player.height + 40);
 
-        if(Phaser.Input.Keyboard.JustDown(keyW)) {
+        if (keyW.isDown) {
             let jumpSound = this.sound.add('jump', { loop: false });
-            jumpSound.play();
+            if (player.body.blocked.down) {
+                jumpSound.play();
+            }
         }
         // HP Bar update
         if (this.currentHealth == 3) {
@@ -103,11 +105,11 @@ class LEVEL_1 extends Phaser.Scene {
             heart1.visible = false;
         }
         // orbs update
-        if(orbNum == 1){
+        if (orbNum == 1) {
             this.add.image(55, 120, 'colorOrb').setScale(0.13).setScrollFactor(0);
-        } else if(orbNum == 2){
+        } else if (orbNum == 2) {
             this.add.image(100, 120, 'colorOrb').setScale(0.13).setScrollFactor(0);
-        } else if(orbNum == 3){
+        } else if (orbNum == 3) {
             this.add.image(145, 120, 'colorOrb').setScale(0.13).setScrollFactor(0);
         }
         //gameOver Trigger
@@ -134,10 +136,10 @@ class LEVEL_1 extends Phaser.Scene {
             player.alpha = 0;
             // create explosion at ship's position
             let boom = this.add.sprite(player.x, player.y, 'Final_sheet', 10).setOrigin(0, 0);
-            boom.anims.play('explosion');           
-            boom.on('animationcomplete', () => {    
-                player.alpha = 1;                    
-                boom.destroy();                   
+            boom.anims.play('explosion');
+            boom.on('animationcomplete', () => {
+                player.alpha = 1;
+                boom.destroy();
             });
         }
     }

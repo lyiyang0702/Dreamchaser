@@ -85,6 +85,12 @@ class LEVEL_2 extends Phaser.Scene {
         this.modeShift(player);
         player.update();
         this.dreamCatcher.attack(player.x, player.y - player.height + 40);
+        if (keyW.isDown) {
+            let jumpSound = this.sound.add('jump', { loop: false });
+            if (player.body.blocked.down) {
+                jumpSound.play();
+            }
+        }
         // HP Bar update
         if (this.currentHealth == 3) {
             heart3.visible = true;

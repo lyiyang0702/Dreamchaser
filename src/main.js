@@ -17,7 +17,7 @@ let config = {
 
 let soundConfig = {
     mute: false,
-    volume: 0.6,
+    volume: 0.3,
     rate: 1,
     loop: true,
 }

@@ -49,7 +49,7 @@
          "name":"ground2",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":40,
          "x":0,
          "y":0
@@ -80,8 +80,8 @@
                  "type":"",
                  "visible":true,
                  "width":50,
-                 "x":400.333,
-                 "y":197
+                 "x":399.336661543826,
+                 "y":159.139138665405
                 }, 
                 {
                  "gid":5,
@@ -229,7 +229,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -577,7 +577,7 @@
          "name":"ground3",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":40,
          "x":0,
          "y":0
@@ -608,8 +608,8 @@
                  "type":"",
                  "visible":true,
                  "width":82,
-                 "x":1884.85112359551,
-                 "y":102.314191011236
+                 "x":1884.85,
+                 "y":102.314
                 }, 
                 {
                  "gid":1,
@@ -680,8 +680,8 @@
                  "type":"",
                  "visible":true,
                  "width":50,
-                 "x":837.100752808989,
-                 "y":698.261011235955
+                 "x":837.101,
+                 "y":698.261
                 }, 
                 {
                  "gid":31,
@@ -692,8 +692,8 @@
                  "type":"",
                  "visible":true,
                  "width":50,
-                 "x":887.548752808989,
-                 "y":697.905011235955
+                 "x":887.549,
+                 "y":697.905
                 }, 
                 {
                  "gid":31,
@@ -704,8 +704,8 @@
                  "type":"",
                  "visible":true,
                  "width":50,
-                 "x":938.497752808989,
-                 "y":697.905011235955
+                 "x":938.498,
+                 "y":697.905
                 }, 
                 {
                  "gid":5,
@@ -788,8 +788,8 @@
                  "type":"",
                  "visible":true,
                  "width":38,
-                 "x":1006.2808988764,
-                 "y":444.339157303371
+                 "x":1006.28,
+                 "y":444.339
                 }, 
                 {
                  "gid":5,
@@ -800,20 +800,32 @@
                  "type":"",
                  "visible":true,
                  "width":38,
-                 "x":1610.21348314607,
-                 "y":697.148146067416
+                 "x":1610.21,
+                 "y":697.148
+                }, 
+                {
+                 "height":0,
+                 "id":89,
+                 "name":"P3 Spawn",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":23.9121,
+                 "y":54.7986
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }],
  "nextlayerid":7,
- "nextobjectid":89,
+ "nextobjectid":90,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.8.5",
+ "tiledversion":"1.8.4",
  "tileheight":50,
  "tilesets":[
         {

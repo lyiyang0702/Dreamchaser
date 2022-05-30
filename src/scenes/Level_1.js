@@ -23,7 +23,7 @@ class LEVEL_1 extends Phaser.Scene {
         this.bOrb2 = this.add.image(100, 120, 'blackOrb').setScale(0.13).setScrollFactor(0);
         this.bOrb3 = this.add.image(145, 120, 'blackOrb').setScale(0.13).setScrollFactor(0);
         // UI Camera
-        const UICam = this.cameras.add(0, 0, 2000, 750);
+        UICam = this.cameras.add(0, 0, 2000, 750);
         // set main camera
         this.cameras.main.setBounds(0, 0, 2000, 750);
         this.physics.world.setBounds(0, 0, 2000, 800);
@@ -85,7 +85,7 @@ class LEVEL_1 extends Phaser.Scene {
     }
 
     update() {
-        this.modeShift(player);
+        this.modeShift(player,UICam);
         player.update();
         this.dreamCatcher.attack(player.x, player.y - player.height + 40);
 
@@ -136,12 +136,13 @@ class LEVEL_1 extends Phaser.Scene {
         game.scene.sleep('level_1');
     }
 
-    modeShift(player) {
+    modeShift(player,Camera) {
         if (keyF1.isDown || keyF2.isDown) {
             // temporarily hide player
             player.alpha = 0;
             // create explosion at ship's position
             let boom = this.add.sprite(player.x, player.y, 'Final_sheet', 10).setOrigin(0, 0);
+            Camera.ignore(boom);
             boom.anims.play('explosion');
             boom.on('animationcomplete', () => {
                 player.alpha = 1;

@@ -1,31 +1,148 @@
 class LEVEL_3 extends Phaser.Scene {
-    constructor () {
-        super ("level_3");
-    }
-    
-    preload() {
-
+    constructor() {
+        super("level_3");
     }
 
     create() {
-        let menuConfig = {
-            fontFamily: 'Courier',
-            fontSize: '28px',
-            backgroundColor: '#F3B141',
-            color: '#843605',
-            align: 'right',
-            padding: {
-                top:5,
-                bottom: 5,
-            },
-            fixedWidth: 0
-        }
-        this.add.text(10, 10, 'LEVEL 3', menuConfig).setScrollFactor(0);
+        // define keys
+        keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+        keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+        keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
+        keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
+        keyG = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.G);
+        keyF1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F1);
+        keyF2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F2);
+        // HP bar
+        this.heart1 = this.add.tileSprite(30, 30, 150, 50, 'oneH').setOrigin(0, 0).setScrollFactor(0);
+        this.heart2 = this.add.tileSprite(30, 30, 150, 50, 'twoH').setOrigin(0, 0).setScrollFactor(0);
+        this.heart3 = this.add.tileSprite(30, 30, 150, 50, 'threeH').setOrigin(0, 0).setScrollFactor(0);
+        // Orbs track
+        this.bOrb1 = this.add.image(55, 120, 'blackOrb').setScale(0.13).setScrollFactor(0);
+        this.bOrb2 = this.add.image(100, 120, 'blackOrb').setScale(0.13).setScrollFactor(0);
+        this.bOrb3 = this.add.image(145, 120, 'blackOrb').setScale(0.13).setScrollFactor(0);
+        // UI Camera
+        UICam = this.cameras.add(0, 0, 2000, 750);
+        // set main camera
+        this.cameras.main.setBounds(0, 0, 2000, 750);
+        this.physics.world.setBounds(0, 0, 2000, 800);
+
+        // define scene
+        const level_3 = this.scene.get('level_3');
+        const load = this.scene.get('loadScene');
+        // Initial HP
+        this.currentHealth = 3;
+        // initial orbs
+        orbNum = 0;
+        // level text
+        this.level = this.add.text(game.config.width / 2, 10, 'LEVEL 3', textConfig).setScrollFactor(0);
+
+        // create tilemap
+        // add game background
+        this.bg = this.add.tileSprite(0, 0, 2000, game.config.height, 'tileStructure').setOrigin(0);
+        // add a tilemap
+        this.map = this.add.tilemap("Map");
+        // add a tileset to the map
+        this.tileset = this.map.addTilesetImage("Final_sheet");
+        // create tilemap layers
+        this.groundLayer = this.map.createLayer("ground3", this.tileset, 0, 0);
+        this.groundLayer.setCollisionByProperty({
+            collides: true
+        });
+
+        //set up player
+        const p3Spawn = this.map.findObject("Object3", obj => obj.name === "P3 Spawn");
+        player = new Player(this, p3Spawn.x, 0, 'animation_atlas', 'idle_right_0001', MAX_JUMP).setOrigin(0, 0);
+
+        // camera follow character
+        this.cameras.main.startFollow(player, true, 0.05, 0.05);
+        player.create();
+        this.cameras.main.setZoom(1.5);
+
+        //set up dream catcher
+        this.dreamCatcher = new Weapons(this, player.x, player.y, 'animation_atlas', 'weapon_right_0001');
+        // set up objects
+        // heart
+        load.mapObject(heartGroup, hearts, 'Heart', 4, this.map, 'Object3', level_3, UICam);
+        // spikes
+        load.mapObject(spikesGroup, spikes, 'Spikes', 30, this.map, 'Object3', level_3, UICam);
+        // memeory orbs
+        load.mapObject(orbsGroup, orbs, 'Memory orbs', 0, this.map, 'Object3', level_3, UICam);
+        // ghost
+        load.mapObject(ghostGroup, ghosts, 'Ghost', 5, this.map, 'Object3', level_3, UICam);
+
+        //add collider
+        this.physics.add.collider(player, this.groundLayer);
+        // shift to next level
+        load.addSoul(level_3, 1950, 100, 'level_3', 'level_2', UICam);
+        // main camera
+        this.cameras.main.ignore([this.heart1, this.heart2, this.heart3, this.bOrb1, this.bOrb2, this.bOrb3, this.level]);
+        // UI camera
+        UICam.ignore([player, this.dreamCatcher, this.groundLayer, this.bg]);
     }
-    
+
     update() {
+        this.modeShift(player,UICam);
+        player.update();
+        this.dreamCatcher.attack(player.x, player.y - player.height + 40);
+
+        if (keyW.isDown) {
+            let jumpSound = this.sound.add('jump', { loop: false });
+            if (player.body.blocked.down) {
+                jumpSound.play();
+            }
+        }
+        // HP Bar update
+        if (this.currentHealth == 3) {
+            this.heart3.visible = true;
+        } else if (this.currentHealth == 2) {
+            this.heart3.visible = false;
+            this.heart2.visible = true;
+        } else if (this.currentHealth == 1) {
+            this.heart1.visible = true;
+            this.heart3.visible = false;
+            this.heart2.visible = false;
+        } else if (this.currentHealth == 0) {
+            this.heart3.visible = false;
+            this.heart2.visible = false;
+            this.heart1.visible = false;
+        }
+        // orbs update
+        if (orbNum == 1) {
+            this.add.image(55, 120, 'colorOrb').setScale(0.13).setScrollFactor(0);
+        } else if (orbNum == 2) {
+            this.add.image(100, 120, 'colorOrb').setScale(0.13).setScrollFactor(0);
+        } else if (orbNum == 3) {
+            this.add.image(145, 120, 'colorOrb').setScale(0.13).setScrollFactor(0);
+        }
+        //gameOver Trigger
+        if (player.y > game.config.height || this.currentHealth == 0) {
+            gameOverStatus = true;
+            this.checkGameOver();
+        } else if (gameOverStatus) {
+            gameOverStatus = false;
+            this.scene.restart();
+        }
 
     }
 
+    checkGameOver() {
+        game.scene.start('gameover');
+        game.scene.sleep('level_3');
+    }
 
+    modeShift(player,Camera) {
+        if (keyF1.isDown || keyF2.isDown) {
+            // temporarily hide player
+            player.alpha = 0;
+            // create explosion at ship's position
+            let boom = this.add.sprite(player.x, player.y, 'Final_sheet', 10).setOrigin(0, 0);
+            Camera.ignore(boom);
+            boom.anims.play('explosion');
+            boom.on('animationcomplete', () => {
+                player.alpha = 1;
+                boom.destroy();
+            });
+        }
+    }
 }

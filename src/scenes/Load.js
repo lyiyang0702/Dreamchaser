@@ -34,7 +34,7 @@ class Load extends Phaser.Scene {
         this.load.image('oneH', 'img/oneHeart.png');
         this.load.image('blackOrb', 'img/blackOrb.png');
         this.load.image('colorOrb', 'img/colorOrb.png');
-        this.load.image('gameOverBack', 'img/gameOverBackground.PNG');
+        this.load.image('gameOverBack', 'img/gameOverBackground.png');
 
         // load bitmap font
         this.load.bitmapFont('gem_font', 'font/gem.png', 'font/gem.xml');

@@ -37,6 +37,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         }
         if (keyF1.isDown && !this.cat) {
             this.cat = true;
+            this.y -= this.height;
         }
         else if (keyF2.isDown && this.cat) {
             this.cat = false;
@@ -48,7 +49,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             if (this.isGrounded) {
                 if (this.cat) {
                     this.anims.play('cat_run_left', true);
-                    this.body.setSize(this.width, this.height, true);
+                    this.body.setSize(this.width/4, this.height*0.7, true).setOffset(5,6);
                 }
                 else {
                     this.anims.play('cat_walk_left', true);
@@ -63,7 +64,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             if (this.isGrounded) {
                 if (this.cat) {
                     this.anims.play('cat_run_right', true);
-                    this.body.setSize(this.width, this.height, true);
+                    this.body.setSize(this.width/4, this.height*0.7, true).setOffset(25,6);
                 }
                 else {
                     this.anims.play('cat_walk_right', true);
@@ -77,7 +78,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             this.setVelocityX(0);
             if (this.right && this.cat) {
                 this.anims.play('cat_idle_right', true);
-                this.body.setSize(this.width, this.height, true);
+                this.body.setSize(this.width/4, this.height*0.7, true).setOffset(25,6);
             }
             else if (this.right) {
                 this.anims.play('idle_right', true);
@@ -87,7 +88,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
             else if (this.left && this.cat) {
                 this.anims.play('cat_idle_left', true);
-                this.body.setSize(this.width, this.height, true);
+                this.body.setSize(this.width/4, this.height*0.7, true).setOffset(5,6);
             }
             else if (this.left) {
                 this.anims.play('idle_left', true);

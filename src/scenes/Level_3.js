@@ -63,13 +63,13 @@ class LEVEL_3 extends Phaser.Scene {
         this.dreamCatcher = new Weapons(this, player.x, player.y, 'animation_atlas', 'weapon_right_0001');
         // set up objects
         // heart
-        load.mapObject(heartGroup, hearts, 'Heart', 4, this.map, 'Object3', level_3, UICam);
+        load.mapObject(this.heartGroup, this.hearts, 'Heart', 4, this.map, 'Object3', level_3, UICam);
         // spikes
-        load.mapObject(spikesGroup, spikes, 'Spikes', 30, this.map, 'Object3', level_3, UICam);
+        load.mapObject(this.spikesGroup, this.spikes, 'Spikes', 30, this.map, 'Object3', level_3, UICam);
         // memeory orbs
-        load.mapObject(orbsGroup, orbs, 'Memory orbs', 0, this.map, 'Object3', level_3, UICam);
+        load.mapObject(this.orbsGroup, this.orbs, 'Memory orbs', 0, this.map, 'Object3', level_3, UICam);
         // ghost
-        load.mapObject(ghostGroup, ghosts, 'Ghost', 5, this.map, 'Object3', level_3, UICam);
+        load.mapObject(this.ghostGroup, this.ghosts, 'Ghost', 5, this.map, 'Object3', level_3, UICam);
 
         //add collider
         this.physics.add.collider(player, this.groundLayer);
@@ -82,39 +82,42 @@ class LEVEL_3 extends Phaser.Scene {
     }
 
     update() {
-        this.modeShift(player,UICam);
-        player.update();
-        this.dreamCatcher.attack(player.x, player.y - player.height + 40);
+        if (!gameOverStatus) {
+            this.modeShift(player, UICam);
+            player.update();
+            this.dreamCatcher.attack(player.x, player.y - player.height + 40);
 
-        if (keyW.isDown) {
-            let jumpSound = this.sound.add('jump', { loop: false });
-            if (player.body.blocked.down) {
-                jumpSound.play();
+            if (keyW.isDown) {
+                let jumpSound = this.sound.add('jump', { loop: false });
+                if (player.body.blocked.down) {
+                    jumpSound.play();
+                }
+            }
+            // HP Bar update
+            if (this.currentHealth == 3) {
+                this.heart3.visible = true;
+            } else if (this.currentHealth == 2) {
+                this.heart3.visible = false;
+                this.heart2.visible = true;
+            } else if (this.currentHealth == 1) {
+                this.heart1.visible = true;
+                this.heart3.visible = false;
+                this.heart2.visible = false;
+            } else if (this.currentHealth == 0) {
+                this.heart3.visible = false;
+                this.heart2.visible = false;
+                this.heart1.visible = false;
+            }
+            // orbs update
+            if (orbNum == 1) {
+                this.add.image(55, 120, 'colorOrb').setScale(0.13).setScrollFactor(0);
+            } else if (orbNum == 2) {
+                this.add.image(100, 120, 'colorOrb').setScale(0.13).setScrollFactor(0);
+            } else if (orbNum == 3) {
+                this.add.image(145, 120, 'colorOrb').setScale(0.13).setScrollFactor(0);
             }
         }
-        // HP Bar update
-        if (this.currentHealth == 3) {
-            this.heart3.visible = true;
-        } else if (this.currentHealth == 2) {
-            this.heart3.visible = false;
-            this.heart2.visible = true;
-        } else if (this.currentHealth == 1) {
-            this.heart1.visible = true;
-            this.heart3.visible = false;
-            this.heart2.visible = false;
-        } else if (this.currentHealth == 0) {
-            this.heart3.visible = false;
-            this.heart2.visible = false;
-            this.heart1.visible = false;
-        }
-        // orbs update
-        if (orbNum == 1) {
-            this.add.image(55, 120, 'colorOrb').setScale(0.13).setScrollFactor(0);
-        } else if (orbNum == 2) {
-            this.add.image(100, 120, 'colorOrb').setScale(0.13).setScrollFactor(0);
-        } else if (orbNum == 3) {
-            this.add.image(145, 120, 'colorOrb').setScale(0.13).setScrollFactor(0);
-        }
+
         //gameOver Trigger
         if (player.y > game.config.height || this.currentHealth == 0) {
             gameOverStatus = true;
@@ -131,11 +134,11 @@ class LEVEL_3 extends Phaser.Scene {
         game.scene.sleep('level_3');
     }
 
-    modeShift(player,Camera) {
+    modeShift(player, Camera) {
         if (keyF1.isDown || keyF2.isDown) {
             // temporarily hide player
             player.alpha = 0;
-            // create explosion at ship's position
+            // create explosion at player's position
             let boom = this.add.sprite(player.x, player.y, 'Final_sheet', 10).setOrigin(0, 0);
             Camera.ignore(boom);
             boom.anims.play('explosion');

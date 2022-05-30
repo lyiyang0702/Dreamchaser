@@ -305,7 +305,6 @@ class Load extends Phaser.Scene {
         obj2.destroy();
         orbNum += 1;
         console.log(orbNum);
-        // scene.orbCheck.text = "Orb: " + scene.orbNum;
     }
 
     groupAddpath(group, path, frame, scene,camera) {

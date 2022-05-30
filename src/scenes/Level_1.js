@@ -30,7 +30,7 @@ class LEVEL_1 extends Phaser.Scene {
 
         // define scene
         const level_1 = this.scene.get('level_1');
-        const load = this.scene.get('loadScene');
+        const load = this.scene.get('functionScene');
         // Initial HP
         this.currentHealth = 3;
         // initial orbs
@@ -123,20 +123,16 @@ class LEVEL_1 extends Phaser.Scene {
 
         //gameOver Trigger
         if (player.y > game.config.height || this.currentHealth == 0) {
+            bgmMusic.stop();
             gameOverStatus = true;
-            this.checkGameOver();
+            this.scene.stop("level_1");
+            this.scene.start("gameover");
         } else if (gameOverStatus) {
             bgmMusic.stop();
             gameOverStatus = false;
             this.scene.restart();
         }
 
-    }
-
-    checkGameOver() {
-        bgmMusic.stop();
-        game.scene.start('gameover');
-        game.scene.sleep('level_1');
     }
 
     modeShift(player, Camera) {

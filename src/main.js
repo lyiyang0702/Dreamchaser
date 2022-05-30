@@ -12,7 +12,7 @@ let config = {
             }
         }
     },
-    scene: [Load,Menu,Story,LEVEL_1,LEVEL_2,LEVEL_3,Gameover,Ending]
+    scene: [Load,Function,Menu,Story,LEVEL_1,LEVEL_2,LEVEL_3,Gameover,Ending]
 }
 
 let soundConfig = {

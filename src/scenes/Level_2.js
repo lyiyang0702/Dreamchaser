@@ -33,7 +33,7 @@ class LEVEL_2 extends Phaser.Scene {
 
         // define scene
         const level_2 = this.scene.get('level_2');
-        const load = this.scene.get('loadScene');
+        const load = this.scene.get('functionScene');
 
         // Initial HP
         this.currentHealth = 3;
@@ -124,17 +124,13 @@ class LEVEL_2 extends Phaser.Scene {
         //gameOver Trigger
         if (player.y > game.config.height || this.currentHealth == 0) {
             gameOverStatus = true;
-            this.checkGameOver();
+            this.scene.stop("level_2");
+            this.scene.start("gameover");
         } else if (gameOverStatus) {
             gameOverStatus = false;
             this.scene.restart();
         }
 
-    }
-
-    checkGameOver() {
-        game.scene.start('gameover');
-        game.scene.sleep('level_2');
     }
 
     modeShift(player, Camera) {

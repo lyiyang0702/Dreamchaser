@@ -78,7 +78,7 @@ class LEVEL_2 extends Phaser.Scene {
         // add collider
         this.physics.add.collider(player, this.groundLayer);
         // shift to next level
-        load.addSoul(level_2, 1950, 100, 'level_3', 'level_2',UICam);
+        load.addSoul(level_2, 1950, 50, 'level_3', 'level_2',UICam);
         // main camera
         this.cameras.main.ignore([this.heart1, this.heart2, this.heart3, this.bOrb1, this.bOrb2, this.bOrb3, this.level]);
         // UI camera

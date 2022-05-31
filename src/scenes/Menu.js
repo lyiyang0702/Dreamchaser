@@ -34,7 +34,7 @@ class Menu extends Phaser.Scene {
             let music = this.sound.add('selectSound');
             music.play();
             menuMusic.stop();
-            this.scene.start('level_1');
+            this.scene.start('level_3');
         }
     }
 

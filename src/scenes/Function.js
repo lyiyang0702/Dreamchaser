@@ -61,7 +61,6 @@ class Function extends Phaser.Scene {
                     if (scene.currentHealth < 3) {
                         scene.currentHealth += 1;
                     }
-                    console.log("Health: " + scene.currentHealth); // HP +1
                 })
                 break;
             case 'Spikes':
@@ -69,8 +68,6 @@ class Function extends Phaser.Scene {
                     objects.body.setSize(44, 20).setOffset(2, 28);
                 });
                 scene.physics.add.collider(player, Group, function () {
-                    /* let ghostHit = this.sound.add('ghostHit');
-                    ghostHit.play() */;
                     player.healthLose(scene);
                 })
                 break;

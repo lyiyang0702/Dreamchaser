@@ -119,6 +119,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             this.onHit = true;
             this.hitTimer.paused = false;
             scene.cameras.main.flash(250);
+            let ghostHit = scene.sound.add('ghostHit');
+            ghostHit.play();
         }
     }
 

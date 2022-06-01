@@ -39,7 +39,7 @@ class Load extends Phaser.Scene {
         // load bitmap font
         this.load.bitmapFont('gem_font', 'font/gem.png', 'font/gem.xml');
         this.load.json('dialog', 'json/dialog.json');
-        this.load.image('dialogbox', 'img/dialogbox.PNG');
+        this.load.image('dialogbox', 'img/dialogbox.png');
     }
 
     create() {

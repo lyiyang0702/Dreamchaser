@@ -35,11 +35,11 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         if (this.isGrounded) {
             this.jumpCount = 0;
         }
-        if (keyF1.isDown && !this.cat) {
+        if (keyQ.isDown && !this.cat) {
             this.cat = true;
             this.y -= this.height;
         }
-        else if (keyF2.isDown && this.cat) {
+        else if (keyE.isDown && this.cat) {
             this.cat = false;
             this.y -= this.height;
         }

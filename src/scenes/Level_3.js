@@ -11,8 +11,8 @@ class LEVEL_3 extends Phaser.Scene {
         keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
         keyG = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.G);
-        keyF1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F1);
-        keyF2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F2);
+        keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
+        keyE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
         // HP bar
         this.heart1 = this.add.tileSprite(30, 30, 150, 50, 'oneH').setOrigin(0, 0).setScrollFactor(0);
         this.heart2 = this.add.tileSprite(30, 30, 150, 50, 'twoH').setOrigin(0, 0).setScrollFactor(0);
@@ -34,8 +34,6 @@ class LEVEL_3 extends Phaser.Scene {
         this.currentHealth = 3;
         // initial orbs
         orbNum = 0;
-        // level text
-        this.level = this.add.text(game.config.width / 2, 10, 'LEVEL 3', textConfig).setScrollFactor(0);
 
         // create tilemap
         // add game background
@@ -76,7 +74,7 @@ class LEVEL_3 extends Phaser.Scene {
         // shift to next level
         load.addSoul(level_3, 1950, 600, 'ending', 'level_3', UICam);
         // main camera
-        this.cameras.main.ignore([this.heart1, this.heart2, this.heart3, this.bOrb1, this.bOrb2, this.bOrb3, this.level]);
+        this.cameras.main.ignore([this.heart1, this.heart2, this.heart3, this.bOrb1, this.bOrb2, this.bOrb3]);
         // UI camera
         UICam.ignore([player, this.dreamCatcher, this.groundLayer, this.bg]);
     }
@@ -131,7 +129,7 @@ class LEVEL_3 extends Phaser.Scene {
     }
 
     modeShift(player, Camera) {
-        if (keyF1.isDown || keyF2.isDown) {
+        if (keyQ.isDown || keyE.isDown) {
             // temporarily hide player
             player.alpha = 0;
             // create explosion at player's position

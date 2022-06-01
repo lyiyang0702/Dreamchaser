@@ -1,0 +1,54 @@
+[
+	[
+		{
+			"speaker" : "Dream Therapist",
+			"dialog" :"Wake up Lucy.",
+			"newSpeaker" : "false"
+		},
+        {
+			"speaker" : "Dream Therapist",
+			"dialog" :"Wake up!",
+			"newSpeaker" : "true"
+		},
+        {
+			"speaker" : "thought",
+			"dialog" :"Your eyes fly open and you realize you are back in the office.",
+			"newSpeaker" : "true"
+		},
+        {
+			"speaker" : "Dream Therapist",
+			"dialog" :"How are you feeling Lucy?",
+			"newSpeaker" : "true"
+		},
+        {
+			"speaker" : "thought",
+			"dialog" :"Everything starts to rush in. All the chunks in your life that you had forgotten have suddenly started to piece itself back together.",
+			"newSpeaker" : "true"
+		},
+        {
+			"speaker" : "lucy",
+			"dialog" :"I remember...everything.",
+			"newSpeaker" : "true"
+		},
+        {
+			"speaker" : "Dream Therapist",
+			"dialog" :"I’m glad Lucy, you did a great job.",
+			"newSpeaker" : "true"
+		},
+        {
+			"speaker" : "lucy",
+			"dialog" :"Thank you for everything.",
+			"newSpeaker" : "true"
+		},
+        {
+			"speaker" : "thought",
+			"dialog" :"You thank your therapist and leave.",
+			"newSpeaker" : "true"
+		},
+        {
+			"speaker" : "Dream Therapist",
+			"dialog" :"Trial number 765...Success.",
+			"newSpeaker" : "true"
+		}
+    ]
+]

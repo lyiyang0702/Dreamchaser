@@ -18,6 +18,7 @@ class Load extends Phaser.Scene {
         this.load.image('tileStructure', 'img/Level1Background.png');
         this.load.image('desert','img/desertBackground.png');
         this.load.image('lucy', 'img/MainCharacter.png');
+        this.load.image('therapist', 'img/therapist.png');
         this.load.spritesheet("Final_sheet", "img/Final_sheet.png", {
             frameWidth: 50,
             frameHeight: 50
@@ -39,6 +40,7 @@ class Load extends Phaser.Scene {
         // load bitmap font
         this.load.bitmapFont('gem_font', 'font/gem.png', 'font/gem.xml');
         this.load.json('dialog', 'json/dialog.json');
+        this.load.json('ending', 'json/ending.json');
         this.load.image('dialogbox', 'img/dialogbox.png');
     }
 

@@ -6,50 +6,60 @@
 			"newSpeaker" : "true"
 		},
 		{
-			"speaker" : "Lucy",
-			"dialog" : "...I’m scared."
+			"speaker" : "lucy",
+			"dialog" : "I’ve been having trouble sleeping...it started with the nightmares but the problem started to affect my day as well. ",
+			"newSpeaker" : "true"
+		},
+		{	
+			"speaker" : "Dream Therapist",
+			"dialog" : "It says on your file that you have been experiencing memory loss as well?",
+            "newSpeaker" : "true"
 		},
 		{	
 			"speaker" : "lucy",
-			"dialog" : "I've been having weird dreams, ones that feel too real.",
+			"dialog" : "Yes, I sometimes forget chunks of my life, but I’m still so young, so I wonder what could be causing this.",
             "newSpeaker" : "true"
 		},
 		{	
 			"speaker" : "Dream Therapist",
-			"dialog" : "Can you describe them?",
-            "newSpeaker" : "true"
+			"dialog" : "I believe that your memories are somehow locked away in your dreams. Thankfully, our newest technology allows you to access those memories, but...",
+			"newSpeaker" : "true"
 		},
 		{	
 			"speaker" : "lucy",
-			"dialog" : "I keep hearing a voice calling out to me, but I can never seem to reach it. It always repeats the same words 'SAVE ME'."
-		},
-		{	
-			"speaker" : "lucy",
-			"dialog" : "I chase after the voice, but right when I think I'm close, I wake up."
+			"dialog" : "What is it?",
+			"newSpeaker" : "true"
 		}
 	],
 	[
 		{
-			"speaker" : "lucy",
-			"dialog" : "I feel like a part of me is stuck there.",
+			"speaker" : "Dream Therapist",
+			"dialog" : "You would have to get them back yourself.",
 			"newSpeaker" : "true"
 		},
 		{
-			"speaker" : "Dream Therapist",
-			"dialog" : "Maybe you can go in there and find out the problem."
+			"speaker" : "lucy",
+			"dialog" : "Meaning… go inside my dream and get my memories?",
+			"newSpeaker" : "true"
 		},
 		{	
 			"speaker" : "Dream Therapist",
-			"dialog" : "Are you ready?",
+			"dialog" : "Yes, precisely. To make it easier, you will have a helper of sorts. All you have to do is follow them and they will help you recover your memories.",
 			"newSpeaker" : "true"
 		},
 		{	
 			"speaker" : "lucy",
-			"dialog" : "…"
+			"dialog" : "Is this safe for me?",
+			"newSpeaker" : "true"
+		},
+		{	
+			"speaker" : "Dream Therapist",
+			"dialog" : "Of course it is, there’s nothing to worry about!",
+			"newSpeaker" : "true"
 		},
 		{	
 			"speaker" : "lucy",
-			"dialog" : "YES.",
+			"dialog" : "...Ok, I trust you.",
 			"newSpeaker" : "true"
 		},
 		{	

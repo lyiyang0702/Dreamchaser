@@ -31,7 +31,7 @@ let backConfig = {
 let game = new Phaser.Game(config);
 let gameOverStatus = false;
 // define keys
-let keyW,keyA,keyS,keyENTER,keySPACE,keyD,keyF1,keyF2;
+let keyW,keyA,keyS,keyENTER,keySPACE,keyD,keyF1,keyF2,keyX;
 
 //gameOver Experimental Key
 let keyG, keyR; //end game key and restart key

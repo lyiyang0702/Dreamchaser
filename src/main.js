@@ -13,7 +13,7 @@ let config = {
             tileBias: 75
         }
     },
-    scene: [Load,Function,Menu,Story,LEVEL_1,LEVEL_2,LEVEL_3,Gameover,Ending]
+    scene: [Load,Function,Menu,Story,LEVEL_1,LEVEL_2,LEVEL_3,Gameover,Ending, Credit]
 }
 
 let soundConfig = {
@@ -32,7 +32,7 @@ let backConfig = {
 let game = new Phaser.Game(config);
 let gameOverStatus = false;
 // define keys
-let keyW,keyA,keyS,keyENTER,keySPACE,keyD,keyQ,keyE,keyX;
+let keyW,keyA,keyS,keyENTER,keySPACE,keyD,keyQ,keyE,keyX, keyM;
 
 //gameOver Experimental Key
 let keyG, keyR; //end game key and restart key

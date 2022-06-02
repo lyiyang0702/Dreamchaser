@@ -122,7 +122,7 @@ class Ending extends Phaser.Scene {
             // make text box invisible
             this.dialogbox.visible = false;
             backstoryMusic.stop();
-            this.scene.start("level_1");
+            this.scene.start("credit");
 
         } else {
             // if not, set current speaker

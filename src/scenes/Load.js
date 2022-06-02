@@ -15,6 +15,7 @@ class Load extends Phaser.Scene {
         this.load.audio('oneStepWalk', 'audio/oneStepWalk.mp3');
         this.load.atlas('animation_atlas', 'img/animations.png', 'json/animation_sprites.json');
         this.load.image('jungle', 'img/jungleBackground.png');
+        this.load.image('credit', 'img/credit.png');
         this.load.image('tileStructure', 'img/Level1Background.png');
         this.load.image('desert','img/desertBackground.png');
         this.load.image('lucy', 'img/MainCharacter.png');

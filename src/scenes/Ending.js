@@ -53,7 +53,7 @@ class Ending extends Phaser.Scene {
 
         // ready the character dialog images offscreen
         this.lucy = this.add.sprite(this.OFFSCREEN_X, this.DBOX_Y+8, 'lucy').setOrigin(0, 1).setScale(0.9);
-        this.therapist = this.add.sprite(this.OFFSCREEN_X, this.DBOX_Y+8, 'therapist').setOrigin(0, 1).setScale(0.9);
+        this.therapist = this.add.sprite(this.OFFSCREEN_X+1280+500, this.DBOX_Y+8, 'therapist').setOrigin(0, 1).setScale(0.9);
         this.thought = this.add.sprite(this.OFFSCREEN_X, this.DBOX_Y+8, 'therapist').setOrigin(0, 1).setScale(0);
 
         // input
@@ -103,12 +103,21 @@ class Ending extends Phaser.Scene {
             console.log('End of Conversations');
             // tween out prior speaker's image
             if(this.dialogLastSpeaker) {
-                this.tweens.add({
-                    targets: this[this.dialogLastSpeaker],
-                    x: this.OFFSCREEN_X,
-                    duration: this.tweenDuration,
-                    ease: 'Linear'
-                });
+                if(this.dialogLastSpeaker == 'therapist') {
+                    this.tweens.add({
+                        targets: this[this.dialogLastSpeaker],
+                        x: this.OFFSCREEN_X + 1280,
+                        duration: this.tweenDuration,
+                        ease: 'Linear'
+                    });
+                } else {
+                    this.tweens.add({
+                        targets: this[this.dialogLastSpeaker],
+                        x: this.OFFSCREEN_X,
+                        duration: this.tweenDuration,
+                        ease: 'Linear'
+                    });
+                }
             }
             // make text box invisible
             this.dialogbox.visible = false;
@@ -126,21 +135,41 @@ class Ending extends Phaser.Scene {
             if(this.dialog[this.dialogConvo][this.dialogLine]['newSpeaker']) {
                 // tween out prior speaker's image
                 if(this.dialogLastSpeaker) {
-                    this.tweens.add({
-                        targets: this[this.dialogLastSpeaker],
-                        x: this.OFFSCREEN_X,
-                        duration: this.tweenDuration,
-                        ease: 'Linear'
-                    });
+                    if(this.dialogLastSpeaker == 'therapist') {
+                        this.tweens.add({
+                            targets: this[this.dialogLastSpeaker],
+                            x: this.OFFSCREEN_X + 1750,
+                            duration: this.tweenDuration,
+                            ease: 'Linear'
+                        });
+                    } else {
+                        this.tweens.add({
+                            targets: this[this.dialogLastSpeaker],
+                            x: this.OFFSCREEN_X,
+                            duration: this.tweenDuration,
+                            ease: 'Linear'
+                        });
+                    }
                 }
                 console.log(this.dialogSpeaker);
                 // tween in new speaker's image
-                this.tweens.add({
-                    targets: this[this.dialogSpeaker],
-                    x: this.DBOX_X + 50,
-                    duration: this.tweenDuration,
-                    ease: 'Linear'
-                });
+                if(this.dialogSpeaker) {
+                    if(this.dialogSpeaker == 'therapist') {
+                        this.tweens.add({
+                            targets: this[this.dialogSpeaker],
+                            x: this.DBOX_X + 750,
+                            duration: this.tweenDuration,
+                            ease: 'Linear'
+                        }); 
+                    } else {
+                        this.tweens.add({
+                            targets: this[this.dialogSpeaker],
+                            x: this.DBOX_X + 50,
+                            duration: this.tweenDuration,
+                            ease: 'Linear'
+                        });
+                    }
+                }
             }
 
             if(this.dialogSpeaker == 'thought') {

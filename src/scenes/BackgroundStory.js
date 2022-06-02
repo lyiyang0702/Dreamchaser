@@ -58,7 +58,7 @@ class Story extends Phaser.Scene {
 
         // ready the character dialog images offscreen
         this.lucy = this.add.sprite(this.OFFSCREEN_X, this.DBOX_Y+8, 'lucy').setOrigin(0, 1).setScale(0.9);
-        this.therapist = this.add.sprite(this.OFFSCREEN_X, this.DBOX_Y+8, 'therapist').setOrigin(0, 1).setScale(0.9);
+        this.therapist = this.add.sprite(this.OFFSCREEN_X+1280+500, this.DBOX_Y+8, 'therapist').setOrigin(0, 1).setScale(0.9);
 
         // input
         keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
@@ -89,17 +89,6 @@ class Story extends Phaser.Scene {
         this.dialogText.text = '';
         this.nextText.text = '';
         this.skipText.text = '';
-
-
-        /* Note: In my conversation data structure: 
-                - each array within the main JSON array is a "conversation"
-                - each object within a "conversation" is a "line"
-                - each "line" can have 3 properties: 
-                    1. a speaker (required)
-                    2. the dialog text (required)
-                    3. an (optional) flag indicating if this speaker is new
-        */
-
         // make sure there are lines left to read in this convo, otherwise jump to next convo
         if(this.dialogLine > this.dialog[this.dialogConvo].length - 1) {
             this.dialogLine = 0;
@@ -114,12 +103,21 @@ class Story extends Phaser.Scene {
             console.log('End of Conversations');
             // tween out prior speaker's image
             if(this.dialogLastSpeaker) {
-                this.tweens.add({
-                    targets: this[this.dialogLastSpeaker],
-                    x: this.OFFSCREEN_X,
-                    duration: this.tweenDuration,
-                    ease: 'Linear'
-                });
+                if(this.dialogLastSpeaker == 'therapist') {
+                    this.tweens.add({
+                        targets: this[this.dialogLastSpeaker],
+                        x: this.OFFSCREEN_X + 1280,
+                        duration: this.tweenDuration,
+                        ease: 'Linear'
+                    });
+                } else {
+                    this.tweens.add({
+                        targets: this[this.dialogLastSpeaker],
+                        x: this.OFFSCREEN_X,
+                        duration: this.tweenDuration,
+                        ease: 'Linear'
+                    });
+                }
             }
             // make text box invisible
             this.dialogbox.visible = false;
@@ -134,24 +132,53 @@ class Story extends Phaser.Scene {
                 this.dialogSpeaker = this.dialog[this.dialogConvo][this.dialogLine]['speaker'];
             }
             // check if there's a new speaker (for exit/enter animations)
-            if(this.dialog[this.dialogConvo][this.dialogLine]['newSpeaker']) {
-                // tween out prior speaker's image
+            if(this.dialog[this.dialogConvo][this.dialogLine]['newSpeaker'] == 'true') {
+                console.log('last: ', this.dialogLastSpeaker);
                 if(this.dialogLastSpeaker) {
+                    if(this.dialogLastSpeaker == 'therapist') {
+                        this.tweens.add({
+                            targets: this[this.dialogLastSpeaker],
+                            x: this.OFFSCREEN_X + 1750,
+                            duration: this.tweenDuration,
+                            ease: 'Linear'
+                        });
+                    } else {
+                        this.tweens.add({
+                            targets: this[this.dialogLastSpeaker],
+                            x: this.OFFSCREEN_X,
+                            duration: this.tweenDuration,
+                            ease: 'Linear'
+                        });
+                    }
+                }
+                // tween out prior speaker's image
+                /* if(this.dialogLastSpeaker) {
                     this.tweens.add({
                         targets: this[this.dialogLastSpeaker],
                         x: this.OFFSCREEN_X,
                         duration: this.tweenDuration,
                         ease: 'Linear'
                     });
+                } */
+                console.log('curr: ', this.dialogSpeaker);
+                // tween in new speaker's image 
+                if(this.dialogSpeaker) {
+                    if(this.dialogSpeaker == 'therapist') {
+                        this.tweens.add({
+                            targets: this[this.dialogSpeaker],
+                            x: this.DBOX_X + 750,
+                            duration: this.tweenDuration,
+                            ease: 'Linear'
+                        }); 
+                    } else {
+                        this.tweens.add({
+                            targets: this[this.dialogSpeaker],
+                            x: this.DBOX_X + 50,
+                            duration: this.tweenDuration,
+                            ease: 'Linear'
+                        });
+                    }
                 }
-                console.log(this.dialogSpeaker);
-                // tween in new speaker's image
-                this.tweens.add({
-                    targets: this[this.dialogSpeaker],
-                    x: this.DBOX_X + 50,
-                    duration: this.tweenDuration,
-                    ease: 'Linear'
-                });
             }
 
             // build dialog (concatenate speaker + line of text)

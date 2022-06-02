@@ -9,7 +9,8 @@ let config = {
             gravity: {
                 x: 0,
                 y: 0
-            }
+            },
+            tileBias: 75
         }
     },
     scene: [Load,Function,Menu,Story,LEVEL_1,LEVEL_2,LEVEL_3,Gameover,Ending]

@@ -119,6 +119,7 @@ class LEVEL_3 extends Phaser.Scene {
         //gameOver Trigger
         if (player.y > game.config.height || this.currentHealth == 0) {
             gameOverStatus = true;
+            level = "level_3";
             this.scene.stop("level_3");
             this.scene.start("gameover");
         } else if (gameOverStatus) {

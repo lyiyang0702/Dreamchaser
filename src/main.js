@@ -42,6 +42,8 @@ let MAX_JUMP = 2;
 
 let healthCheck, orbNum;
 
+let level;
+
 let curve = new Phaser.Curves.Line(new Phaser.Math.Vector2(100, 0), new Phaser.Math.Vector2(200, 0));
 
 let UICam, player;

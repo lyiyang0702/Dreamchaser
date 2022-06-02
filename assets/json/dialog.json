@@ -44,7 +44,7 @@
 		},
 		{	
 			"speaker" : "Dream Therapist",
-			"dialog" : "Yes, precisely. To make it easier, you will have a helper of sorts. All you have to do is follow them and they will help you recover your memories.",
+			"dialog" : "Yes, precisely. To make it easier, you will have a helper of sorts. You will meet them at the end of each dream, and they will help you reach your next dream. All you have to do is follow them and they will help you recover your memories.",
 			"newSpeaker" : "true"
 		},
 		{	

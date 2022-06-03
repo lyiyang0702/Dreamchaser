@@ -20,9 +20,9 @@ class LEVEL_2 extends Phaser.Scene {
         this.heart3 = this.add.tileSprite(30, 30, 150, 50, 'threeH').setOrigin(0, 0).setScrollFactor(0);
 
         // Orbs track
-        this.bOrb1 = this.add.image(55, 120, 'blackOrb').setScale(0.13).setScrollFactor(0);
-        this.bOrb2 = this.add.image(100, 120, 'blackOrb').setScale(0.13).setScrollFactor(0);
-        this.bOrb3 = this.add.image(145, 120, 'blackOrb').setScale(0.13).setScrollFactor(0);
+        this.bOrb1 = this.add.image(55, 120, 'blackOrb').setScale(0.15).setScrollFactor(0);
+        this.bOrb2 = this.add.image(110, 120, 'blackOrb').setScale(0.15).setScrollFactor(0);
+        this.bOrb3 = this.add.image(165, 120, 'blackOrb').setScale(0.15).setScrollFactor(0);
         // tutorial image
         this.tutorial = this.add.image(50,50, 'tutorial').setOrigin(0, 0).setScrollFactor(0);
         this.tutorial.visible = false;
@@ -121,11 +121,11 @@ class LEVEL_2 extends Phaser.Scene {
             }
             // orbs update
             if (orbNum == 1) {
-                this.add.image(55, 120, 'colorOrb').setScale(0.13).setScrollFactor(0);
+                this.add.image(55, 120, 'colorOrb').setScale(0.15).setScrollFactor(0);
             } else if (orbNum == 2) {
-                this.add.image(100, 120, 'colorOrb').setScale(0.13).setScrollFactor(0);
+                this.add.image(110, 120, 'colorOrb').setScale(0.15).setScrollFactor(0);
             } else if (orbNum == 3) {
-                this.add.image(145, 120, 'colorOrb').setScale(0.13).setScrollFactor(0);
+                this.add.image(165, 120, 'colorOrb').setScale(0.15).setScrollFactor(0);
             }
         }
 

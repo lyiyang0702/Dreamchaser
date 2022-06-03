@@ -114,8 +114,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
     healthLose(scene) {
         //update num
-        if (currentHealth > 0 && !this.onHit) {
-            currentHealth -= 1;
+        if (scene.currentHealth > 0 && !this.onHit) {
+            scene.currentHealth -= 1;
             this.onHit = true;
             this.hitTimer.paused = false;
             scene.cameras.main.flash(250);

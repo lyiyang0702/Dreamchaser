@@ -58,8 +58,8 @@ class Function extends Phaser.Scene {
                     obj2.destroy(); // remove heart
                     let collectHealth = this.sound.add('collectHealth');
                     collectHealth.play();
-                    if (currentHealth < 3) {
-                        currentHealth += 1;
+                    if (scene.currentHealth < 3) {
+                        scene.currentHealth += 1;
                     }
                 })
                 break;

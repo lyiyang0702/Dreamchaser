@@ -40,7 +40,6 @@ let keyG, keyR; //end game key and restart key
 
 let MAX_JUMP = 2;
 
-let currentHealth = 3;
 let healthCheck, orbNum;
 
 let level;

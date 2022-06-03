@@ -24,7 +24,7 @@ class LEVEL_2 extends Phaser.Scene {
         this.bOrb2 = this.add.image(110, 120, 'blackOrb').setScale(0.15).setScrollFactor(0);
         this.bOrb3 = this.add.image(165, 120, 'blackOrb').setScale(0.15).setScrollFactor(0);
         // tutorial image
-        this.tutorial = this.add.image(50,50, 'tutorial').setOrigin(0, 0).setScrollFactor(0).setDepth(1);;
+        this.tutorial = this.add.image(0,0, 'tutorial').setOrigin(0, 0).setDepth(1);
         this.tutorial.visible = false;
         this.text = this.add.bitmapText(250,30, 'gem_font', 'Press C for controls', 24).setScrollFactor(0);
         // UI Camera
@@ -82,7 +82,7 @@ class LEVEL_2 extends Phaser.Scene {
         // shift to next level
         load.addSoul(level_2, 1950, 50, 'level_3', 'level_2', UICam);
         // main camera
-        this.cameras.main.ignore([this.heart1, this.heart2, this.heart3, this.bOrb1, this.bOrb2, this.bOrb3]);
+        this.cameras.main.ignore([this.heart1, this.heart2, this.heart3, this.bOrb1, this.bOrb2, this.bOrb3,this.text,this.tutorial]);
         // UI camera
         UICam.ignore([player, this.dreamCatcher, this.groundLayer, this.jungle]);
     }

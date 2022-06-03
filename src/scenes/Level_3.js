@@ -15,9 +15,9 @@ class LEVEL_3 extends Phaser.Scene {
         keyE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
         keyC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C);
         // tutorial image
-        this.tutorial = this.add.image(50,50, 'tutorial').setOrigin(0, 0).setScrollFactor(0);
+        this.tutorial = this.add.image(0,0, 'tutorial').setOrigin(0, 0).setScrollFactor(0).setDepth(1);
         this.tutorial.visible = false;
-        this.text = this.add.bitmapText(250,30, 'gem_font', 'Press C for Tutorial', 24);
+        this.text = this.add.bitmapText(250,30, 'gem_font', 'Press C for Tutorial', 24).setScrollFactor(0);
         // HP bar
         this.heart1 = this.add.tileSprite(30, 30, 150, 50, 'oneH').setOrigin(0, 0).setScrollFactor(0);
         this.heart2 = this.add.tileSprite(30, 30, 150, 50, 'twoH').setOrigin(0, 0).setScrollFactor(0);

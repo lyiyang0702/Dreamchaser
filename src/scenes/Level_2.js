@@ -14,8 +14,12 @@ class LEVEL_2 extends Phaser.Scene {
         keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
         keyE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
         keyC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C);
+        // tutorial image
+        this.tutorial = this.add.image(0, 0, 'tutorial').setOrigin(0, 0).setDepth(1);
+        this.tutorial.visible = false;
+        this.text = this.add.bitmapText(250, 30, 'gem_font', 'Press C for controls', 24).setScrollFactor(0);
         // HP bar
-        this.heart1 = this.add.tileSprite(0,0, 150, 50, 'oneH').setOrigin(0, 0).setScrollFactor(0);
+        this.heart1 = this.add.tileSprite(30, 30, 150, 50, 'oneH').setOrigin(0, 0).setScrollFactor(0);
         this.heart2 = this.add.tileSprite(30, 30, 150, 50, 'twoH').setOrigin(0, 0).setScrollFactor(0);
         this.heart3 = this.add.tileSprite(30, 30, 150, 50, 'threeH').setOrigin(0, 0).setScrollFactor(0);
 
@@ -23,10 +27,7 @@ class LEVEL_2 extends Phaser.Scene {
         this.bOrb1 = this.add.image(55, 120, 'blackOrb').setScale(0.15).setScrollFactor(0);
         this.bOrb2 = this.add.image(110, 120, 'blackOrb').setScale(0.15).setScrollFactor(0);
         this.bOrb3 = this.add.image(165, 120, 'blackOrb').setScale(0.15).setScrollFactor(0);
-        // tutorial image
-        this.tutorial = this.add.image(0,0, 'tutorial').setOrigin(0, 0).setDepth(1);
-        this.tutorial.visible = false;
-        this.text = this.add.bitmapText(250,30, 'gem_font', 'Press C for controls', 24).setScrollFactor(0);
+
         // UI Camera
         UICam = this.cameras.add(0, 0, 2000, 750);
         // set camera
@@ -73,7 +74,7 @@ class LEVEL_2 extends Phaser.Scene {
         // spikes
         load.mapObject(this.spikesGroup, this.spikes, 'Spikes', 30, this.map, 'Object2', level_2, UICam);
         // memeory orbs
-        load.mapObject(this.orbsGroup,this.orbs, 'Memory orbs', 0, this.map, 'Object2', level_2, UICam);
+        load.mapObject(this.orbsGroup, this.orbs, 'Memory orbs', 0, this.map, 'Object2', level_2, UICam);
         // ghost
         load.mapObject(this.ghostGroup, this.ghosts, 'Ghost', 5, this.map, 'Object2', level_2, UICam);
 
@@ -82,16 +83,16 @@ class LEVEL_2 extends Phaser.Scene {
         // shift to next level
         load.addSoul(level_2, 1950, 50, 'level_3', 'level_2', UICam);
         // main camera
-        this.cameras.main.ignore([this.heart1, this.heart2, this.heart3, this.bOrb1, this.bOrb2, this.bOrb3,this.text,this.tutorial]);
+        this.cameras.main.ignore([this.heart1, this.heart2, this.heart3, this.bOrb1, this.bOrb2, this.bOrb3, this.text, this.tutorial]);
         // UI camera
         UICam.ignore([player, this.dreamCatcher, this.groundLayer, this.jungle]);
     }
 
     update() {
-        if (keyC.isDown){
+        if (keyC.isDown) {
             this.tutorial.visible = true;
         }
-        else{
+        else {
             this.tutorial.visible = false;
         }
         if (!gameOverStatus) {

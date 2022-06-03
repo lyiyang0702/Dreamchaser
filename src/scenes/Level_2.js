@@ -26,7 +26,7 @@ class LEVEL_2 extends Phaser.Scene {
         // tutorial image
         this.tutorial = this.add.image(50,50, 'tutorial').setOrigin(0, 0).setScrollFactor(0).setDepth(1);;
         this.tutorial.visible = false;
-        this.text = this.add.bitmapText(250,30, 'gem_font', 'Press C for Tutorial', 24).setScrollFactor(0);
+        this.text = this.add.bitmapText(250,30, 'gem_font', 'Press C for controls', 24).setScrollFactor(0);
         // UI Camera
         UICam = this.cameras.add(0, 0, 2000, 750);
         // set camera

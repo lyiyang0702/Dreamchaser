@@ -16,7 +16,7 @@ class LEVEL_1 extends Phaser.Scene {
         keyE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
         keyC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C);
         // tutorial image
-        this.tutorial = this.add.image(0,0, 'tutorial').setOrigin(0, 0).setDepth(1);
+        this.tutorial = this.add.image(0,0, 'tutorial').setOrigin(0, 0).setDepth(1).setScrollFactor(0);
         this.tutorial.visible = false;
         this.text = this.add.bitmapText(250,30, 'gem_font', 'Press C for controls', 24).setScrollFactor(0);
         // HP bar
@@ -82,7 +82,7 @@ class LEVEL_1 extends Phaser.Scene {
         bgmMusic = this.sound.add('backMusic', soundConfig);
         bgmMusic.play();
         // main camera
-        this.cameras.main.ignore([this.heart1, this.heart2, this.heart3, this.bOrb1, this.bOrb2, this.bOrb3,this.text,this.tutorial]);
+        this.cameras.main.ignore([this.heart1, this.heart2, this.heart3, this.bOrb1, this.bOrb2, this.bOrb3,this.text]);
         // UI camera
         UICam.ignore([player, this.dreamCatcher, this.groundLayer, this.bg]);
     }

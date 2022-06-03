@@ -15,9 +15,9 @@ class LEVEL_3 extends Phaser.Scene {
         keyE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
         keyC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C);
         // tutorial image
-        this.tutorial = this.add.image(0,0, 'tutorial').setDepth(1);
+        this.tutorial = this.add.image(0, 0, 'tutorial').setOrigin(0, 0).setDepth(1).setScrollFactor(0);
         this.tutorial.visible = false;
-        this.text = this.add.bitmapText(250,30, 'gem_font', 'Press C for controls', 24).setScrollFactor(0);
+        this.text = this.add.bitmapText(250, 30, 'gem_font', 'Press C for controls', 24).setScrollFactor(0);
         // HP bar
         this.heart1 = this.add.tileSprite(30, 30, 150, 50, 'oneH').setOrigin(0, 0).setScrollFactor(0);
         this.heart2 = this.add.tileSprite(30, 30, 150, 50, 'twoH').setOrigin(0, 0).setScrollFactor(0);
@@ -79,7 +79,7 @@ class LEVEL_3 extends Phaser.Scene {
         // shift to next level
         load.addSoul(level_3, 1950, 600, 'ending', 'level_3', UICam);
         // main camera
-        this.cameras.main.ignore([this.heart1, this.heart2, this.heart3, this.bOrb1, this.bOrb2, this.bOrb3,this.text,this.tutorial]);
+        this.cameras.main.ignore([this.heart1, this.heart2, this.heart3, this.bOrb1, this.bOrb2, this.bOrb3,this.text]);
         // UI camera
         UICam.ignore([player, this.dreamCatcher, this.groundLayer, this.bg]);
     }

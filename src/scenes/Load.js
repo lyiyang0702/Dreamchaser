@@ -43,7 +43,7 @@ class Load extends Phaser.Scene {
         this.load.json('dialog', 'json/dialog.json');
         this.load.json('ending', 'json/ending.json');
         this.load.image('dialogbox', 'img/dialogbox.png');
-        this.load.image ('tutorial','img/tutorial.png');
+        this.load.image ('tutorial','img/tutorialPage.png');
     }
 
     create() {

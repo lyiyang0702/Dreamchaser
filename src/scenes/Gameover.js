@@ -7,6 +7,7 @@ class Gameover extends Phaser.Scene {
     create() {
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
         keyM = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.M);
+        currentHealth = 3;
     }
     
     update() {

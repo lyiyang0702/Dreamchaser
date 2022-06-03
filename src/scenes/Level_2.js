@@ -13,6 +13,7 @@ class LEVEL_2 extends Phaser.Scene {
         keyG = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.G);
         keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
         keyE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
+        keyC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C);
         // HP bar
         this.heart1 = this.add.tileSprite(30, 30, 150, 50, 'oneH').setOrigin(0, 0).setScrollFactor(0);
         this.heart2 = this.add.tileSprite(30, 30, 150, 50, 'twoH').setOrigin(0, 0).setScrollFactor(0);
@@ -22,7 +23,10 @@ class LEVEL_2 extends Phaser.Scene {
         this.bOrb1 = this.add.image(55, 120, 'blackOrb').setScale(0.13).setScrollFactor(0);
         this.bOrb2 = this.add.image(100, 120, 'blackOrb').setScale(0.13).setScrollFactor(0);
         this.bOrb3 = this.add.image(145, 120, 'blackOrb').setScale(0.13).setScrollFactor(0);
-
+        // tutorial image
+        this.tutorial = this.add.image(50,50, 'tutorial').setOrigin(0, 0).setScrollFactor(0);
+        this.tutorial.visible = false;
+        this.text = this.add.bitmapText(250,30, 'gem_font', 'Press C for Tutorial', 24);
         // UI Camera
         UICam = this.cameras.add(0, 0, 2000, 750);
         // set camera
@@ -84,6 +88,12 @@ class LEVEL_2 extends Phaser.Scene {
     }
 
     update() {
+        if (keyC.isDown){
+            this.tutorial.visible = true;
+        }
+        else{
+            this.tutorial.visible = false;
+        }
         if (!gameOverStatus) {
             this.modeShift(player, UICam);
             player.update();

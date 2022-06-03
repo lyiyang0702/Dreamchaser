@@ -6,7 +6,7 @@ class Gameover extends Phaser.Scene {
 
     create() {
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
-        keyENTER = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
+        keyM = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.M);
     }
     
     update() {
@@ -15,7 +15,7 @@ class Gameover extends Phaser.Scene {
             this.scene.stop('gameover');
             this.scene.start(level);
         }
-        if(keyENTER.isDown){
+        if(keyM.isDown){
             this.scene.stop('gameover');
             this.scene.start('menuScene');
         }

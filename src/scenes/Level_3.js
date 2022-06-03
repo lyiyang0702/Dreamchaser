@@ -42,7 +42,7 @@ class LEVEL_3 extends Phaser.Scene {
 
         // create tilemap
         // add game background
-        this.bg = this.add.tileSprite(0, 0, 2000, game.config.height, 'desert').setOrigin(0);
+        this.bg = this.add.tileSprite(0, 0, 2000, 750, 'desert').setOrigin(0);
         // add a tilemap
         this.map = this.add.tilemap("Map");
         // add a tileset to the map
